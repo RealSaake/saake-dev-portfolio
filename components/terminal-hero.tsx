@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { TypingAnimation } from '@/components/react-bits/typing-animation'
 import { GlitchText } from '@/components/react-bits/glitch-text'
 import { Button } from '@/components/ui/button'
+import FuzzyText from '@/components/react-bits/fuzzy-text-advanced'
 
 const commands = [
   '> initializing saake.dev...',
@@ -84,11 +85,16 @@ export function TerminalHero() {
             className="mt-8 text-center"
           >
             <h1 className="text-4xl md:text-6xl font-bold mb-4">
-              <GlitchText 
-                text="SAAKE.DEV" 
-                className="neon-glow text-neon-green"
-                glitchIntensity={0.15}
-              />
+              <FuzzyText
+                fontSize="clamp(3rem, 8vw, 6rem)"
+                color="#00ff41"
+                baseIntensity={0.2}
+                hoverIntensity={0.6}
+                fontWeight={900}
+                className="neon-glow"
+              >
+                SAAKE.DEV
+              </FuzzyText>
             </h1>
             <p className="text-xl text-gray-300 mb-8">
               Full-Stack Developer • Automation Enthusiast • Security-Focused

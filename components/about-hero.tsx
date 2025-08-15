@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { MapPin, Calendar, Zap, Code2 } from 'lucide-react'
 import { saakeEngine } from '@/data/skills'
+import FuzzyText from '@/components/react-bits/fuzzy-text-advanced'
 
 const quickFacts = [
   {
@@ -63,7 +64,16 @@ export function AboutHero() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-3xl font-bold text-white mb-6"
           >
-            Hey, I'm <span className="text-neon-green neon-glow">Anubhav</span> (aka <span className="text-neon-blue">Saake</span>)
+            Hey, I'm{' '}
+            <FuzzyText
+              fontSize="3rem"
+              color="#00ff41"
+              baseIntensity={0.1}
+              hoverIntensity={0.4}
+              className="inline-block"
+            >
+              Saake
+            </FuzzyText>
           </motion.h2>
           
           <motion.div

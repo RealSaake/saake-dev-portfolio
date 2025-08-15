@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Menu, X, User, Briefcase, Clock, Wrench, Mail } from 'lucide-react'
+import FuzzyText from '@/components/react-bits/fuzzy-text-advanced'
 
 const navItems = [
   { href: '/', label: 'Home' },
@@ -23,7 +24,16 @@ export function Navigation() {
             <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-sm">S</span>
             </div>
-            <span className="font-bold text-xl text-white">saake.dev</span>
+            <FuzzyText
+              fontSize="1.25rem"
+              color="#00ff41"
+              baseIntensity={0.05}
+              hoverIntensity={0.3}
+              fontWeight={700}
+              className="neon-glow"
+            >
+              saake.dev
+            </FuzzyText>
           </Link>
 
           {/* Desktop Navigation */}

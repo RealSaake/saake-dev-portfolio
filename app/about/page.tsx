@@ -7,6 +7,7 @@ import { ExperienceGrid } from '@/components/experience-grid'
 import { skillCategories } from '@/data/skills'
 import { Code, Heart, Zap, Users } from 'lucide-react'
 import { saakeEngine } from '@/data/skills'
+import FuzzyText from '@/components/react-bits/fuzzy-text-advanced'
 
 const values = [
   {
@@ -46,9 +47,16 @@ export default function AboutPage() {
           className="text-center mb-12"
         >
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            <span className="glitch-text neon-glow text-neon-green" data-text="ABOUT">
+            <FuzzyText
+              fontSize="clamp(3rem, 8vw, 6rem)"
+              color="#00ff41"
+              baseIntensity={0.15}
+              hoverIntensity={0.5}
+              fontWeight={900}
+              className="neon-glow"
+            >
               ABOUT
-            </span>
+            </FuzzyText>
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             The story behind the code - my journey, values, and the passion that drives 
