@@ -1,6 +1,6 @@
 # 🚀 SAAKE.DEV - Cyber Portfolio
 
-A bleeding-edge, cyber-themed portfolio website for Anubhav Aryan (Saake) built with Next.js 14, featuring automation-inspired animations, terminal aesthetics, and lightning-fast performance. Showcasing expertise in AI/LLM integration, automation workflows, and secure web development.
+A bleeding-edge, cyber-themed portfolio website for Saake built with Next.js 14, featuring automation-inspired animations, terminal aesthetics, and lightning-fast performance. Showcasing expertise in AI/LLM integration, automation workflows, and secure web development.
 
 ## ✨ Features
 
@@ -160,4 +160,4 @@ MIT License - feel free to use this for your own portfolio!
 
 ---
 
-**Built with ❤️ by Anubhav Aryan (Saake)** | [Portfolio](https://saake.dev) | [EOS Trails](https://eostrails.com) | [Tools](https://tools.saake.dev)
+**Built with ❤️ by Saake** | [Portfolio](https://saake.dev) | [EOS Trails](https://eostrails.com) | [Tools](https://tools.saake.dev)
