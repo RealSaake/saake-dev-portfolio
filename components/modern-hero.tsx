@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, Github, Linkedin, Mail } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import FuzzyText from '@/components/react-bits/fuzzy-text-advanced'
 
 export function ModernHero() {
   return (
@@ -24,7 +25,16 @@ export function ModernHero() {
           </div>
           
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight">
-            <span className="gradient-text">Saake</span>
+            <FuzzyText
+              fontSize="clamp(4rem, 10vw, 8rem)"
+              color="#ffffff"
+              baseIntensity={0.15}
+              hoverIntensity={0.5}
+              fontWeight={700}
+              className="gradient-text"
+            >
+              Saake
+            </FuzzyText>
           </h1>
           
           <div className="text-xl md:text-2xl text-gray-400 mb-8 max-w-3xl mx-auto">
