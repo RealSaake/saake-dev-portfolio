@@ -1,0 +1,97 @@
+{
+  "identity": {
+    "legal_name": "Anubhav Aryan",
+    "aliases": ["Saake", "Ari"],
+    "tagline": "We got this.",
+    "short_bio": "Full-stack developer and automation enthusiast building secure, scalable web apps, AI demos, and data workflows.",
+    "professional_philosophy": "Collaborative problem solving through automation, security best practices, and continuous learning."
+  },
+  "goals": {
+    "short_term": [
+      "Build AI/LLM integrations and demos",
+      "Implement n8n automation workflows",
+      "Develop self-hosted Raspberry Pi projects on Linux",
+      "Launch secure cloud infrastructure on AWS/Azure",
+      "Contribute to open-source cybersecurity tools",
+      "Master modern web development with Next.js and React"
+    ],
+    "long_term": [
+      "Lead architecture for enterprise AI and automation platforms",
+      "Create a self-sustaining home lab for learning and hosting",
+      "Publish open-source cybersecurity frameworks",
+      "Scale a travel automation site (eostrails.com) to 50k monthly users",
+      "Advise startups on secure, automated cloud deployments",
+      "Achieve recognized expertise in AI, automation, and security"
+    ]
+  },
+  "skills_current": [
+    "Web development (JavaScript, TypeScript, React, Next.js)",
+    "Core programming (Python, C++)",
+    "API design and integration",
+    "Data analysis and visualization",
+    "Productivity system design (Obsidian, custom tools)",
+    "Basic DevOps (Docker, GitHub Actions)"
+  ],
+  "skills_learning": [
+    "n8n workflow automation",
+    "Advanced Linux administration",
+    "Raspberry Pi hardware projects",
+    "Cloud platforms (AWS, Azure)",
+    "Cybersecurity best practices and pen-testing",
+    "Serverless architectures (Supabase, Vercel)"
+  ],
+  "interests": [
+    "AI & large language models",
+    "Cybersecurity & ethical hacking",
+    "Self-hosting & home labs",
+    "Automation & no-code tools",
+    "Game development & 3D graphics",
+    "Travel & photography",
+    "Piano & music theory",
+    "Ergonomic tech setups"
+  ],
+  "projects": [
+    {
+      "name": "eostrails.com",
+      "description": "Interactive travel site with custom itinerary automation and AI recommendations."
+    },
+    {
+      "name": "Saake Tools",
+      "description": "Collection of utilities: JSON formatter, JWT decoder, WebSocket echo tester."
+    },
+    {
+      "name": "AI Chatbot Demo",
+      "description": "Serverless GPT/Gemini integration for customer interaction automation."
+    },
+    {
+      "name": "Home Lab Automation",
+      "description": "Raspberry Pi self-hosted services with Ansible and Docker."
+    },
+    {
+      "name": "Portfolio Dashboard",
+      "description": "Real-time data command center showing GitHub activity, CI/CD status, and network pings."
+    }
+  ],
+  "style": [
+    "Problem solver",
+    "Automation enthusiast",
+    "Security-focused",
+    "System thinker",
+    "Detail-oriented",
+    "Innovation-driven"
+  ],
+  "tools_stack": {
+    "languages": ["JavaScript", "TypeScript", "Python", "C++"],
+    "frameworks": ["Next.js", "React", "Tailwind CSS", "shadcn/ui", "react-bits"],
+    "platforms": ["Vercel", "Supabase", "AWS", "Azure", "n8n"],
+    "hardware": ["Raspberry Pi", "Linux servers", "Arduino", "Docker host"]
+  },
+  "personality_traits": [
+    "Analytical",
+    "Curious",
+    "Persistent",
+    "Adaptable",
+    "Solution-oriented",
+    "Collaborative"
+  ]
+}
