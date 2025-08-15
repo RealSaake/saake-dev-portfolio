@@ -24,14 +24,14 @@ export function ModernHero() {
             <span className="text-sm text-gray-400">Available for work</span>
           </div>
           
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight flex justify-center">
             <FuzzyText
               fontSize="clamp(4rem, 10vw, 8rem)"
               color="#ffffff"
               baseIntensity={0.15}
               hoverIntensity={0.5}
               fontWeight={700}
-              className="gradient-text"
+              className="gradient-text mx-auto"
             >
               Saake
             </FuzzyText>
@@ -51,13 +51,15 @@ export function ModernHero() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
         >
-          <Button size="lg" className="group bg-white text-black hover:bg-gray-100 px-8 py-6 text-lg">
-            View My Work
-            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+          <Button size="lg" className="group bg-white text-black hover:bg-gray-100 px-8 py-6 text-lg" asChild>
+            <a href="/projects">
+              View My Work
+              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            </a>
           </Button>
           
-          <Button variant="outline" size="lg" className="px-8 py-6 text-lg border-white/20 hover:bg-white/5">
-            Get In Touch
+          <Button variant="outline" size="lg" className="px-8 py-6 text-lg border-white/20 hover:bg-white/5" asChild>
+            <a href="/contact">Get In Touch</a>
           </Button>
         </motion.div>
 
@@ -68,19 +70,25 @@ export function ModernHero() {
           className="flex items-center justify-center gap-6"
         >
           <a 
-            href="https://github.com/saake" 
+            href="https://github.com/RealSaake" 
+            target="_blank"
+            rel="noopener noreferrer"
             className="p-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-colors group"
           >
             <Github className="h-6 w-6 text-gray-400 group-hover:text-white transition-colors" />
           </a>
           <a 
             href="https://linkedin.com/in/saake" 
+            target="_blank"
+            rel="noopener noreferrer"
             className="p-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-colors group"
           >
             <Linkedin className="h-6 w-6 text-gray-400 group-hover:text-white transition-colors" />
           </a>
           <a 
             href="mailto:hello@saake.dev" 
+            target="_blank"
+            rel="noopener noreferrer"
             className="p-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-colors group"
           >
             <Mail className="h-6 w-6 text-gray-400 group-hover:text-white transition-colors" />
