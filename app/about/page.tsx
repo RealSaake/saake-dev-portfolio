@@ -49,11 +49,11 @@ export default function AboutPage() {
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             <FuzzyText
               fontSize="clamp(3rem, 8vw, 6rem)"
-              color="#00ff41"
+              color="#a855f7"
               baseIntensity={0.15}
               hoverIntensity={0.5}
               fontWeight={900}
-              className="neon-glow"
+              className="gradient-text"
             >
               ABOUT
             </FuzzyText>
@@ -75,7 +75,7 @@ export default function AboutPage() {
           viewport={{ once: true }}
           className="py-20"
         >
-          <h2 className="text-3xl font-bold text-center mb-12 text-neon-green">
+          <h2 className="text-3xl font-bold text-center mb-12 text-purple-400">
             Core Values
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -89,9 +89,9 @@ export default function AboutPage() {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
                   whileHover={{ scale: 1.05 }}
-                  className="bg-black/40 backdrop-blur-md border border-gray-800 rounded-lg p-6 text-center hover:border-gray-700 transition-all duration-300"
+                  className="bg-black/40 backdrop-blur-md border border-purple-500/30 rounded-lg p-6 text-center hover:border-purple-400 transition-all duration-300"
                 >
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-neon-green/20 border border-green text-neon-green mb-4">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-purple-500/20 border border-purple-400 text-purple-400 mb-4">
                     <Icon className="h-8 w-8" />
                   </div>
                   <h3 className="text-xl font-semibold text-white mb-3">
@@ -114,7 +114,7 @@ export default function AboutPage() {
           viewport={{ once: true }}
           className="py-20"
         >
-          <h2 className="text-3xl font-bold text-center mb-12 text-neon-green">
+          <h2 className="text-3xl font-bold text-center mb-12 text-purple-400">
             Technical Expertise
           </h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -127,16 +127,16 @@ export default function AboutPage() {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-black/40 backdrop-blur-md border border-gray-800 rounded-lg p-6"
+                  className="bg-black/40 backdrop-blur-md border border-purple-500/30 rounded-lg p-6"
                 >
-                  <h3 className="text-lg font-semibold mb-4 text-neon-green">
+                  <h3 className="text-lg font-semibold mb-4 text-purple-400">
                     {category.name}
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {category.skills.slice(0, 6).map(skill => (
                       <span
                         key={skill.name}
-                        className="px-3 py-1 bg-gray-800 text-gray-300 text-sm rounded border border-gray-700"
+                        className="px-3 py-1 bg-gray-800 text-gray-300 text-sm rounded border border-purple-500/30"
                       >
                         {skill.name}
                       </span>
@@ -159,8 +159,8 @@ export default function AboutPage() {
           viewport={{ once: true }}
           className="py-20"
         >
-          <div className="bg-black/40 backdrop-blur-md border border-gray-800 rounded-lg p-8 text-center">
-            <h2 className="text-3xl font-bold mb-6 text-neon-green">
+          <div className="bg-black/40 backdrop-blur-md border border-purple-500/30 rounded-lg p-8 text-center">
+            <h2 className="text-3xl font-bold mb-6 text-purple-400">
               Beyond the Code
             </h2>
             <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
@@ -173,7 +173,7 @@ export default function AboutPage() {
               {saakeEngine.interests.slice(0, 4).map((interest, index) => (
                 <span 
                   key={interest}
-                  className={`px-4 py-2 bg-neon-${['green', 'blue', 'purple', 'pink'][index]}/20 border border-neon-${['green', 'blue', 'purple', 'pink'][index]} text-neon-${['green', 'blue', 'purple', 'pink'][index]} rounded-full`}
+                  className={`px-4 py-2 bg-${['purple', 'pink', 'violet', 'fuchsia'][index]}-500/20 border border-${['purple', 'pink', 'violet', 'fuchsia'][index]}-400 text-${['purple', 'pink', 'violet', 'fuchsia'][index]}-400 rounded-full`}
                 >
                   {interest}
                 </span>

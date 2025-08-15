@@ -17,7 +17,7 @@ export default function TimelinePage() {
           className="text-center mb-12"
         >
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            <span className="glitch-text neon-glow text-neon-green" data-text="TIMELINE">
+            <span className="gradient-text">
               TIMELINE
             </span>
           </h1>
@@ -37,7 +37,7 @@ export default function TimelinePage() {
               className="relative"
             >
               {/* Timeline Line */}
-              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-neon-green via-neon-blue to-neon-purple"></div>
+              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-purple-400 via-pink-400 to-violet-400"></div>
               
               <div className="space-y-8">
                 {allEvents.map((event, index) => (
@@ -66,28 +66,28 @@ export default function TimelinePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="mt-8 bg-black/40 backdrop-blur-md border border-gray-800 rounded-lg p-6"
+                className="mt-8 bg-black/40 backdrop-blur-md border border-purple-500/30 rounded-lg p-6"
               >
-                <h3 className="text-xl font-semibold text-neon-green mb-4 flex items-center gap-2">
+                <h3 className="text-xl font-semibold text-purple-400 mb-4 flex items-center gap-2">
                   <Zap className="h-5 w-5" />
                   Career Highlights
                 </h3>
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
                     <span className="text-gray-300">Years Coding</span>
-                    <span className="text-neon-blue font-bold">6+</span>
+                    <span className="text-pink-400 font-bold">6+</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-gray-300">Projects Completed</span>
-                    <span className="text-neon-purple font-bold">50+</span>
+                    <span className="text-violet-400 font-bold">50+</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-gray-300">Technologies Mastered</span>
-                    <span className="text-neon-pink font-bold">25+</span>
+                    <span className="text-fuchsia-400 font-bold">25+</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-gray-300">Open Source Contributions</span>
-                    <span className="text-neon-green font-bold">100+</span>
+                    <span className="text-purple-400 font-bold">100+</span>
                   </div>
                 </div>
               </motion.div>

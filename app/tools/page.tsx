@@ -16,7 +16,7 @@ export default function ToolsPage() {
           className="text-center mb-12"
         >
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            <span className="glitch-text neon-glow text-neon-green" data-text="TOOLS">
+            <span className="gradient-text">
               TOOLS
             </span>
           </h1>
@@ -50,8 +50,8 @@ export default function ToolsPage() {
           viewport={{ once: true }}
           className="mt-20 text-center"
         >
-          <div className="bg-black/40 backdrop-blur-md border border-gray-800 rounded-lg p-8">
-            <Zap className="h-12 w-12 text-neon-blue mx-auto mb-4" />
+          <div className="bg-black/40 backdrop-blur-md border border-purple-500/30 rounded-lg p-8">
+            <Zap className="h-12 w-12 text-purple-400 mx-auto mb-4" />
             <h3 className="text-2xl font-bold text-white mb-4">More Tools Coming Soon</h3>
             <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
               I'm constantly building new tools to streamline development workflows. 
@@ -60,7 +60,7 @@ export default function ToolsPage() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-6 py-3 bg-neon-blue/20 border border-neon-blue text-neon-blue rounded-lg hover:bg-neon-blue/30 transition-all duration-200"
+              className="px-6 py-3 bg-purple-500/20 border border-purple-400 text-purple-400 rounded-lg hover:bg-purple-500/30 transition-all duration-200"
             >
               Suggest a Tool
             </motion.button>

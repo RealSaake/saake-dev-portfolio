@@ -41,7 +41,7 @@ export default function ProjectsPage() {
           className="text-center mb-12"
         >
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            <span className="glitch-text neon-glow text-neon-green" data-text="PROJECTS">
+            <span className="gradient-text">
               PROJECTS
             </span>
           </h1>
@@ -66,12 +66,12 @@ export default function ProjectsPage() {
                 placeholder="Search projects..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-black/40 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:border-neon-green focus:outline-none"
+                className="w-full pl-10 pr-4 py-3 bg-black/40 border border-purple-500/30 rounded-lg text-white placeholder-gray-400 focus:border-purple-400 focus:outline-none"
               />
             </div>
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className="flex items-center gap-2 px-6 py-3 bg-black/40 border border-gray-700 rounded-lg text-white hover:border-neon-green transition-colors"
+              className="flex items-center gap-2 px-6 py-3 bg-black/40 border border-purple-500/30 rounded-lg text-white hover:border-purple-400 transition-colors"
             >
               <Filter className="h-5 w-5" />
               Filters
@@ -83,9 +83,9 @@ export default function ProjectsPage() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="bg-black/40 border border-gray-700 rounded-lg p-4 mb-6"
+              className="bg-black/40 border border-purple-500/30 rounded-lg p-4 mb-6"
             >
-              <h3 className="text-lg font-semibold mb-3 text-neon-green">Filter by Technology</h3>
+              <h3 className="text-lg font-semibold mb-3 text-purple-400">Filter by Technology</h3>
               <div className="flex flex-wrap gap-2">
                 {allTags.map(tag => (
                   <button
@@ -93,7 +93,7 @@ export default function ProjectsPage() {
                     onClick={() => toggleTag(tag)}
                     className={`px-3 py-1 rounded-full text-sm transition-all ${
                       selectedTags.includes(tag)
-                        ? 'bg-neon-green text-black'
+                        ? 'bg-purple-500 text-white'
                         : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
                     }`}
                   >
@@ -104,7 +104,7 @@ export default function ProjectsPage() {
               {selectedTags.length > 0 && (
                 <button
                   onClick={() => setSelectedTags([])}
-                  className="mt-3 text-sm text-neon-blue hover:underline"
+                  className="mt-3 text-sm text-pink-400 hover:underline"
                 >
                   Clear all filters
                 </button>
@@ -144,7 +144,7 @@ export default function ProjectsPage() {
                 setSearchQuery('')
                 setSelectedTags([])
               }}
-              className="mt-4 text-neon-blue hover:underline"
+              className="mt-4 text-pink-400 hover:underline"
             >
               Clear all filters
             </button>

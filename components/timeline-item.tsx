@@ -18,10 +18,10 @@ const iconMap = {
 }
 
 const colorMap = {
-  work: 'text-neon-blue border-neon-blue',
-  education: 'text-neon-green border-neon-green',
-  project: 'text-neon-purple border-neon-purple',
-  achievement: 'text-neon-pink border-neon-pink',
+  work: 'text-purple-400 border-purple-400',
+  education: 'text-pink-400 border-pink-400',
+  project: 'text-violet-400 border-violet-400',
+  achievement: 'text-fuchsia-400 border-fuchsia-400',
   certification: 'text-yellow-400 border-yellow-400'
 }
 
@@ -45,7 +45,7 @@ export function TimelineItem({ event, index }: TimelineItemProps) {
       {/* Content */}
       <motion.div
         whileHover={{ scale: 1.02 }}
-        className="flex-1 bg-black/40 backdrop-blur-md border border-gray-800 rounded-lg p-6 hover:border-gray-700 transition-all duration-300"
+        className="flex-1 bg-black/40 backdrop-blur-md border border-purple-500/30 rounded-lg p-6 hover:border-purple-400 transition-all duration-300"
       >
         <div className="flex items-start justify-between mb-3">
           <div>
@@ -53,7 +53,7 @@ export function TimelineItem({ event, index }: TimelineItemProps) {
               {event.title}
             </h3>
             {event.company && (
-              <p className="text-neon-green font-medium">
+              <p className="text-purple-400 font-medium">
                 {event.company}
                 {event.location && (
                   <span className="text-gray-400 ml-2">• {event.location}</span>
@@ -69,7 +69,7 @@ export function TimelineItem({ event, index }: TimelineItemProps) {
               })}
             </span>
             {event.featured && (
-              <span className="px-2 py-1 bg-neon-green/20 border border-neon-green text-neon-green text-xs rounded-full">
+              <span className="px-2 py-1 bg-purple-500/20 border border-purple-400 text-purple-400 text-xs rounded-full">
                 Featured
               </span>
             )}
@@ -87,7 +87,7 @@ export function TimelineItem({ event, index }: TimelineItemProps) {
               {event.technologies.map(tech => (
                 <span
                   key={tech}
-                  className="px-2 py-1 bg-gray-800 text-gray-300 text-xs rounded border border-gray-700"
+                  className="px-2 py-1 bg-gray-800 text-gray-300 text-xs rounded border border-purple-500/30"
                 >
                   {tech}
                 </span>
@@ -101,7 +101,7 @@ export function TimelineItem({ event, index }: TimelineItemProps) {
             href={event.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-neon-blue hover:text-neon-green transition-colors"
+            className="inline-flex items-center gap-2 text-purple-400 hover:text-pink-400 transition-colors"
           >
             <ExternalLink className="h-4 w-4" />
             <span className="text-sm">View Project</span>

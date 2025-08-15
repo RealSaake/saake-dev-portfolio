@@ -13,8 +13,8 @@ interface ToolCardProps {
 const statusConfig = {
   active: {
     icon: CheckCircle,
-    color: 'text-neon-green border-neon-green',
-    bg: 'bg-neon-green/20',
+    color: 'text-purple-400 border-purple-400',
+    bg: 'bg-purple-500/20',
     label: 'Active'
   },
   beta: {
@@ -42,9 +42,9 @@ export function ToolCard({ tool, index }: ToolCardProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
       whileHover={isClickable ? { scale: 1.02, y: -5 } : {}}
-      className={`bg-black/40 backdrop-blur-md border border-gray-800 rounded-lg p-6 h-full transition-all duration-300 ${
+      className={`bg-black/40 backdrop-blur-md border border-purple-500/30 rounded-lg p-6 h-full transition-all duration-300 ${
         isClickable 
-          ? 'hover:border-neon-green/50 cursor-pointer group' 
+          ? 'hover:border-purple-400 cursor-pointer group' 
           : 'opacity-75'
       }`}
     >
@@ -57,12 +57,12 @@ export function ToolCard({ tool, index }: ToolCardProps) {
             {status.label}
           </span>
           {isClickable && (
-            <ExternalLink className="h-4 w-4 text-gray-400 group-hover:text-neon-green transition-colors" />
+            <ExternalLink className="h-4 w-4 text-gray-400 group-hover:text-purple-400 transition-colors" />
           )}
         </div>
       </div>
 
-      <h3 className={`text-xl font-bold mb-3 ${isClickable ? 'text-white group-hover:text-neon-green' : 'text-gray-300'} transition-colors`}>
+      <h3 className={`text-xl font-bold mb-3 ${isClickable ? 'text-white group-hover:text-purple-400' : 'text-gray-300'} transition-colors`}>
         {tool.title}
       </h3>
 
@@ -93,7 +93,7 @@ export function ToolCard({ tool, index }: ToolCardProps) {
           {tool.technologies.map(tech => (
             <span
               key={tech}
-              className="px-2 py-1 bg-gray-800 text-gray-300 text-xs rounded border border-gray-700"
+              className="px-2 py-1 bg-gray-800 text-gray-300 text-xs rounded border border-purple-500/30"
             >
               {tech}
             </span>

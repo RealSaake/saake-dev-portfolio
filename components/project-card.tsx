@@ -17,14 +17,14 @@ export function ProjectCard({ project, index, onClick }: ProjectCardProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
       whileHover={{ scale: 1.02, y: -5 }}
-      className="bg-black/40 backdrop-blur-md border border-gray-800 rounded-lg overflow-hidden hover:border-neon-green/50 transition-all duration-300 cursor-pointer group"
+      className="bg-black/40 backdrop-blur-md border border-purple-500/30 rounded-lg overflow-hidden hover:border-purple-400 transition-all duration-300 cursor-pointer group"
       onClick={onClick}
     >
-      <div className="relative h-48 bg-gradient-to-br from-neon-green/20 to-neon-blue/20 overflow-hidden">
+      <div className="relative h-48 bg-gradient-to-br from-purple-500/20 to-pink-500/20 overflow-hidden">
         <div className="absolute inset-0 bg-black/50" />
         <div className="absolute top-4 right-4 flex gap-2">
           {project.featured && (
-            <span className="px-2 py-1 bg-neon-green/20 border border-neon-green text-neon-green text-xs rounded-full">
+            <span className="px-2 py-1 bg-purple-500/20 border border-purple-400 text-purple-400 text-xs rounded-full">
               Featured
             </span>
           )}
@@ -38,7 +38,7 @@ export function ProjectCard({ project, index, onClick }: ProjectCardProps) {
         </div>
         
         <div className="absolute bottom-4 left-4 right-4">
-          <h3 className="text-xl font-bold text-white mb-2 group-hover:text-neon-green transition-colors">
+          <h3 className="text-xl font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">
             {project.title}
           </h3>
           <div className="flex flex-wrap gap-1">
@@ -96,7 +96,7 @@ export function ProjectCard({ project, index, onClick }: ProjectCardProps) {
                   e.stopPropagation()
                   window.open(project.demoUrl, '_blank')
                 }}
-                className="p-2 bg-neon-green/20 border border-neon-green text-neon-green rounded-lg hover:bg-neon-green/30 transition-colors"
+                className="p-2 bg-purple-500/20 border border-purple-400 text-purple-400 rounded-lg hover:bg-purple-500/30 transition-colors"
               >
                 <ExternalLink className="h-4 w-4" />
               </button>
@@ -118,7 +118,7 @@ export function ProjectCard({ project, index, onClick }: ProjectCardProps) {
             {project.techStack.slice(0, 3).map((tech, i) => (
               <div
                 key={tech}
-                className="w-8 h-8 bg-gradient-to-br from-neon-blue to-neon-purple rounded-full border-2 border-black flex items-center justify-center text-xs font-bold"
+                className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full border-2 border-black flex items-center justify-center text-xs font-bold"
                 title={tech}
               >
                 {tech.charAt(0)}
