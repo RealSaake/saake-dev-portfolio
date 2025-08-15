@@ -18,7 +18,7 @@ export const tools: Tool[] = [
     description: 'Format, validate, and minify JSON with syntax highlighting and error detection.',
     category: 'formatter',
     icon: '{}',
-    color: 'neon-green',
+    color: 'purple-400',
     features: [
       'Real-time validation',
       'Syntax highlighting',
@@ -36,7 +36,7 @@ export const tools: Tool[] = [
     description: 'Encode and decode Base64 strings with support for files and images.',
     category: 'converter',
     icon: '⚡',
-    color: 'neon-blue',
+    color: 'pink-400',
     features: [
       'Text encoding/decoding',
       'File upload support',
@@ -54,7 +54,7 @@ export const tools: Tool[] = [
     description: 'Generate beautiful color palettes with accessibility checks and export options.',
     category: 'generator',
     icon: '🎨',
-    color: 'neon-purple',
+    color: 'violet-400',
     features: [
       'AI-powered generation',
       'Accessibility checks',
@@ -72,7 +72,7 @@ export const tools: Tool[] = [
     description: 'Test regular expressions with real-time matching and explanation.',
     category: 'analyzer',
     icon: '.*',
-    color: 'neon-pink',
+    color: 'fuchsia-400',
     features: [
       'Real-time testing',
       'Match highlighting',
@@ -108,7 +108,7 @@ export const tools: Tool[] = [
     description: 'Create customizable QR codes with logos, colors, and various data types.',
     category: 'generator',
     icon: '⬜',
-    color: 'neon-green',
+    color: 'purple-400',
     features: [
       'Custom styling',
       'Logo embedding',
@@ -126,7 +126,7 @@ export const tools: Tool[] = [
     description: 'Decode and analyze JSON Web Tokens with security validation.',
     category: 'analyzer',
     icon: '🔐',
-    color: 'neon-blue',
+    color: 'pink-400',
     features: [
       'Token decoding',
       'Signature verification',
@@ -144,7 +144,7 @@ export const tools: Tool[] = [
     description: 'Test REST APIs with custom headers, authentication, and response analysis.',
     category: 'utility',
     icon: '🌐',
-    color: 'neon-purple',
+    color: 'violet-400',
     features: [
       'Multiple HTTP methods',
       'Custom headers',
@@ -162,7 +162,7 @@ export const tools: Tool[] = [
     description: 'Write and preview Markdown with live rendering and export options.',
     category: 'formatter',
     icon: '📝',
-    color: 'neon-pink',
+    color: 'fuchsia-400',
     features: [
       'Live preview',
       'Syntax highlighting',
@@ -176,10 +176,10 @@ export const tools: Tool[] = [
 ]
 
 export const toolCategories = [
-  { id: 'formatter', name: 'Formatters', color: 'neon-green' },
-  { id: 'converter', name: 'Converters', color: 'neon-blue' },
-  { id: 'generator', name: 'Generators', color: 'neon-purple' },
-  { id: 'analyzer', name: 'Analyzers', color: 'neon-pink' },
+  { id: 'formatter', name: 'Formatters', color: 'purple-400' },
+  { id: 'converter', name: 'Converters', color: 'pink-400' },
+  { id: 'generator', name: 'Generators', color: 'violet-400' },
+  { id: 'analyzer', name: 'Analyzers', color: 'fuchsia-400' },
   { id: 'utility', name: 'Utilities', color: 'yellow-400' }
 ]
 

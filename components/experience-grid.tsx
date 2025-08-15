@@ -29,7 +29,7 @@ export function ExperienceGrid() {
       viewport={{ once: true }}
       className="py-20"
     >
-      <h2 className="text-3xl font-bold text-center mb-12 text-neon-green">
+      <h2 className="text-3xl font-bold text-center mb-12 text-purple-400">
         Key Milestones
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -45,10 +45,10 @@ export function ExperienceGrid() {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
               whileHover={{ scale: 1.02, y: -5 }}
-              className="bg-black/40 backdrop-blur-md border border-gray-800 rounded-lg p-6 hover:border-gray-700 transition-all duration-300"
+              className="bg-black/40 backdrop-blur-md border border-purple-500/30 rounded-lg p-6 hover:border-purple-400 transition-all duration-300"
             >
               <div className="flex items-start gap-4 mb-4">
-                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-neon-green/20 border border-green text-neon-green">
+                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 border border-purple-400 text-purple-400">
                   <Icon className="h-6 w-6" />
                 </div>
                 <div className="flex-1">
@@ -62,7 +62,7 @@ export function ExperienceGrid() {
                     {event.title}
                   </h3>
                   {event.company && (
-                    <p className="text-sm text-neon-green font-medium">
+                    <p className="text-sm text-purple-400 font-medium">
                       {event.company}
                     </p>
                   )}
@@ -78,13 +78,13 @@ export function ExperienceGrid() {
                   {event.technologies.slice(0, 3).map(tech => (
                     <span
                       key={tech}
-                      className="px-2 py-1 bg-gray-800 text-gray-300 text-xs rounded border border-gray-700"
+                      className="px-2 py-1 bg-gray-800 text-gray-300 text-xs rounded border border-purple-500/30"
                     >
                       {tech}
                     </span>
                   ))}
                   {event.technologies.length > 3 && (
-                    <span className="px-2 py-1 bg-gray-800 text-gray-400 text-xs rounded border border-gray-700">
+                    <span className="px-2 py-1 bg-gray-800 text-gray-400 text-xs rounded border border-purple-500/30">
                       +{event.technologies.length - 3}
                     </span>
                   )}

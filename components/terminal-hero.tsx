@@ -54,7 +54,7 @@ export function TerminalHero() {
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.8 }}
-      className="bg-black/80 backdrop-blur-md border border-neon-green/30 rounded-lg p-8 max-w-2xl mx-auto"
+      className="bg-black/80 backdrop-blur-md border border-purple-500/30 rounded-lg p-8 max-w-2xl mx-auto"
     >
       <div className="flex items-center mb-4">
         <div className="flex space-x-2">
@@ -67,12 +67,12 @@ export function TerminalHero() {
       
       <div className="font-mono text-lg">
         {commands.slice(0, currentCommand).map((cmd, index) => (
-          <div key={index} className="text-neon-green mb-2">
+          <div key={index} className="text-purple-400 mb-2">
             {cmd}
           </div>
         ))}
         
-        <div className="text-neon-green">
+        <div className="text-purple-400">
           {displayText}
           {showCursor && <span className="terminal-cursor ml-1"></span>}
         </div>
@@ -87,7 +87,7 @@ export function TerminalHero() {
             <h1 className="text-4xl md:text-6xl font-bold mb-4">
               <FuzzyText
                 fontSize="clamp(3rem, 8vw, 6rem)"
-                color="#00ff41"
+                color="#a855f7"
                 baseIntensity={0.2}
                 hoverIntensity={0.6}
                 fontWeight={900}

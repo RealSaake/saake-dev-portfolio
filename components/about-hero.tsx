@@ -10,25 +10,25 @@ const quickFacts = [
     icon: MapPin,
     label: 'Based In',
     value: 'Remote',
-    color: 'text-neon-green'
+    color: 'text-purple-400'
   },
   {
     icon: Calendar,
     label: 'Experience',
     value: '4+ Years',
-    color: 'text-neon-blue'
+    color: 'text-pink-400'
   },
   {
     icon: Zap,
     label: 'Automation Projects',
     value: '25+',
-    color: 'text-neon-purple'
+    color: 'text-violet-400'
   },
   {
     icon: Code2,
     label: 'Active Projects',
     value: '6',
-    color: 'text-neon-pink'
+    color: 'text-fuchsia-400'
   }
 ]
 
@@ -48,10 +48,10 @@ export function AboutHero() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="relative"
         >
-          <div className="aspect-square bg-gradient-to-br from-neon-green/20 via-neon-blue/20 to-neon-purple/20 rounded-lg border border-gray-800 flex items-center justify-center">
+          <div className="aspect-square bg-gradient-to-br from-purple-500/20 via-pink-500/20 to-violet-500/20 rounded-lg border border-purple-500/30 flex items-center justify-center">
             <div className="text-8xl">👨‍💻</div>
           </div>
-          <div className="absolute -top-4 -right-4 bg-neon-green/20 border border-neon-green text-neon-green px-4 py-2 rounded-full text-sm font-semibold">
+          <div className="absolute -top-4 -right-4 bg-purple-500/20 border border-purple-400 text-purple-400 px-4 py-2 rounded-full text-sm font-semibold">
             Available for hire
           </div>
         </motion.div>
@@ -67,7 +67,7 @@ export function AboutHero() {
             Hey, I'm{' '}
             <FuzzyText
               fontSize="3rem"
-              color="#00ff41"
+              color="#a855f7"
               baseIntensity={0.1}
               hoverIntensity={0.4}
               className="inline-block"
@@ -112,7 +112,7 @@ export function AboutHero() {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
-                  className="bg-black/40 backdrop-blur-md border border-gray-800 rounded-lg p-4 text-center"
+                  className="bg-black/40 backdrop-blur-md border border-purple-500/30 rounded-lg p-4 text-center"
                 >
                   <Icon className={`h-6 w-6 mx-auto mb-2 ${fact.color}`} />
                   <div className={`text-lg font-bold ${fact.color}`}>

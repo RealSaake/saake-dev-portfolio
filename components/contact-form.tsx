@@ -57,8 +57,8 @@ export function ContactForm() {
   }
 
   return (
-    <div className="bg-black/40 backdrop-blur-md border border-gray-800 rounded-lg p-8">
-      <h2 className="text-2xl font-bold text-neon-green mb-6">
+    <div className="bg-black/40 backdrop-blur-md border border-purple-500/30 rounded-lg p-8">
+      <h2 className="text-2xl font-bold text-purple-400 mb-6">
         Send Message
       </h2>
       
@@ -75,7 +75,7 @@ export function ContactForm() {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 bg-black/60 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:border-neon-green focus:outline-none transition-colors"
+              className="w-full px-4 py-3 bg-black/60 border border-purple-500/30 rounded-lg text-white placeholder-gray-400 focus:border-purple-400 focus:outline-none transition-colors"
               placeholder="Your name"
             />
           </div>
@@ -91,7 +91,7 @@ export function ContactForm() {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-4 py-3 bg-black/60 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:border-neon-green focus:outline-none transition-colors"
+              className="w-full px-4 py-3 bg-black/60 border border-purple-500/30 rounded-lg text-white placeholder-gray-400 focus:border-purple-400 focus:outline-none transition-colors"
               placeholder="your@email.com"
             />
           </div>
@@ -108,7 +108,7 @@ export function ContactForm() {
             value={formData.subject}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 bg-black/60 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:border-neon-green focus:outline-none transition-colors"
+            className="w-full px-4 py-3 bg-black/60 border border-purple-500/30 rounded-lg text-white placeholder-gray-400 focus:border-purple-400 focus:outline-none transition-colors"
             placeholder="Project inquiry, collaboration, etc."
           />
         </div>
@@ -123,7 +123,7 @@ export function ContactForm() {
               name="budget"
               value={formData.budget}
               onChange={handleChange}
-              className="w-full px-4 py-3 bg-black/60 border border-gray-700 rounded-lg text-white focus:border-neon-green focus:outline-none transition-colors"
+              className="w-full px-4 py-3 bg-black/60 border border-purple-500/30 rounded-lg text-white focus:border-purple-400 focus:outline-none transition-colors"
             >
               <option value="">Select budget</option>
               <option value="< $5K">Less than $5K</option>
@@ -143,7 +143,7 @@ export function ContactForm() {
               name="timeline"
               value={formData.timeline}
               onChange={handleChange}
-              className="w-full px-4 py-3 bg-black/60 border border-gray-700 rounded-lg text-white focus:border-neon-green focus:outline-none transition-colors"
+              className="w-full px-4 py-3 bg-black/60 border border-purple-500/30 rounded-lg text-white focus:border-purple-400 focus:outline-none transition-colors"
             >
               <option value="">Select timeline</option>
               <option value="ASAP">ASAP</option>
@@ -167,7 +167,7 @@ export function ContactForm() {
             onChange={handleChange}
             required
             rows={6}
-            className="w-full px-4 py-3 bg-black/60 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:border-neon-green focus:outline-none transition-colors resize-none"
+            className="w-full px-4 py-3 bg-black/60 border border-purple-500/30 rounded-lg text-white placeholder-gray-400 focus:border-purple-400 focus:outline-none transition-colors resize-none"
             placeholder="Tell me about your project, goals, and how I can help..."
           />
         </div>
@@ -177,11 +177,11 @@ export function ContactForm() {
           disabled={isSubmitting}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-neon-green/20 border border-neon-green text-neon-green rounded-lg hover:bg-neon-green/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+          className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-purple-500/20 border border-purple-400 text-purple-400 rounded-lg hover:bg-purple-500/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
         >
           {isSubmitting ? (
             <>
-              <div className="w-5 h-5 border-2 border-neon-green border-t-transparent rounded-full animate-spin" />
+              <div className="w-5 h-5 border-2 border-purple-400 border-t-transparent rounded-full animate-spin" />
               Sending...
             </>
           ) : (
@@ -197,7 +197,7 @@ export function ContactForm() {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex items-center gap-2 text-neon-green bg-neon-green/10 border border-neon-green rounded-lg p-4"
+            className="flex items-center gap-2 text-purple-400 bg-purple-500/10 border border-purple-400 rounded-lg p-4"
           >
             <CheckCircle className="h-5 w-5" />
             <span>Message sent successfully! I'll get back to you soon.</span>

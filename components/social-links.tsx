@@ -8,28 +8,28 @@ const socialLinks = [
     name: 'GitHub',
     icon: Github,
     href: 'https://github.com/saake',
-    color: 'hover:text-neon-green hover:border-neon-green',
+    color: 'hover:text-purple-400 hover:border-purple-400',
     description: 'Open source projects and contributions'
   },
   {
     name: 'LinkedIn',
     icon: Linkedin,
     href: 'https://linkedin.com/in/saake',
-    color: 'hover:text-neon-blue hover:border-neon-blue',
+    color: 'hover:text-pink-400 hover:border-pink-400',
     description: 'Professional network and career updates'
   },
   {
     name: 'Twitter',
     icon: Twitter,
     href: 'https://twitter.com/saake_dev',
-    color: 'hover:text-neon-purple hover:border-neon-purple',
+    color: 'hover:text-violet-400 hover:border-violet-400',
     description: 'Tech thoughts and industry insights'
   },
   {
     name: 'Instagram',
     icon: Instagram,
     href: 'https://instagram.com/saake.dev',
-    color: 'hover:text-neon-pink hover:border-neon-pink',
+    color: 'hover:text-fuchsia-400 hover:border-fuchsia-400',
     description: 'Behind the scenes and life updates'
   },
   {
@@ -70,8 +70,8 @@ const platforms = [
 
 export function SocialLinks() {
   return (
-    <div className="bg-black/40 backdrop-blur-md border border-gray-800 rounded-lg p-8">
-      <h2 className="text-2xl font-bold text-neon-green mb-6">
+    <div className="bg-black/40 backdrop-blur-md border border-purple-500/30 rounded-lg p-8">
+      <h2 className="text-2xl font-bold text-purple-400 mb-6">
         Connect & Follow
       </h2>
       
@@ -89,7 +89,7 @@ export function SocialLinks() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               whileHover={{ scale: 1.02 }}
-              className={`flex items-center gap-4 p-4 bg-black/40 border border-gray-700 rounded-lg transition-all duration-300 group ${social.color}`}
+              className={`flex items-center gap-4 p-4 bg-black/40 border border-purple-500/30 rounded-lg transition-all duration-300 group ${social.color}`}
             >
               <div className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-800 border border-gray-600 text-gray-300 group-hover:bg-current/20 group-hover:border-current group-hover:text-current transition-all">
                 <Icon className="h-6 w-6" />
@@ -124,7 +124,7 @@ export function SocialLinks() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
               whileHover={{ scale: 1.02 }}
-              className="block p-3 bg-black/40 border border-gray-700 rounded-lg hover:border-green hover:text-neon-green transition-all duration-300 group"
+              className="block p-3 bg-black/40 border border-purple-500/30 rounded-lg hover:border-purple-400 hover:text-purple-400 transition-all duration-300 group"
             >
               <div className="font-medium text-white group-hover:text-current transition-colors">
                 {platform.name}
@@ -142,9 +142,9 @@ export function SocialLinks() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.8 }}
-        className="mt-8 p-4 bg-neon-blue/10 border border-neon-blue rounded-lg"
+        className="mt-8 p-4 bg-purple-500/10 border border-purple-400 rounded-lg"
       >
-        <h4 className="text-lg font-semibold text-neon-blue mb-2">
+        <h4 className="text-lg font-semibold text-purple-400 mb-2">
           Stay Updated
         </h4>
         <p className="text-sm text-gray-300 mb-4">
@@ -154,7 +154,7 @@ export function SocialLinks() {
         <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          className="w-full px-4 py-2 bg-neon-blue/20 border border-neon-blue text-neon-blue rounded-lg hover:bg-neon-blue/30 transition-colors"
+          className="w-full px-4 py-2 bg-purple-500/20 border border-purple-400 text-purple-400 rounded-lg hover:bg-purple-500/30 transition-colors"
         >
           Subscribe to Newsletter
         </motion.button>

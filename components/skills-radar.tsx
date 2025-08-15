@@ -48,8 +48,8 @@ export function SkillsRadar() {
       }
 
       // Draw skill polygon
-      ctx.strokeStyle = '#00ff41'
-      ctx.fillStyle = 'rgba(0, 255, 65, 0.1)'
+      ctx.strokeStyle = '#a855f7'
+      ctx.fillStyle = 'rgba(168, 85, 247, 0.1)'
       ctx.lineWidth = 2
       ctx.beginPath()
 
@@ -78,7 +78,7 @@ export function SkillsRadar() {
         const y = centerY + Math.sin(angle) * skillRadius
         
         // Skill point
-        ctx.fillStyle = '#00ff41'
+        ctx.fillStyle = '#a855f7'
         ctx.beginPath()
         ctx.arc(x, y, 4, 0, Math.PI * 2)
         ctx.fill()
@@ -94,7 +94,7 @@ export function SkillsRadar() {
         ctx.fillText(skill.name, labelX, labelY)
         
         // Skill level
-        ctx.fillStyle = '#00d4ff'
+        ctx.fillStyle = '#ec4899'
         ctx.font = '10px monospace'
         ctx.fillText(`${skill.level}%`, labelX, labelY + 15)
       })
@@ -138,8 +138,8 @@ export function SkillsRadar() {
         }
         
         // Draw animated polygon
-        ctx.strokeStyle = '#00ff41'
-        ctx.fillStyle = 'rgba(0, 255, 65, 0.1)'
+        ctx.strokeStyle = '#a855f7'
+        ctx.fillStyle = 'rgba(168, 85, 247, 0.1)'
         ctx.lineWidth = 2
         ctx.beginPath()
         
@@ -175,9 +175,9 @@ export function SkillsRadar() {
       whileInView={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.8 }}
       viewport={{ once: true }}
-      className="bg-black/40 backdrop-blur-md border border-gray-800 rounded-lg p-6"
+      className="bg-black/40 backdrop-blur-md border border-purple-500/30 rounded-lg p-6"
     >
-      <h3 className="text-xl font-semibold text-neon-green mb-6 text-center">
+      <h3 className="text-xl font-semibold text-purple-400 mb-6 text-center">
         Skills Radar
       </h3>
       <div className="flex justify-center">

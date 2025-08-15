@@ -11,28 +11,28 @@ const stats = [
     label: 'Lines of Code',
     value: 500000,
     suffix: '+',
-    color: 'text-neon-green'
+    color: 'text-purple-400'
   },
   {
     icon: Coffee,
     label: 'Cups of Coffee',
     value: 2847,
     suffix: '',
-    color: 'text-neon-blue'
+    color: 'text-pink-400'
   },
   {
     icon: GitBranch,
     label: 'Commits',
     value: 12543,
     suffix: '+',
-    color: 'text-neon-purple'
+    color: 'text-violet-400'
   },
   {
     icon: Zap,
     label: 'Projects Deployed',
     value: 127,
     suffix: '',
-    color: 'text-neon-pink'
+    color: 'text-fuchsia-400'
   }
 ]
 
@@ -51,7 +51,7 @@ export function StatsGrid() {
             transition={{ duration: 0.6, delay: index * 0.1 }}
             viewport={{ once: true }}
           >
-            <Card className="bg-black/40 backdrop-blur-md border-gray-800 hover:border-neon-green/50 transition-all duration-300">
+            <Card className="bg-black/40 backdrop-blur-md border-purple-500/30 hover:border-purple-400 transition-all duration-300">
               <CardContent className="p-6 text-center">
                 <div className="flex justify-center mb-4">
                   <Icon className={`h-8 w-8 ${stat.color}`} />
