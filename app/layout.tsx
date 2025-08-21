@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import { Navigation } from '@/components/navigation'
 import { MatrixBackground } from '@/components/matrix-background'
@@ -16,7 +16,6 @@ export const metadata: Metadata = {
   description: 'Full-stack developer and automation enthusiast building secure, scalable web apps, AI demos, and data workflows.',
   keywords: ['developer', 'portfolio', 'full-stack', 'react', 'nextjs', 'typescript'],
   authors: [{ name: 'Saake' }],
-  viewport: 'width=device-width, initial-scale=1',
   robots: 'index, follow',
   metadataBase: new URL('https://saake.dev'),
   alternates: {
@@ -33,6 +32,11 @@ export const metadata: Metadata = {
     title: 'saake.dev - Cyber Portfolio',
     description: 'Full-stack developer and automation enthusiast',
   }
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 }
 
 export default function RootLayout({
