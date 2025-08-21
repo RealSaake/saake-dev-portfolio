@@ -18,7 +18,7 @@ export function Navigation() {
   const pathname = usePathname()
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-black/90 via-purple-900/20 to-black/90 backdrop-blur-xl border-b border-purple-500/30">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-black/90 via-purple-900/20 to-black/90 backdrop-blur-xl border-b border-purple-500/30" aria-label="Primary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo Section - Tighter spacing */}
@@ -48,6 +48,7 @@ export function Navigation() {
                     key={item.href}
                     href={item.href}
                     className="relative px-4 py-2 rounded-lg font-medium transition-all duration-300 group"
+                    aria-current={isActive ? 'page' : undefined}
                   >
                     <span className={`relative z-10 ${
                       isActive 
@@ -76,6 +77,9 @@ export function Navigation() {
             <motion.button
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-2 rounded-lg text-gray-300 hover:text-white hover:bg-purple-600/20 transition-colors border border-purple-500/30"
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
+              aria-label={isOpen ? 'Close menu' : 'Open menu'}
               whileTap={{ scale: 0.95 }}
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -91,6 +95,9 @@ export function Navigation() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           className="md:hidden bg-gradient-to-b from-black/95 to-purple-900/20 backdrop-blur-xl border-b border-purple-500/30"
+          id="mobile-menu"
+          role="dialog"
+          aria-label="Mobile navigation"
         >
           <div className="px-4 pt-2 pb-3 space-y-1">
             {navItems.map((item) => {
@@ -104,6 +111,7 @@ export function Navigation() {
                       ? 'text-white bg-gradient-to-r from-purple-600/30 to-pink-600/30 border border-purple-500/50'
                       : 'text-gray-300 hover:text-white hover:bg-purple-600/20'
                   }`}
+                  aria-current={isActive ? 'page' : undefined}
                   onClick={() => setIsOpen(false)}
                 >
                   {item.label}

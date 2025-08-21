@@ -19,12 +19,21 @@ export function ProjectCard({ project, index, onClick }: ProjectCardProps) {
       whileHover={{ scale: 1.02, y: -5 }}
       className="bg-black/40 backdrop-blur-md border border-purple-500/30 rounded-lg overflow-hidden hover:border-purple-400 transition-all duration-300 cursor-pointer group"
       onClick={onClick}
+      role="button"
+      tabIndex={0}
+      aria-label={`Open project ${project.title}`}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          onClick()
+        }
+      }}
     >
       <div className="relative h-48 bg-gradient-to-br from-purple-500/20 to-pink-500/20 overflow-hidden">
         <div className="absolute inset-0 bg-black/50" />
         <div className="absolute top-4 right-4 flex gap-2">
           {project.featured && (
-            <span className="px-2 py-1 bg-purple-500/20 border border-purple-400 text-purple-400 text-xs rounded-full">
+            <span className="px-2 py-1 bg-purple-500/20 border border-purple-400 text-purple-400 text-xs rounded-full" aria-label="Featured project">
               Featured
             </span>
           )}
@@ -97,6 +106,7 @@ export function ProjectCard({ project, index, onClick }: ProjectCardProps) {
                   window.open(project.demoUrl, '_blank')
                 }}
                 className="p-2 bg-purple-500/20 border border-purple-400 text-purple-400 rounded-lg hover:bg-purple-500/30 transition-colors"
+                aria-label={`Open live demo for ${project.title}`}
               >
                 <ExternalLink className="h-4 w-4" />
               </button>
@@ -108,6 +118,7 @@ export function ProjectCard({ project, index, onClick }: ProjectCardProps) {
                   window.open(project.githubUrl, '_blank')
                 }}
                 className="p-2 bg-gray-800 border border-gray-600 text-gray-300 rounded-lg hover:border-gray-500 transition-colors"
+                aria-label={`Open GitHub repository for ${project.title}`}
               >
                 <Github className="h-4 w-4" />
               </button>

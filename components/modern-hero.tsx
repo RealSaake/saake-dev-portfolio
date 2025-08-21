@@ -74,6 +74,7 @@ export function ModernHero() {
             target="_blank"
             rel="noopener noreferrer"
             className="p-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-colors group"
+            aria-label="GitHub profile"
           >
             <Github className="h-6 w-6 text-gray-400 group-hover:text-white transition-colors" />
           </a>
@@ -82,6 +83,7 @@ export function ModernHero() {
             target="_blank"
             rel="noopener noreferrer"
             className="p-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-colors group"
+            aria-label="LinkedIn profile"
           >
             <Linkedin className="h-6 w-6 text-gray-400 group-hover:text-white transition-colors" />
           </a>
@@ -90,6 +92,7 @@ export function ModernHero() {
             target="_blank"
             rel="noopener noreferrer"
             className="p-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-colors group"
+            aria-label="Email Saake"
           >
             <Mail className="h-6 w-6 text-gray-400 group-hover:text-white transition-colors" />
           </a>
@@ -108,6 +111,8 @@ export function ModernHero() {
           repeat: Infinity,
           ease: "linear"
         }}
+        aria-hidden="true"
+        data-animate
       />
       <motion.div
         className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"
@@ -120,6 +125,8 @@ export function ModernHero() {
           repeat: Infinity,
           ease: "linear"
         }}
+        aria-hidden="true"
+        data-animate
       />
     </section>
   )
