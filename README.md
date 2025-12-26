@@ -161,3 +161,6 @@ MIT License - feel free to use this for your own portfolio!
 ---
 
 **Built with ❤️ by Saake** | [Portfolio](https://saake.dev) | [EOS Trails](https://eostrails.com) | [Tools](https://tools.saake.dev)
+
+
+![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/RealSaake/saake-dev-portfolio?utm_source=oss&utm_medium=github&utm_campaign=RealSaake%2Fsaake-dev-portfolio&labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit+Reviews)
