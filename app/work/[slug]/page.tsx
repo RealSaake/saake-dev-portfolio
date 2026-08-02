@@ -52,7 +52,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
 
   return (
     <article>
-      <Section className="pt-20 md:pt-32">
+      <Section pad="top">
         <Container>
           <Reveal>
             <div className="flex items-baseline gap-6">

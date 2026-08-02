@@ -137,8 +137,21 @@ const before6 = failures
     if (!u.startsWith(ORIGIN)) fail(`sitemap entry ${u} is not on ${ORIGIN}`)
   }
   for (const route of ROUTES) {
-    const expected = route === '/' ? `${ORIGIN}/` : `${ORIGIN}${route}`
-    if (!urls.includes(expected)) fail(`sitemap is missing ${expected}`)
+    // The home URL is emitted as the bare origin, matching its canonical.
+    // Accept either form rather than inventing a trailing slash the site
+    // does not use anywhere else.
+    const expected = route === '/' ? [ORIGIN, `${ORIGIN}/`] : [`${ORIGIN}${route}`]
+    if (!expected.some((u) => urls.includes(u))) {
+      fail(`sitemap is missing ${expected[0]}`)
+    }
+  }
+
+  // Whatever form it uses, the sitemap and the canonical must agree.
+  const homeHtml = await (await fetch(`${ORIGIN}/`)).text()
+  const homeCanonical = (homeHtml.match(/<link rel="canonical" href="([^"]+)"/) || [])[1]
+  const homeInSitemap = urls.find((u) => u === ORIGIN || u === `${ORIGIN}/`)
+  if (homeCanonical && homeInSitemap && homeCanonical !== homeInSitemap) {
+    fail(`home canonical is ${homeCanonical} but the sitemap lists ${homeInSitemap}`)
   }
 
   const robots = await (await fetch(`${ORIGIN}/robots.txt`)).text()

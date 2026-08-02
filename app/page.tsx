@@ -38,7 +38,7 @@ export default function Home() {
       {/* ── Position ──────────────────────────────────────────
           The claim, made in the first screen, without a job title
           or a pill that says "available for work". */}
-      <Section className="pt-20 md:pt-32">
+      <Section pad="top">
         <Container>
           <Reveal>
             <Label className="mb-10">saake.dev — {site.name}</Label>

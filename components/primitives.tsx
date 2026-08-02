@@ -110,14 +110,28 @@ export function Reveal({ children, delay = 0, className = '' }: {
   )
 }
 
-/* ── Section — vertical rhythm, one value one jump (P11) ───── */
-export function Section({ children, className = '', id }: {
+/* ── Section — vertical rhythm, one value one jump (P11) ─────
+ *
+ * `pad` is a variant, not a className override. Passing `pt-32`
+ * alongside the default `py-40` compiles both, and which one wins
+ * is decided by their order in the generated stylesheet rather
+ * than by the order they appear in the JSX — so the override is
+ * silently unreliable. Enumerating the cases removes the guess.
+ */
+const SECTION_PAD = {
+  default: 'py-24 md:py-40',
+  top: 'pt-20 pb-24 md:pt-32 md:pb-40',
+  tight: 'py-16 md:py-24',
+} as const
+
+export function Section({ children, className = '', id, pad = 'default' }: {
   children: ReactNode
   className?: string
   id?: string
+  pad?: keyof typeof SECTION_PAD
 }) {
   return (
-    <section id={id} className={`py-24 md:py-40 ${className}`}>
+    <section id={id} className={`${SECTION_PAD[pad]} ${className}`}>
       {children}
     </section>
   )

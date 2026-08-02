@@ -2,7 +2,7 @@ import { Container, InternalLink, Label, Prose, Section } from '@/components/pri
 
 export default function NotFound() {
   return (
-    <Section className="pt-20 md:pt-32">
+    <Section pad="top">
       <Container>
         <Label className="mb-10">404</Label>
         <h1 className="text-h1 max-w-measure">This page does not exist.</h1>

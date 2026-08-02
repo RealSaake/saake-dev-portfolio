@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 export default function Contact() {
   return (
-    <Section className="pt-20 md:pt-32">
+    <Section pad="top">
       <Container>
         <Reveal>
           <Label className="mb-10">Contact</Label>
