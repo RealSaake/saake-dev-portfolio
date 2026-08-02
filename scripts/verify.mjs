@@ -195,8 +195,24 @@ for (const p of pages) {
   const imgs = [...p.html.matchAll(/<img\b[^>]*>/g)].filter((m) => !/\balt=/.test(m[0]))
   if (imgs.length) fail(`${p.route}: ${imgs.length} <img> without alt`)
   if (/<div[^>]+onclick/i.test(p.html)) fail(`${p.route}: click handler on a div`)
+
+  /* Heading order — exactly one h1, and no level skipped on the way
+   * down. Both reference sites fail this (one goes h1 → h3 → h2), and
+   * it is the kind of defect that returns silently: a section heading
+   * styled small gets emitted as a span, the section loses its h2, and
+   * the h3s inside it now dangle off the page h1. Visual size is not a
+   * document level, and only the built markup can prove which shipped. */
+  const levels = [...p.html.matchAll(/<h([1-6])[\s>]/g)].map((m) => Number(m[1]))
+  const h1s = levels.filter((l) => l === 1).length
+  if (h1s !== 1) fail(`${p.route}: ${h1s} <h1> elements, expected exactly 1`)
+  for (let i = 1; i < levels.length; i++) {
+    if (levels[i] > levels[i - 1] + 1) {
+      fail(`${p.route}: heading order skips h${levels[i - 1]} → h${levels[i]}`)
+      break
+    }
+  }
 }
-if (failures === a11yBefore) pass('lang, skip link, alt text, no div-buttons')
+if (failures === a11yBefore) pass('lang, skip link, alt text, no div-buttons, heading order')
 
 /* ── 6. Share cards ────────────────────────────────────────────
  * The site declared `twitter:card: summary_large_image` for a while
@@ -246,7 +262,16 @@ for (const p of pages) {
 }
 if (failures === ogBefore) pass('every declared card exists, is a PNG, and is 1200×630')
 
-/* ── 7. Contrast floor — recompute, do not trust the table ─────── */
+/* ── 7. Contrast floor — recompute, do not trust the table ───────
+ *
+ * Dark is the default and lives in `:root`; light is the override
+ * block. That is the inverse of the first build, and the reason
+ * this reads the blocks by name rather than by position: a check
+ * pointed at the wrong block reports a ratio for a colour pair
+ * that never renders together, which is worse than no check.
+ *
+ * Both blocks are asserted to exist. If a rename ever makes one
+ * unfindable, that is a failure rather than a silent skip. */
 
 console.log('\nContrast')
 const css = readFileSync('app/globals.css', 'utf8')
@@ -260,21 +285,26 @@ const lum = (h) => {
     const s = v / 255
     return s <= 0.03928 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4
   })
-  return 0.2126 * r + 0.0722 * b + 0.7152 * g
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b
 }
 const ratio = (a, b) => {
   const [x, y] = [lum(a), lum(b)].sort((m, n) => n - m)
   return (x + 0.05) / (y + 0.05)
 }
-const tok = (name, scope) => {
-  const block = scope === 'dark'
-    ? (css.match(/\[data-theme='dark'\]\s*\{([\s\S]*?)\}/) || [, ''])[1]
-    : (css.match(/:root\s*\{([\s\S]*?)\}/) || [, ''])[1]
-  return (block.match(new RegExp(`--${name}:\\s*(#[0-9a-fA-F]{3,6})`)) || [])[1]
+
+const BLOCK = {
+  dark: (css.match(/:root\s*\{([\s\S]*?)\n\s*\}/) || [, ''])[1],
+  light: (css.match(/\[data-theme='light'\]\s*\{([\s\S]*?)\n\s*\}/) || [, ''])[1],
+}
+for (const [mode, body] of Object.entries(BLOCK)) {
+  if (!body.trim()) fail(`contrast: could not find the ${mode} token block in globals.css`)
 }
 
+const tok = (name, mode) =>
+  (BLOCK[mode].match(new RegExp(`--${name}:\\s*(#[0-9a-fA-F]{3,6})`)) || [])[1]
+
 let tightest = { r: Infinity }
-for (const mode of ['light', 'dark']) {
+for (const mode of ['dark', 'light']) {
   const paper = tok('paper', mode)
   const surface = tok('surface', mode)
   if (!paper || !surface) { fail(`${mode}: could not read paper/surface from globals.css`); continue }

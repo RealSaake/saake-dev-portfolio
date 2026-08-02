@@ -18,16 +18,17 @@ const ratio = (a, b) => {
   const [x, y] = [lum(a), lum(b)].sort((m, n) => n - m)
   return (x + 0.05) / (y + 0.05)
 }
-const block = (mode) =>
-  mode === 'dark'
-    ? (css.match(/\[data-theme='dark'\]\s*\{([\s\S]*?)\n\s*\}/) || [, ''])[1]
-    : (css.match(/:root\s*\{([\s\S]*?)\n\s*\}/) || [, ''])[1]
+// Dark is the default and lives in `:root`; light is the override block.
+const BLOCK = {
+  dark: (css.match(/:root\s*\{([\s\S]*?)\n\s*\}/) || [, ''])[1],
+  light: (css.match(/\[data-theme='light'\]\s*\{([\s\S]*?)\n\s*\}/) || [, ''])[1],
+}
 
 const tok = (name, mode) =>
-  (block(mode).match(new RegExp(`--${name}:\\s*(#[0-9a-fA-F]{3,6})`)) || [])[1]
+  (BLOCK[mode].match(new RegExp(`--${name}:\\s*(#[0-9a-fA-F]{3,6})`)) || [])[1]
 
 let worst = { r: Infinity }
-for (const mode of ['light', 'dark']) {
+for (const mode of ['dark', 'light']) {
   const paper = tok('paper', mode)
   const surface = tok('surface', mode)
   console.log(`\n== ${mode} ==  paper ${paper}  surface ${surface}`)
@@ -43,14 +44,13 @@ for (const mode of ['light', 'dark']) {
       `   --${fg.padEnd(8)} ${c}  paper ${onPaper.toFixed(2)}  surface ${onSurface.toFixed(2)}${flag}`
     )
   }
-  // accent roles resolve to ramp steps
-  const roles = { 'accent-text': mode === 'light' ? 'a-5' : 'a-3' }
-  for (const [role, step] of Object.entries(roles)) {
-    const c = tok(step, 'light') // ramp is declared once, in :root
-    console.log(
-      `   ${role} (${step}) ${c}  paper ${ratio(c, paper).toFixed(2)}  surface ${ratio(c, surface).toFixed(2)}`
-    )
-  }
+  // The lime ramp is declared once, in :root. accent-text points at a
+  // different step per theme so the brand fill can stay constant.
+  const step = mode === 'dark' ? 'l-4' : 'l-7'
+  const c = tok(step, 'dark')
+  console.log(
+    `   accent-text (${step}) ${c}  paper ${ratio(c, paper).toFixed(2)}  surface ${ratio(c, surface).toFixed(2)}`
+  )
 }
 console.log(
   `\ntightest: --${worst.fg} on --${worst.bg} (${worst.mode}) = ${worst.r.toFixed(2)}:1\n`

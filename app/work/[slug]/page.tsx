@@ -3,13 +3,17 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import {
   Container,
+  DotGrid,
+  Eyebrow,
   ExternalLink,
   InternalLink,
   Label,
+  NumberedList,
   Prose,
   Reveal,
   Rule,
   Section,
+  SpecTable,
 } from '@/components/primitives'
 import { caseStudies, getCaseStudy, site } from '@/content'
 
@@ -49,20 +53,36 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
 
   const index = caseStudies.findIndex((s) => s.slug === study.slug)
   const next = caseStudies[(index + 1) % caseStudies.length]
+  const live = study.links?.find((l) => l.label === 'Live')
+  const source = study.links?.find((l) => l.label === 'Source')
 
   return (
     <article>
-      <Section pad="top">
-        <Container>
+      <Section pad="top" className="relative overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="hud-grid pointer-events-none absolute inset-0 opacity-60"
+        />
+        <Container className="relative">
           <Reveal>
-            <div className="flex items-baseline gap-6">
-              <Label>{study.year}</Label>
-              <Label className="text-muted-2">{study.kind}</Label>
-            </div>
+            <nav aria-label="Breadcrumb" className="mb-10">
+              <Link
+                href="/work"
+                className="label transition-colors duration-act hover:text-accent-text"
+              >
+                ← Work
+              </Link>
+            </nav>
+          </Reveal>
+
+          <Reveal>
+            <Eyebrow>
+              {study.kind} // {study.year}
+            </Eyebrow>
           </Reveal>
 
           <Reveal delay={1}>
-            <h1 className="mt-10 text-display max-w-measure-long">{study.title}</h1>
+            <h1 className="mt-10 max-w-measure-long text-display">{study.title}</h1>
           </Reveal>
 
           <Reveal delay={2}>
@@ -80,6 +100,63 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
               </div>
             </Reveal>
           )}
+        </Container>
+      </Section>
+
+      {/* ── The live artefact ────────────────────────────────
+          Routing a visitor to the running thing is the strongest
+          claim this page can make. Some hosts refuse framing via
+          X-Frame-Options, so the frame sits on top of a visible
+          fallback: if it never paints, the panel and the link
+          underneath still read as deliberate. */}
+      <Section pad="tight">
+        <Container>
+          <Reveal>
+            <div className="relative border border-rule">
+              <DotGrid className="aspect-card w-full border-0" label={study.slug} />
+              {live && (
+                <iframe
+                  src={live.href}
+                  title={`${study.title} — live`}
+                  loading="lazy"
+                  sandbox="allow-scripts allow-same-origin"
+                  className="absolute inset-0 h-full w-full border-0 bg-paper"
+                />
+              )}
+            </div>
+            <div className="mt-4 flex flex-wrap items-baseline justify-between gap-4">
+              <Label>{live ? 'Live, embedded' : 'No live deployment'}</Label>
+              {live && (
+                <ExternalLink href={live.href} className="text-s">
+                  Open the live site
+                </ExternalLink>
+              )}
+            </div>
+          </Reveal>
+        </Container>
+      </Section>
+
+      <Section pad="tight">
+        <Container>
+          <Reveal>
+            <SpecTable
+              rows={[
+                ['Year', study.year],
+                ['Kind', study.kind],
+                ['Stack', study.stack],
+                [
+                  'Source',
+                  source ? (
+                    <ExternalLink href={source.href} className="text-s">
+                      {source.href.replace('https://github.com/', '')}
+                    </ExternalLink>
+                  ) : (
+                    'Not public'
+                  ),
+                ],
+              ]}
+            />
+          </Reveal>
         </Container>
       </Section>
 
@@ -130,16 +207,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
               <Reveal delay={2}>
                 <div className="mt-16">
                   <Label className="mb-6">Specifically</Label>
-                  <ul className="grid gap-px bg-rule">
-                    {study.deliverables.map((d) => (
-                      <li key={d} className="bg-paper py-5 pl-6 text-s text-muted">
-                        <span className="mr-4 text-muted-2" aria-hidden="true">
-                          —
-                        </span>
-                        {d}
-                      </li>
-                    ))}
-                  </ul>
+                  <NumberedList items={study.deliverables} />
                 </div>
               </Reveal>
             </div>
@@ -168,7 +236,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
               </Reveal>
 
               <Reveal delay={2}>
-                <p className="mortar mt-16 max-w-measure text-s text-muted-2">{study.stack}</p>
+                <p className="mt-16 max-w-measure border-l border-accent-edge pl-4 text-s text-muted-2">
+                  {study.stack}
+                </p>
               </Reveal>
             </div>
           </div>
@@ -184,7 +254,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
               href={`/work/${next.slug}`}
               className="lift group block border-t border-rule py-10 transition-colors duration-act hover:border-accent-edge"
             >
-              <h2 className="text-h2 max-w-measure transition-colors duration-act group-hover:text-accent-text">
+              <h2 className="max-w-measure text-h2 transition-colors duration-act group-hover:text-accent-text">
                 {next.title}
               </h2>
               <p className="mt-3 max-w-measure text-s text-muted">{next.tagline}</p>
