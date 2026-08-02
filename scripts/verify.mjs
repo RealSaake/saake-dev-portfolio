@@ -198,7 +198,55 @@ for (const p of pages) {
 }
 if (failures === a11yBefore) pass('lang, skip link, alt text, no div-buttons')
 
-/* ── 6. Contrast floor — recompute, do not trust the table ─────── */
+/* ── 6. Share cards ────────────────────────────────────────────
+ * The site declared `twitter:card: summary_large_image` for a while
+ * and shipped no image, so every share rendered a blank slab with a
+ * hostname under it. Declaring the tag is a promise; this checks the
+ * promise is kept — the file exists, it is a real PNG, and it is the
+ * size the meta tag claims it is. Reading the IHDR rather than
+ * trusting the tag is the point: the tag is the thing that lied. */
+
+console.log('\nShare cards')
+const ogBefore = failures
+for (const p of pages) {
+  if (p.route.startsWith('/_')) continue
+
+  const declared = (p.html.match(/<meta property="og:image" content="([^"]+)"/) || [])[1]
+  const card = (p.html.match(/<meta name="twitter:card" content="([^"]+)"/) || [])[1]
+
+  if (card === 'summary_large_image' && !declared) {
+    fail(`${p.route}: declares summary_large_image with no og:image`)
+    continue
+  }
+  if (!declared) continue
+
+  if (!declared.startsWith(ORIGIN)) fail(`${p.route}: og:image is not on ${ORIGIN}`)
+
+  // /work/waveline/opengraph-image?hash → .next/server/app/work/waveline/opengraph-image.body
+  const rel = declared.slice(ORIGIN.length).split('?')[0]
+  const body = join(ROOT, `${rel}.body`)
+  if (!existsSync(body)) {
+    fail(`${p.route}: og:image ${rel} has no generated file`)
+    continue
+  }
+
+  const png = readFileSync(body)
+  if (png.subarray(0, 8).toString('hex') !== '89504e470d0a1a0a') {
+    fail(`${p.route}: og:image is not a PNG`)
+    continue
+  }
+  const w = png.readUInt32BE(16)
+  const h = png.readUInt32BE(20)
+  const dw = Number((p.html.match(/<meta property="og:image:width" content="(\d+)"/) || [])[1])
+  const dh = Number((p.html.match(/<meta property="og:image:height" content="(\d+)"/) || [])[1])
+  if (w !== dw || h !== dh) {
+    fail(`${p.route}: og:image is ${w}×${h} but declares ${dw}×${dh}`)
+  }
+  if (w !== 1200 || h !== 630) fail(`${p.route}: og:image is ${w}×${h}, expected 1200×630`)
+}
+if (failures === ogBefore) pass('every declared card exists, is a PNG, and is 1200×630')
+
+/* ── 7. Contrast floor — recompute, do not trust the table ─────── */
 
 console.log('\nContrast')
 const css = readFileSync('app/globals.css', 'utf8')
@@ -243,9 +291,9 @@ for (const mode of ['light', 'dark']) {
 if (tightest.r === Infinity) fail('contrast check read no tokens — the regex is stale, not the CSS')
 else console.log(`  · tightest pair: --${tightest.fg} on --${tightest.bg} (${tightest.mode}) = ${tightest.r.toFixed(2)}:1`)
 
-/* ── 7. Bundle budget ──────────────────────────────────────────── */
+/* ── 8. Bundle budget ──────────────────────────────────────────── */
 
-/* ── 7. Weight ─────────────────────────────────────────────────
+/* ── 8. Weight ─────────────────────────────────────────────────
  * Measured as gzip of the scripts a page actually references, not
  * as the sum of every chunk on disk — the latter counts chunks no
  * single visitor downloads and reads as worse than reality.

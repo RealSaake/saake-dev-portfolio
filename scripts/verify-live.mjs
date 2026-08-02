@@ -126,9 +126,43 @@ const before5 = failures
 }
 if (failures === before5) pass('nosniff, referrer-policy, frame-options, HSTS')
 
-/* ── 6. sitemap and robots agree with the canonical origin ────── */
-console.log('\nSitemap and robots')
+/* ── 6. Share cards actually fetch ────────────────────────────
+ * Local verification proves the PNG was generated. It cannot prove
+ * a crawler can reach it — that depends on routing and the CDN in
+ * front of it, and a card that 404s over the wire previews exactly
+ * as badly as no card at all. Twitter and Slack fetch this URL
+ * unauthenticated and do not follow many hops, so it has to be 200
+ * on the first try with an image content-type. */
+console.log('\nShare cards')
 const before6 = failures
+{
+  for (const route of ROUTES) {
+    const html = await (await fetch(`${ORIGIN}${route}`)).text()
+    const url = (html.match(/<meta property="og:image" content="([^"]+)"/) || [])[1]
+    if (!url) { fail(`${route}: no og:image declared`); continue }
+    if (!url.startsWith(ORIGIN)) { fail(`${route}: og:image is not on ${ORIGIN}`); continue }
+
+    const r = await fetch(url, { redirect: 'manual' })
+    if (r.status !== 200) {
+      fail(`${route}: og:image returns ${r.status}${r.headers.get('location') ? ` → ${r.headers.get('location')}` : ''}`)
+      continue
+    }
+    const type = r.headers.get('content-type') || ''
+    if (!type.startsWith('image/')) fail(`${route}: og:image serves ${type}`)
+
+    const bytes = Buffer.from(await r.arrayBuffer())
+    if (bytes.subarray(0, 8).toString('hex') !== '89504e470d0a1a0a') {
+      fail(`${route}: og:image body is not a PNG`)
+    } else if (bytes.readUInt32BE(16) !== 1200 || bytes.readUInt32BE(20) !== 630) {
+      fail(`${route}: og:image is ${bytes.readUInt32BE(16)}×${bytes.readUInt32BE(20)} over the wire`)
+    }
+  }
+}
+if (failures === before6) pass('every og:image returns 200 as a 1200×630 PNG')
+
+/* ── 7. sitemap and robots agree with the canonical origin ────── */
+console.log('\nSitemap and robots')
+const before7 = failures
 {
   const sitemap = await (await fetch(`${ORIGIN}/sitemap.xml`)).text()
   const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1])
@@ -157,7 +191,7 @@ const before6 = failures
   const robots = await (await fetch(`${ORIGIN}/robots.txt`)).text()
   if (!robots.includes(`${ORIGIN}/sitemap.xml`)) fail('robots.txt does not point at the sitemap on this origin')
 }
-if (failures === before6) pass('sitemap complete and on-origin, robots points at it')
+if (failures === before7) pass('sitemap complete and on-origin, robots points at it')
 
 console.log(failures === 0 ? '\nPASS — live site verified\n' : `\nFAIL — ${failures} problem${failures === 1 ? '' : 's'}\n`)
 process.exit(failures === 0 ? 0 : 1)
