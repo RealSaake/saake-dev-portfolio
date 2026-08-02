@@ -1,36 +1,27 @@
 import { ImageResponse } from 'next/og'
 
-export const runtime = 'edge'
-
-export const size = {
-  width: 32,
-  height: 32,
-}
-
+export const size = { width: 32, height: 32 }
 export const contentType = 'image/png'
 
+/* A dot in vermillion on paper. No letterform — at 32px an "S" in
+   Instrument Serif is mush, and a shape that survives the size is
+   worth more than one that is technically the wordmark. */
 export default function Icon() {
   return new ImageResponse(
     (
       <div
         style={{
-          fontSize: 20,
-          background: '#000',
           width: '100%',
           height: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          color: '#00ff41',
-          fontFamily: 'monospace',
-          fontWeight: 'bold',
+          background: '#f7f5f0',
         }}
       >
-        &gt;_
+        <div style={{ width: 16, height: 16, borderRadius: '50%', background: '#9b3312' }} />
       </div>
     ),
-    {
-      ...size,
-    }
+    size
   )
 }

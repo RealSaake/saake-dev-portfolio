@@ -1,187 +1,98 @@
-'use client'
+import type { Metadata } from 'next'
+import { Container, ExternalLink, Label, Prose, Reveal, Rule, Section } from '@/components/primitives'
+import { site } from '@/content'
 
-import { motion } from 'framer-motion'
-import { SkillsRadar } from '@/components/skills-radar'
-import { AboutHero } from '@/components/about-hero'
-import { ExperienceGrid } from '@/components/experience-grid'
-import { skillCategories } from '@/data/skills'
-import { Code, Heart, Zap, Users } from 'lucide-react'
-import { saakeEngine } from '@/data/skills'
-import FuzzyText from '@/components/react-bits/fuzzy-text-advanced'
+export const metadata: Metadata = {
+  title: 'About',
+  description: 'Who I am, how I got here, and what I am still short on.',
+  alternates: { canonical: '/about' },
+}
 
-const values = [
-  {
-    icon: Code,
-    title: 'Clean Code',
-    description: 'Writing maintainable, scalable code that stands the test of time.',
-    color: 'neon-green'
-  },
-  {
-    icon: Zap,
-    title: 'Performance',
-    description: 'Optimizing every byte and millisecond for the best user experience.',
-    color: 'neon-blue'
-  },
-  {
-    icon: Users,
-    title: 'Collaboration',
-    description: 'Building great products through effective teamwork and communication.',
-    color: 'neon-purple'
-  },
-  {
-    icon: Heart,
-    title: 'User-Centric',
-    description: 'Putting users first in every design and development decision.',
-    color: 'neon-pink'
-  }
-]
-
-export default function AboutPage() {
+export default function About() {
   return (
-    <div className="min-h-screen pt-20 px-4">
-      <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            <FuzzyText
-              fontSize="clamp(3rem, 8vw, 6rem)"
-              color="#a855f7"
-              baseIntensity={0.15}
-              hoverIntensity={0.5}
-              fontWeight={900}
-              className="gradient-text"
-            >
-              ABOUT
-            </FuzzyText>
-          </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            The story behind the code - my journey, values, and the passion that drives 
-            me to build exceptional digital experiences.
-          </p>
-        </motion.div>
+    <Section className="pt-20 md:pt-32">
+      <Container>
+        <Reveal>
+          <Label className="mb-10">About</Label>
+        </Reveal>
 
-        {/* Hero Section */}
-        <AboutHero />
+        <div className="grid gap-16 md:grid-cols-12">
+          <div className="md:col-span-7">
+            <Reveal delay={1}>
+              <h1 className="text-h1 max-w-measure">
+                I am {site.name}. I build things on the web and I am fairly direct about which parts
+                of them work.
+              </h1>
+            </Reveal>
 
-        {/* Values Section */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="py-20"
-        >
-          <h2 className="text-3xl font-bold text-center mb-12 text-purple-400">
-            Core Values
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {values.map((value, index) => {
-              const Icon = value.icon
-              return (
-                <motion.div
-                  key={value.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-black/40 backdrop-blur-md border border-purple-500/30 rounded-lg p-6 text-center hover:border-purple-400 transition-all duration-300"
-                >
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-purple-500/20 border border-purple-400 text-purple-400 mb-4">
-                    <Icon className="h-8 w-8" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-white mb-3">
-                    {value.title}
-                  </h3>
-                  <p className="text-gray-300 leading-relaxed">
-                    {value.description}
+            <Reveal delay={2}>
+              <Prose long className="mt-12">
+                <p>
+                  I came to design through building rather than the other way round. That shows: I
+                  am more interested in what an interface does under load, on a bad connection, or
+                  in its empty state than in how it photographs. The things I find satisfying are
+                  the ones nobody notices — a page that does not move while it loads, a form that
+                  remembers what you typed, an error that says what to do next.
+                </p>
+                <p className="mortar">
+                  Most of my work has been solo, which has an obvious cost and one real benefit. The
+                  cost is that I have never had a senior engineer tell me my architecture was wrong
+                  before I found out the expensive way. The benefit is that I have had to hold the
+                  whole thing — the research, the type, the data model, the deploy — and I have
+                  learned where those decisions actually touch each other.
+                </p>
+                <p className="mortar">
+                  The clearest example is this site. The version before it made a series of
+                  impressive claims that were not true, and rather than quietly fix the numbers I
+                  wrote down what had happened and rebuilt around a rule that makes it hard to
+                  repeat. That is on the work page, and it is the piece I would want read first.
+                </p>
+              </Prose>
+            </Reveal>
+          </div>
+
+          <div className="md:col-span-4 md:col-start-9">
+            <Reveal delay={3}>
+              <Label className="mb-6">What I am good at</Label>
+              <ul className="flex flex-col">
+                {[
+                  'Turning an unclear brief into a smaller, answerable one',
+                  'Interface and interaction design, end to end',
+                  'Front-end engineering — React, TypeScript, the platform underneath',
+                  'Design systems that survive contact with a deadline',
+                  'Writing — the documents around the work, not just the work',
+                ].map((s) => (
+                  <li key={s} className="border-t border-rule py-4 text-s text-muted">
+                    {s}
+                  </li>
+                ))}
+              </ul>
+              <Rule />
+            </Reveal>
+
+            <Reveal delay={4}>
+              <div className="mt-16">
+                <Label className="mb-6">What I am not</Label>
+                <Prose>
+                  <p className="text-s">
+                    I have not worked inside a large engineering organisation, I have not shipped
+                    anything at serious scale, and I do not have production experience with native
+                    mobile or with backend systems beyond what these projects needed. If a role
+                    turns on any of those, I am the wrong person and would rather say so now.
                   </p>
-                </motion.div>
-              )
-            })}
-          </div>
-        </motion.section>
+                </Prose>
+              </div>
+            </Reveal>
 
-        {/* Skills Section */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="py-20"
-        >
-          <h2 className="text-3xl font-bold text-center mb-12 text-purple-400">
-            Technical Expertise
-          </h2>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <SkillsRadar />
-            <div className="space-y-6">
-              {skillCategories.slice(0, 4).map((category, index) => (
-                <motion.div
-                  key={category.name}
-                  initial={{ opacity: 0, x: 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="bg-black/40 backdrop-blur-md border border-purple-500/30 rounded-lg p-6"
-                >
-                  <h3 className="text-lg font-semibold mb-4 text-purple-400">
-                    {category.name}
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {category.skills.slice(0, 6).map(skill => (
-                      <span
-                        key={skill.name}
-                        className="px-3 py-1 bg-gray-800 text-gray-300 text-sm rounded border border-purple-500/30"
-                      >
-                        {skill.name}
-                      </span>
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+            <Reveal delay={5}>
+              <div className="mt-16">
+                <Label className="mb-6">Elsewhere</Label>
+                <ExternalLink href={site.github}>github.com/RealSaake</ExternalLink>
+              </div>
+            </Reveal>
           </div>
-        </motion.section>
-
-        {/* Experience Grid */}
-        <ExperienceGrid />
-
-        {/* Personal Section */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="py-20"
-        >
-          <div className="bg-black/40 backdrop-blur-md border border-purple-500/30 rounded-lg p-8 text-center">
-            <h2 className="text-3xl font-bold mb-6 text-purple-400">
-              Beyond the Code
-            </h2>
-            <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              When I'm not building automation workflows or tinkering with my home lab, you'll 
-              find me exploring AI/LLM integrations, contributing to cybersecurity tools, or 
-              working on travel photography. I believe in the power of automation and security 
-              to create efficient, reliable systems.
-            </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-4">
-              {saakeEngine.interests.slice(0, 4).map((interest, index) => (
-                <span 
-                  key={interest}
-                  className={`px-4 py-2 bg-${['purple', 'pink', 'violet', 'fuchsia'][index]}-500/20 border border-${['purple', 'pink', 'violet', 'fuchsia'][index]}-400 text-${['purple', 'pink', 'violet', 'fuchsia'][index]}-400 rounded-full`}
-                >
-                  {interest}
-                </span>
-              ))}
-            </div>
-          </div>
-        </motion.section>
-      </div>
-    </div>
+        </div>
+      </Container>
+    </Section>
   )
 }

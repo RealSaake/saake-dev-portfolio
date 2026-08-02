@@ -1,166 +1,78 @@
-# 🚀 SAAKE.DEV - Cyber Portfolio
+# saake.dev
 
-A bleeding-edge, cyber-themed portfolio website for Saake built with Next.js 14, featuring automation-inspired animations, terminal aesthetics, and lightning-fast performance. Showcasing expertise in AI/LLM integration, automation workflows, and secure web development.
+Source for [saake.dev](https://saake.dev).
 
-## ✨ Features
+The site links here as evidence, so this file describes what is actually in the
+repository rather than advertising it.
 
-- **🎯 Terminal-Inspired Design**: Authentic hacker aesthetic with glitch effects and neon colors
-- **⚡ Lightning Fast**: Optimized for 95+ Lighthouse scores with static generation
-- **🎨 Quantum Animations**: Advanced animations using Framer Motion
-- **📱 Fully Responsive**: Mobile-first design with touch optimizations
-- **🔍 Smart Filtering**: Real-time project filtering and search
-- **🎭 Interactive Components**: Hover effects, modals, and smooth transitions
-- **♿ Accessible**: WCAG 2.1 AA compliant
-- **🌐 SEO Optimized**: Meta tags, structured data, and performance optimized
+## Why it was rebuilt
 
-## 🛠️ Tech Stack
+The previous version published claims that were not true — invented statistics,
+a role at a company that does not exist, a placeholder phone number beginning
++1 (555), and a promised response time on an address that rejected mail. The
+rebuild deleted those rather than correcting them, and the audit is written up
+as the first case study on the site.
 
-- **Framework**: Next.js 14 (App Router)
-- **Styling**: Tailwind CSS with custom animations
-- **Animations**: Framer Motion
-- **UI Components**: Radix UI primitives
-- **Icons**: Lucide React
-- **TypeScript**: Full type safety
-- **Deployment**: Vercel (or any static host)
+## Stack
 
-## 🚀 Quick Start
+Next.js App Router, TypeScript, Tailwind with the theme **overridden** rather
+than extended, and four self-hosted font files. Three runtime dependencies:
+`next`, `react`, `react-dom`.
 
-### Prerequisites
-- Node.js 18+ 
-- npm/yarn/pnpm
+Two client components exist — a theme toggle and a single IntersectionObserver
+for entrance animations. Everything else is server-rendered. Every page's
+content is present in the HTML with JavaScript disabled.
 
-### Installation
+## Layout
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/saake/saake-dev-portfolio.git
-   cd saake-dev-portfolio
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   # or
-   yarn install
-   # or
-   pnpm install
-   ```
-
-3. **Start development server**
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   # or
-   pnpm dev
-   ```
-
-4. **Open your browser**
-   Navigate to [http://localhost:3000](http://localhost:3000)
-
-## 📦 Build & Deploy
-
-### Static Export (Recommended)
-```bash
-npm run build
-npm run export
+```
+app/          routes; each declares its own canonical
+components/   primitives, shell, the two client components
+content/      case studies as typed data — the only place copy lives
+scripts/      build-output verification
 ```
 
-### Vercel Deployment
-1. Push to GitHub
-2. Connect to Vercel
-3. Deploy automatically
+## Verification
 
-### Other Static Hosts
 ```bash
-npm run build
-# Upload the 'out' folder to your static host
+npm run check
 ```
 
-## 🎨 Customization
+Builds, then runs `scripts/verify.mjs` against `.next/server/app` — the built
+HTML, not the source. It checks:
 
-### Personal Data
-Update the following files with your information:
+- **Fabrications.** Greps for the specific false claims the old build carried.
+  The flagship case study *quotes* those claims while describing the audit, so
+  the narrative is excised before the grep runs. A check whose result moves
+  independently of the property under test is not a diagnostic.
+- **AI tells.** Nine patterns the design system bans, matched against class
+  attributes rather than prose.
+- **Canonicals.** Present, unique, self-referential, no trailing slash.
+- **No-JS.** Every route server-renders real content and an `<h1>`.
+- **Accessibility.** `lang`, skip link, alt text, no click handlers on divs.
+- **Contrast.** Recomputed from `app/globals.css` rather than trusted from a
+  table. Floor is 4.5:1; the tightest pair is 4.51:1.
+- **Weight.** Gzip of the scripts each page actually references.
 
-- `data/projects.ts` - Your projects and portfolio items
-- `data/timeline.ts` - Career timeline and achievements  
-- `data/skills.ts` - Technical skills and expertise
-- `app/layout.tsx` - Meta tags and SEO information
+```bash
+npm run contrast
+```
 
-### Styling
-- `tailwind.config.js` - Colors, animations, and design tokens
-- `app/globals.css` - Global styles and CSS variables
-- `components/` - Individual component styling
+Prints every foreground/background ratio in both themes.
 
-### Content
-- `components/terminal-hero.tsx` - Landing page terminal animation
-- `components/navigation.tsx` - Navigation menu items
-- `app/page.tsx` - Homepage content and sections
+## Known limitations
 
-## 🎯 Performance Optimizations
+The ~185 kB gzip first load is the React and App Router client runtime. This
+site's own client code is under 2 kB. Reducing it further means dropping the
+App Router, which has not been done.
 
-- **Static Generation**: Pre-rendered at build time
-- **Image Optimization**: Next.js Image component with lazy loading
-- **Code Splitting**: Automatic route-based splitting
-- **Tree Shaking**: Unused code elimination
-- **CSS Optimization**: Tailwind CSS purging
-- **Font Optimization**: System fonts with fallbacks
+## Local development
 
-## 🔧 Advanced Features
+```bash
+npm install
+npm run dev
+```
 
-### Matrix Background
-Animated matrix-style background with customizable characters and speed.
+## License
 
-### Network Visualization  
-Interactive network graph with animated data packets and connections.
-
-### Terminal Animation
-Realistic terminal typing effect with customizable commands and timing.
-
-### Glitch Effects
-CSS-based glitch animations for authentic cyber aesthetics.
-
-## 📱 Browser Support
-
-- Chrome 90+
-- Firefox 88+
-- Safari 14+
-- Edge 90+
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
-## 📄 License
-
-MIT License - feel free to use this for your own portfolio!
-
-## 🎉 Credits
-
-- **Design Inspiration**: Cyberpunk aesthetics and terminal interfaces
-- **Animations**: Framer Motion community examples
-- **Icons**: Lucide React icon library
-- **Fonts**: System monospace fonts for authentic terminal feel
-
-## 🚀 Deployment Checklist
-
-- [ ] Update personal information in data files
-- [ ] Replace placeholder images
-- [ ] Update social media links
-- [ ] Test all animations and interactions
-- [ ] Verify mobile responsiveness
-- [ ] Check accessibility compliance
-- [ ] Run Lighthouse audit
-- [ ] Test in multiple browsers
-- [ ] Deploy to production
-
----
-
-**Built with ❤️ by Saake** | [Portfolio](https://saake.dev) | [EOS Trails](https://eostrails.com) | [Tools](https://tools.saake.dev)
-
-
-![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/RealSaake/saake-dev-portfolio?utm_source=oss&utm_medium=github&utm_campaign=RealSaake%2Fsaake-dev-portfolio&labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit+Reviews)
+MIT for the code. The written content and case studies are not.

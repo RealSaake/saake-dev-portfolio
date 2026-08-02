@@ -1,111 +1,219 @@
+/* ============================================================
+   saake.dev — token layer
+   Every value here comes from design/system.md.
+   No component writes a color, size, or duration directly.
+   ============================================================ */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Using next/font for Inter; external @import removed for performance */
-
 @layer base {
   :root {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --radius: 0.75rem;
-  }
-}
+    /* ---- neutral ramp — light (default) ---- */
+    --paper: #f7f5f0;
+    --surface: #f1eee6;
+    --rule: #ded8cb;
+    --rule-strong: #bfb7a4;
+    --muted-2: #726c5c; /* 4.80 vs paper */
+    --muted: #585245; /* 7.12 */
+    --ink-2: #38352c; /* 11.25 */
+    --ink: #191814; /* 16.31 */
 
-@layer base {
+    /* ---- accent — vermillion, six steps ---- */
+    --a-1: #fbeae4;
+    --a-2: #f0b9a6;
+    --a-3: #dc6a4a;
+    --a-4: #c2461f;
+    --a-5: #9b3312;
+    --a-6: #66220c;
+
+    /* semantic accent roles — light */
+    --accent-text: var(--a-5); /* 6.70 */
+    --accent-fill: var(--a-5);
+    --accent-edge: var(--a-4); /* 4.60 */
+    --accent-wash: var(--a-1);
+    --focus: var(--a-5);
+
+    /* ---- texture ---- */
+    --grain: 0.012;
+
+    /* ---- type scale — base 16, ratio 1.25 ---- */
+    --t-label: 0.8rem;
+    --t-body-s: 1rem;
+    --t-body: 1.25rem;
+    --t-lead: 1.5625rem;
+    --t-h3: 1.9531rem;
+    --t-h2: clamp(1.5625rem, 1.163rem + 1.598vw, 2.4414rem);
+    --t-h1: clamp(1.9531rem, 1.4537rem + 1.998vw, 3.0518rem);
+    --t-display: clamp(2.4414rem, 1.8172rem + 2.497vw, 3.8147rem);
+
+    /* ---- tracking — three values, no fourth ---- */
+    --track-label: 0.16em;
+    --track-tight: -0.02em;
+    --track-display: -0.035em;
+
+    /* ---- measure ---- */
+    --measure: 68ch;
+    --measure-long: 62ch;
+
+    /* ---- containers ---- */
+    --c-prose: 720px;
+    --c-content: 1120px;
+    --c-wide: 1400px;
+
+    /* ---- rhythm ---- */
+    --section-y: 96px;
+    --section-y-lg: 160px;
+
+    /* ---- motion — two tiers, no third ---- */
+    --dur-enter: 640ms;
+    --ease-enter: cubic-bezier(0.22, 1, 0.36, 1);
+    --dur-act: 160ms;
+    --ease-act: ease;
+
+    /* ---- surface ---- */
+    --radius: 0;
+  }
+
+  [data-theme='dark'] {
+    --paper: #12110e;
+    --surface: #191814;
+    --rule: #2a2822;
+    --rule-strong: #3d3a31;
+    --muted-2: #8c8578; /* 5.16 */
+    --muted: #a9a294; /* 7.45 */
+    --ink-2: #d6d0c2; /* 12.28 */
+    --ink: #f2efe7; /* 16.43 */
+
+    /* accent roles flip step — see system.md §1 */
+    --accent-text: var(--a-3); /* 5.58 */
+    --accent-fill: var(--a-3);
+    --accent-edge: var(--a-4); /* 3.77 */
+    --accent-wash: var(--a-6);
+    --focus: var(--a-3);
+
+    --grain: 0.03;
+  }
+
   * {
-    @apply border-border;
+    border-color: var(--rule);
   }
-  body {
-    @apply bg-background text-foreground font-sans antialiased;
-    overflow-x: hidden;
-  }
-  
+
   html {
+    -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+    font-size: var(--t-body-s);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-synthesis-weight: none;
+  }
+
+  ::selection {
+    background: var(--accent-wash);
+    color: var(--ink);
+  }
+
+  /* a11y floor 3 — never outline:none without replacement */
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif), Times New Roman, serif;
+    font-weight: 400; /* Instrument Serif has one weight */
+    color: var(--ink);
   }
 }
 
 @layer components {
-  .glass-card {
-    @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl;
-  }
-  
-  .gradient-text {
-    @apply bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent;
-  }
-  
-  .accent-gradient {
-    @apply bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500;
-  }
-  
-  .cyber-gradient {
-    @apply bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600;
-  }
-  
-  .hover-lift {
-    @apply transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1;
-  }
-  
-  .smooth-shadow {
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  }
-  
-  .glow-effect {
-    @apply relative;
-  }
-  
-  .glow-effect::before {
-    content: '';
-    @apply absolute -inset-1 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity duration-300;
-  }
-  
-  .text-balance {
-    text-wrap: balance;
+  /* ---- the label register (P5) — mono, uppercase, tracked ---- */
+  .label {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: var(--t-label);
+    letter-spacing: var(--track-label);
+    text-transform: uppercase;
+    color: var(--muted-2);
+    line-height: 1.4;
   }
 
-  /* Skip link styles */
-  .skip-link {
-    position: absolute;
-    top: -40px;
-    left: 0;
-    background: #111827; /* slate-900 */
-    color: #ffffff;
-    padding: 8px 16px;
-    z-index: 100;
-    border-radius: 0.5rem;
-    transition: top 0.2s ease;
+  /* ---- the mortar grid (P1) — hairline seams, no double borders ---- */
+  .mortar {
+    display: grid;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
   }
-  .skip-link:focus {
-    top: 8px;
-    outline: 2px solid #a78bfa; /* purple-400 */
-    outline-offset: 2px;
+  .mortar > * {
+    background: var(--surface);
   }
 
-  /* Respect reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.001ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.001ms !important;
-      scroll-behavior: auto !important;
+  /* ---- the reveal primitive (P7) — one class, one observer ---- */
+  .reveal {
+    opacity: 1;
+  }
+  .js .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity var(--dur-enter) var(--ease-enter),
+      transform var(--dur-enter) var(--ease-enter);
+  }
+  .js .reveal.in {
+    opacity: 1;
+    transform: none;
+  }
+
+  .rd-1 { transition-delay: 80ms; }
+  .rd-2 { transition-delay: 160ms; }
+  .rd-3 { transition-delay: 240ms; }
+  .rd-4 { transition-delay: 320ms; }
+  .rd-5 { transition-delay: 400ms; }
+
+  /* ---- one hover gesture site-wide (P8) ---- */
+  @media (hover: hover) {
+    .lift {
+      transition:
+        transform var(--dur-act) var(--ease-act),
+        border-color var(--dur-act) var(--ease-act);
     }
+    .lift:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent-edge);
+    }
+  }
+
+  /* ---- prose ---- */
+  .prose-measure {
+    max-width: var(--measure);
+  }
+  .prose-measure p + p {
+    margin-top: 24px;
+  }
+}
+
+/* ---- reduced motion — content VISIBLE, not merely un-animated ---- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .js .reveal {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
