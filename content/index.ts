@@ -121,7 +121,21 @@ export function getCaseStudy(slug: string) {
 export const site = {
   name: 'Aryan',
   handle: 'saake',
-  url: 'https://saake.dev',
+  /**
+   * The canonical origin is www, not the apex.
+   *
+   * This is not the preference — apex is. But the Vercel project redirects
+   * saake.dev → www.saake.dev with a 308, and a canonical that points at a
+   * URL which redirects is worse than a canonical on the less-preferred
+   * host: it tells a crawler the authoritative page is somewhere that
+   * immediately sends it elsewhere.
+   *
+   * Fix the redirect direction in the Vercel dashboard (Project → Domains →
+   * set saake.dev as primary), then change this back to the apex. Until the
+   * redirect actually changes, this string must match whatever host serves
+   * a 200.
+   */
+  url: 'https://www.saake.dev',
   email: 'hi@saake.dev',
   github: 'https://github.com/RealSaake',
   // linkedin — unverified, omitted

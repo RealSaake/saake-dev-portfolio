@@ -17,7 +17,12 @@ import { gzipSync } from 'node:zlib'
 import { join, sep } from 'node:path'
 
 const ROOT = '.next/server/app'
-const ORIGIN = 'https://saake.dev'
+
+// Read the origin from the same place the app reads it, so this file and the
+// site can never disagree about which host is canonical.
+const ORIGIN = (
+  readFileSync('content/index.ts', 'utf8').match(/url:\s*'([^']+)'/) || [, 'https://saake.dev']
+)[1].replace(/\/$/, '')
 
 let failures = 0
 const fail = (msg) => {
