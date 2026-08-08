@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import {
   Container,
-  DotGrid,
   Eyebrow,
   ExternalLink,
   InternalLink,
@@ -13,6 +12,7 @@ import {
   Rule,
   Section,
 } from '@/components/primitives'
+import { CASE_ARTEFACTS, IndexPlate } from '@/components/artefacts'
 import { caseStudies, elsewhere, site } from '@/content'
 
 export const metadata: Metadata = {
@@ -79,7 +79,13 @@ export default function WorkIndex() {
                       </div>
 
                       <div className="md:col-span-3 md:col-start-10">
-                        <DotGrid className="aspect-card w-full" />
+                        <IndexPlate
+                          year={study.year}
+                          kind={study.kind}
+                          deployed={Boolean(study.links?.some((l) => l.label === 'Live'))}
+                          source={Boolean(study.links?.some((l) => l.label === 'Source'))}
+                          hasArtefact={study.slug in CASE_ARTEFACTS}
+                        />
                       </div>
                     </div>
                   </Link>

@@ -3,7 +3,6 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import {
   Container,
-  DotGrid,
   Eyebrow,
   ExternalLink,
   InternalLink,
@@ -15,6 +14,7 @@ import {
   Section,
   SpecTable,
 } from '@/components/primitives'
+import { CASE_ARTEFACTS } from '@/components/artefacts'
 import { caseStudies, getCaseStudy, site } from '@/content'
 
 type Params = { slug: string }
@@ -53,8 +53,8 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
 
   const index = caseStudies.findIndex((s) => s.slug === study.slug)
   const next = caseStudies[(index + 1) % caseStudies.length]
-  const live = study.links?.find((l) => l.label === 'Live')
   const source = study.links?.find((l) => l.label === 'Source')
+  const artefact = CASE_ARTEFACTS[study.slug]
 
   return (
     <article>
@@ -103,38 +103,37 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
         </Container>
       </Section>
 
-      {/* ── The live artefact ────────────────────────────────
-          Routing a visitor to the running thing is the strongest
-          claim this page can make. Some hosts refuse framing via
-          X-Frame-Options, so the frame sits on top of a visible
-          fallback: if it never paints, the panel and the link
-          underneath still read as deliberate. */}
-      <Section pad="tight">
-        <Container>
-          <Reveal>
-            <div className="relative border border-rule">
-              <DotGrid className="aspect-card w-full border-0" label={study.slug} />
-              {live && (
-                <iframe
-                  src={live.href}
-                  title={`${study.title} — live`}
-                  loading="lazy"
-                  sandbox="allow-scripts allow-same-origin"
-                  className="absolute inset-0 h-full w-full border-0 bg-paper"
-                />
-              )}
-            </div>
-            <div className="mt-4 flex flex-wrap items-baseline justify-between gap-4">
-              <Label>{live ? 'Live, embedded' : 'No live deployment'}</Label>
-              {live && (
-                <ExternalLink href={live.href} className="text-s">
-                  Open the live site
-                </ExternalLink>
-              )}
-            </div>
-          </Reveal>
-        </Container>
-      </Section>
+      {/* ── The artefact ─────────────────────────────────────
+          This slot used to hold an <iframe> of the running app.
+          Three reasons it is gone.
+
+          Two of these case studies are critical of the interface
+          they are about; embedding that interface at hero size
+          presents the criticised thing as the portfolio piece and
+          inverts the argument the page is making.
+
+          `sandbox="allow-scripts allow-same-origin"` together is
+          not a sandbox — for a same-origin document the pair lets
+          the frame reach back out and remove its own sandbox
+          attribute.
+
+          And it loaded two third-party applications on a page
+          that otherwise ships as static HTML.
+
+          What replaces it is a drawn figure built from this site's
+          own tokens: analysis rather than a window. The live link
+          is directly above, where someone who wants the running
+          thing can have it. */}
+      {artefact && (
+        <Section pad="tight">
+          <Container>
+            <Reveal>
+              {artefact.render()}
+              <p className="mt-4 max-w-measure text-s text-muted-2">{artefact.caption}</p>
+            </Reveal>
+          </Container>
+        </Section>
+      )}
 
       <Section pad="tight">
         <Container>

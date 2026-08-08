@@ -29,7 +29,16 @@ const config: Config = {
       'accent-fill': 'var(--accent-fill)',
       'accent-edge': 'var(--accent-edge)',
       'accent-wash': 'var(--accent-wash)',
+      'on-accent': 'var(--on-accent)',
       focus: 'var(--focus)',
+      // Two semantic colours beyond the accent. `signal` means a
+      // fault. `evidence` is quarantined to artefacts depicting a
+      // criticised system — see globals.css.
+      signal: 'var(--signal)',
+      'signal-wash': 'var(--signal-wash)',
+      evidence: 'var(--evidence)',
+      'evidence-wash': 'var(--evidence-wash)',
+      'evidence-on': 'var(--evidence-on)',
     },
     // 4px base — twelve values, nothing else
     spacing: {

@@ -17,14 +17,19 @@ const DECLARED = (
 
 const ORIGIN = (process.argv[2] || DECLARED).replace(/\/$/, '')
 
+/* The case-study routes are derived from the content module, not listed.
+   This list was hand-written once and went stale the moment two more case
+   studies shipped: production was reported green while two live routes had
+   never been requested. A verifier that has to be updated by hand is a
+   verifier that will eventually lie. */
 const ROUTES = [
   '/',
   '/work',
   '/about',
   '/contact',
-  '/work/rebuilding-this-site',
-  '/work/waveline',
-  '/work/skillbridge',
+  ...[...readFileSync('content/index.ts', 'utf8').matchAll(/^\s{4}slug:\s*'([^']+)'/gm)].map(
+    (m) => `/work/${m[1]}`
+  ),
 ]
 
 let failures = 0

@@ -321,24 +321,12 @@ export function NumberedList({ items, className = '' }: {
   )
 }
 
-/* ── DotGrid — a deliberate placeholder ─────────────────────
+/* `DotGrid` used to live here — a bordered panel of graph-paper
+ * texture, standing in wherever a screenshot would have gone. Its
+ * own comment conceded the problem: it filled evidence slots with
+ * decoration. Every one of those slots now holds a real figure
+ * from components/artefacts.tsx, or nothing at all where there is
+ * no figure to draw, so the placeholder has no callers left.
  *
- * Used where a screenshot would sit. There are no product shots
- * for this work, and a stock image would be a lie about what
- * exists — so the slot is filled with structure instead.
- */
-export function DotGrid({ className = '', label }: {
-  className?: string
-  label?: string
-}) {
-  return (
-    <div
-      aria-hidden="true"
-      className={`hud-grid relative border border-rule bg-surface-2 ${className}`}
-    >
-      {label && (
-        <span className="label absolute bottom-4 left-4 text-muted-2">{label}</span>
-      )}
-    </div>
-  )
-}
+ * The `.hud-grid` class it used survives and is still applied as a
+ * full-bleed layer behind the two page heroes. */

@@ -44,14 +44,14 @@ export const caseStudies: CaseStudy[] = [
       'I audited every claim on the site against its own source and against the repositories it linked to, then deleted rather than corrected. A number that has to be researched before it can be trusted is not doing the job a number is for. I rebuilt the site around a rule that survives me being tired: content is a typed object with a required problem and a required outcome, so a screenshot with no story cannot be published. I set the accessibility floor as a merge gate rather than a launch task, and I removed every visual device that signals a template — the neon gradients, the glass cards, the counters that count, the rounded corners on everything.',
     deliverables: [
       'A claim-by-claim audit of the previous build, with each statement traced to source or deleted',
-      'A token layer where every colour pair was contrast-checked before it shipped — the tightest is 4.51:1, and it passes by 0.01',
+      'A token layer where every rendered colour pair is contrast-checked by a script in the repository rather than by eye — thirty-two pairs across two themes, the tightest at 5.34:1 against a 4.5 floor',
       'A content schema that fails the build when a case study has no stated outcome',
       'One entrance animation and one hover gesture, defined once and reused everywhere',
       'A three-state theme that resolves before first paint, so there is no flash',
-      'Type set in Instrument Serif and Geist — deliberately not Inter',
+      'Type set in Syne, Space Grotesk and Space Mono, self-hosted as variable fonts — deliberately not Inter',
     ],
     outcome:
-      'The site is smaller and says less. Twelve invented statistics became zero, four fabricated projects became three real ones, and the one thing it now argues for is legible in the source of the page you are reading. Whether that reads as confidence or as a thin portfolio is a fair question, and I would rather be judged on the second than caught on the first.',
+      'The site is smaller and says less. Twelve invented statistics became zero, and nine tools that did not exist became five case studies about work that does: two deployed applications, one firmware design I will not claim was ever assembled, one unfinished experiment labelled as unfinished, and this rebuild. The one thing the site now argues for is legible in the source of the page you are reading. Whether that reads as confidence or as a thin portfolio is a fair question, and I would rather be judged on the second than caught on the first.',
     stack: 'Next.js App Router, TypeScript, Tailwind with an overridden theme, CSS custom properties, IntersectionObserver, Vercel.',
     links: [{ label: 'Source', href: 'https://github.com/RealSaake/saake-dev-portfolio' }],
     flagship: true,

@@ -3,7 +3,6 @@ import Link from 'next/link'
 import {
   Card,
   Container,
-  DotGrid,
   Eyebrow,
   ExternalLink,
   InternalLink,
@@ -18,6 +17,7 @@ import {
   SectionHead,
   StatTile,
 } from '@/components/primitives'
+import { DecisionField, Specimen } from '@/components/artefacts'
 import {
   capabilities,
   caseStudies,
@@ -125,13 +125,37 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* ── 04 · Demonstrate ──────────────────────────────────
+      {/* ── 04 · Show the method, before claiming any of it ────
+          The hero asserts that the decisions are the work. This is
+          that assertion made checkable in the same screenful:
+          four real decisions carried from requirement to rule to
+          the interface state each one produces. Every specimen is
+          drawn in the page's own tokens, so it is the argument
+          rather than a picture of it. */}
+      <Section>
+        <Container>
+          <Reveal>
+            <SectionHead index="01" label="Method">
+              A decision is only worth stating if you can see what it produced.
+            </SectionHead>
+          </Reveal>
+          <Reveal delay={1}>
+            <DecisionField />
+          </Reveal>
+        </Container>
+      </Section>
+
+      <Container>
+        <Rule />
+      </Container>
+
+      {/* ── 05 · Demonstrate ──────────────────────────────────
           The flagship, at length, before anything else competes
           for attention. */}
       <Section>
         <Container>
           <Reveal>
-            <SectionHead index="01" label="Currently" />
+            <SectionHead index="02" label="Currently" />
           </Reveal>
 
           <div className="grid gap-12 md:grid-cols-12">
@@ -161,9 +185,6 @@ export default function Home() {
                 </div>
               </Reveal>
 
-              <Reveal delay={3}>
-                <DotGrid className="mt-12 aspect-card" label="saake.dev / rebuild" />
-              </Reveal>
             </div>
 
             <div className="md:col-span-4 md:col-start-9">
@@ -179,6 +200,16 @@ export default function Home() {
               </Reveal>
             </div>
           </div>
+
+          {/* The specimen sits below the twelve-column grid rather than
+              inside a seven-column cell: it is a two-pane comparison,
+              and at half width the panes stack even on a desktop, which
+              is the one thing a comparison must not do. */}
+          <Reveal delay={3}>
+            <div className="mt-16">
+              <Specimen />
+            </div>
+          </Reveal>
         </Container>
       </Section>
 
@@ -191,7 +222,7 @@ export default function Home() {
       <Section>
         <Container>
           <Reveal>
-            <SectionHead index="02" label="Selected work" />
+            <SectionHead index="03" label="Selected work" />
           </Reveal>
 
           <ul>
@@ -241,7 +272,7 @@ export default function Home() {
       <Section className="bg-surface-2">
         <Container>
           <Reveal>
-            <SectionHead index="03" label="What I do">
+            <SectionHead index="04" label="What I do">
               Six things, described as capability rather than as experience.
             </SectionHead>
           </Reveal>
@@ -272,7 +303,7 @@ export default function Home() {
           <div className="grid gap-12 md:grid-cols-12">
             <div className="md:col-span-4">
               <Reveal>
-                <SectionHead index="04" label="How it goes" />
+                <SectionHead index="05" label="How it goes" />
               </Reveal>
             </div>
 
@@ -300,7 +331,7 @@ export default function Home() {
           <div className="grid gap-16 md:grid-cols-12">
             <div className="md:col-span-5">
               <Reveal>
-                <SectionHead index="05" label="How I work" />
+                <SectionHead index="06" label="How I work" />
               </Reveal>
             </div>
 
@@ -340,7 +371,7 @@ export default function Home() {
       <Section>
         <Container>
           <Reveal>
-            <SectionHead index="06" label="Materials" />
+            <SectionHead index="07" label="Materials" />
           </Reveal>
 
           <div className="mortar grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
@@ -367,7 +398,7 @@ export default function Home() {
       <Section className="border-t border-rule">
         <Container>
           <Reveal>
-            <SectionHead index="07" label="Next" />
+            <SectionHead index="08" label="Next" />
           </Reveal>
 
           <div className="grid gap-12 md:grid-cols-12">

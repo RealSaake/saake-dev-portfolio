@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og'
 import { OgCard, ogFonts, OG_SIZE, OG_CONTENT_TYPE } from '@/components/og-card'
-import { site } from '@/content'
+import { caseStudies, site } from '@/content'
 
 export const size = OG_SIZE
 export const contentType = OG_CONTENT_TYPE
@@ -12,7 +12,7 @@ export default function OpengraphImage() {
       <OgCard
         eyebrow={`saake.dev — ${site.name}`}
         title="I design and build interfaces, and I write down why."
-        note="Three case studies, each with a stated problem and an outcome that includes what did not work."
+        note={`${caseStudies.length} case studies, each with a stated problem and an outcome that includes what did not work.`}
       />
     ),
     { ...size, fonts: ogFonts() }

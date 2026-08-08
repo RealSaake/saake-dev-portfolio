@@ -48,6 +48,24 @@
     --accent-edge: var(--l-5);
     --accent-wash: rgba(198, 241, 53, 0.08);
     --focus: var(--l-4);
+    /* Lime is a light colour in both themes, so anything sitting ON
+       it is dark in both themes. One token, no per-theme guessing. */
+    --on-accent: #0a0a0a; /* 15.12 on --l-4 */
+
+    /* ---- signal — fault, failure, the thing that broke ----
+       A second semantic colour, and the only one. It is not a
+       palette expansion: red means a specific state and appears
+       nowhere that state does not exist. */
+    --signal: #ff5a49; /* 5.89 on paper, 5.66 on surface */
+    --signal-wash: #2a1512;
+
+    /* ---- evidence — QUARANTINED ----
+       Purple is not a brand colour on this site. It appears only
+       inside a labelled artefact depicting a system being
+       criticised, and never outside one. */
+    --evidence: #a98cea; /* 7.11 on paper */
+    --evidence-wash: #1c1730;
+    --evidence-on: #0a0a0a; /* 7.11 on --evidence */
 
     --grain: 0.35;
 
@@ -112,6 +130,14 @@
     --accent-edge: var(--l-6);
     --accent-wash: rgba(198, 241, 53, 0.14);
     --focus: var(--l-6);
+    --on-accent: #0a0a0a; /* fill is constant, so this is too */
+
+    --signal: #b4271c; /* 5.85 on paper, 6.55 on surface */
+    --signal-wash: #fae4e1;
+
+    --evidence: #5b34b5; /* 7.24 on paper, 8.07 on surface */
+    --evidence-wash: #ece5fa;
+    --evidence-on: #ffffff; /* 8.07 on --evidence */
 
     --grain: 0.05;
   }
@@ -309,6 +335,199 @@
   .nav-blur {
     -webkit-backdrop-filter: blur(16px);
     backdrop-filter: blur(16px);
+  }
+
+  /* ============================================================
+     ARTEFACT LAYER
+
+     Drawn evidence, not decoration. Every rule below serves a
+     diagram that carries information a paragraph would carry
+     worse. Nothing here animates on its own, nothing here needs
+     JavaScript, and every label inside these figures is real
+     selectable HTML rather than SVG text.
+     ============================================================ */
+
+  .plate {
+    border: 1px solid var(--rule);
+    background: var(--surface-2);
+  }
+  .plate__head,
+  .plate__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 16px;
+  }
+  .plate__head { border-bottom: 1px solid var(--rule); }
+  .plate__foot { border-top: 1px solid var(--rule); }
+
+  /* ---- three-layer proof — requirement → rule → rendered ----
+     One row per decision category. The row IDs stay visible at
+     every width, because the ID is what ties the three layers
+     together once they stop sitting side by side. */
+  .proof { border-top: 1px solid var(--rule); }
+  .proof__row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 16px;
+    border-bottom: 1px solid var(--rule);
+  }
+  @media (min-width: 768px) {
+    .proof__row {
+      grid-template-columns: 1fr 22px 1fr 22px 1.15fr;
+      gap: 0;
+      align-items: center;
+    }
+    .proof__cell { padding-right: 14px; }
+    .proof__cell:last-child { padding-right: 0; }
+  }
+  .proof__arrow {
+    display: none;
+    color: var(--accent-fill);
+  }
+  @media (min-width: 768px) {
+    .proof__arrow { display: block; }
+  }
+
+  /* ---- the decision rule ----
+     A single horizontal bar whose thickness steps up as the
+     decisions compound. Thickness is the data. */
+  .dseg {
+    display: block;
+    width: 100%;
+    background: var(--accent-fill);
+  }
+
+  /* ---- rendered specimen states ---- */
+  .spec {
+    border: 1px solid var(--rule-strong);
+    background: var(--paper);
+    padding: 12px;
+  }
+  .spec--fault { border-color: var(--signal); }
+  .spec__bar {
+    height: 6px;
+    border: 1px solid var(--rule-strong);
+    background: var(--surface);
+  }
+  .spec__fill {
+    display: block;
+    height: 100%;
+    background: var(--accent-fill);
+  }
+
+  /* ---- pipeline — repository → matrix → roadmap ----
+     Connectors are borders on real grid cells, so they survive a
+     resize with no observer and no measured pixel anywhere. */
+  .pipe {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  /* 1024px, not 900: the markup switches the connector from vertical
+     to horizontal at Tailwind's `lg`, and a grid that turned
+     horizontal earlier than the arrows did would point the flow the
+     wrong way for 124px of viewport. One breakpoint, both layers. */
+  @media (min-width: 1024px) {
+    .pipe {
+      grid-template-columns: 0.85fr 28px 1.35fr 28px 1fr;
+      gap: 0;
+      align-items: stretch;
+    }
+  }
+  .pipe__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-fill);
+  }
+  @media (min-width: 1024px) {
+    .pipe__link { flex-direction: row; }
+  }
+
+  /* ---- lineage — a real disclosure, no script ---- */
+  .lin { border-top: 1px solid var(--rule); }
+  .lin details { border-bottom: 1px solid var(--rule); }
+  .lin summary {
+    cursor: pointer;
+    padding: 14px 16px;
+    list-style: none;
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+  }
+  .lin summary::-webkit-details-marker { display: none; }
+  .lin summary::after {
+    content: '+';
+    margin-left: auto;
+    color: var(--accent-text);
+    font-family: var(--font-mono), monospace;
+  }
+  .lin details[open] summary::after { content: '−'; }
+  .lin details[open] summary { background: var(--surface); }
+  .lin summary:hover { color: var(--accent-text); }
+
+  /* ---- comparison specimen — radio-driven, keyboard-native ----
+     Three states below 1024px: observed, side by side, rebuilt.
+     Above it both panes are always visible and the control is
+     redundant, so it hides itself rather than lying about what
+     it does. */
+  .cmp__panes {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 1024px) {
+    .cmp__panes { grid-template-columns: 1fr 2px 1fr; }
+    .cmp__ctl { display: none; }
+  }
+  /* the fixed datum — a hard line, never a draggable handle */
+  .cmp__datum { background: var(--ink); }
+  @media (max-width: 1023px) {
+    .cmp__datum { height: 2px; }
+    .cmp:has(#cmp-observed:checked) .cmp__pane--after,
+    .cmp:has(#cmp-observed:checked) .cmp__datum,
+    .cmp:has(#cmp-rebuilt:checked) .cmp__pane--before,
+    .cmp:has(#cmp-rebuilt:checked) .cmp__datum {
+      display: none;
+    }
+  }
+  .cmp__ctl input:checked + label {
+    background: var(--accent-fill);
+    color: var(--on-accent);
+    border-color: var(--accent-fill);
+  }
+  .cmp__ctl input:focus-visible + label {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  /* ---- observed-system specimen ----
+     The rejected traits, reproduced honestly so the comparison
+     means something. Written here rather than as utility classes
+     on purpose: the point is to depict rounding and translucency,
+     not to ship them as house style. */
+  .obs {
+    background: var(--evidence-wash);
+    border: 1px solid var(--evidence);
+    border-radius: 20px;
+    padding: 14px 16px;
+  }
+  .obs__chip {
+    border-radius: 999px;
+    background: var(--evidence);
+    color: var(--evidence-on);
+    padding: 4px 14px;
+    display: inline-block;
+  }
+  .obs__ghost {
+    border-radius: 14px;
+    background: var(--evidence);
+    opacity: 0.22;
+    height: 10px;
+    display: block;
   }
 }
 
