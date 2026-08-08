@@ -145,12 +145,28 @@ export function InternalLink({ href, children, className = '' }: {
  * so unbounded content never exceeds the five defined classes.
  * Use `revealDelay(i)` for anything rendered from a .map().
  */
-export function Reveal({ children, delay = 0, className = '' }: {
+/* `load` marks a reveal that is above the fold on arrival.
+ *
+ * A scroll-driven entrance is keyed to the element's travel through
+ * the viewport, so anything already on screen has finished its range
+ * before the first frame and simply appears. That is right for the
+ * rest of the page and wrong for the first screen, which should
+ * arrive as a cascade. Setting `load` plays the same keyframes once
+ * against the document timeline instead. Use it only for content in
+ * the opening viewport; below the fold it would fire unseen. */
+export function Reveal({ children, delay = 0, load = false, className = '' }: {
   children: ReactNode
   delay?: 0 | 1 | 2 | 3 | 4 | 5
+  load?: boolean
   className?: string
 }) {
-  return <div className={`reveal ${delay ? `rd-${delay}` : ''} ${className}`}>{children}</div>
+  return (
+    <div
+      className={`reveal ${load ? 'reveal--load' : ''} ${delay ? `rd-${delay}` : ''} ${className}`}
+    >
+      {children}
+    </div>
+  )
 }
 
 export function revealDelay(i: number): 1 | 2 | 3 | 4 | 5 {

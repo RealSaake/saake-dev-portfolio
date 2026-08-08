@@ -109,11 +109,17 @@ var l=window.matchMedia('(prefers-color-scheme: light)').matches;
 d.dataset.theme=(s==='light'||(s==='system'&&l))?'light':'dark';
 }catch(e){document.documentElement.dataset.theme='dark'}})()`
 
+/* `data-scroll-behavior="smooth"`: the root sets `scroll-behavior:
+ * smooth` for in-page anchors. Without this attribute Next also
+ * animates the scroll reset on a route change, so a navigation
+ * scrolls the old page up instead of starting the new one at the
+ * top. This keeps smooth for anchors and instant for navigations. */
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en-GB"
       data-theme="dark"
+      data-scroll-behavior="smooth"
       className={`${display.variable} ${sans.variable} ${mono.variable}`}
       suppressHydrationWarning
     >

@@ -98,6 +98,14 @@
     --section-y: 64px;
     --section-y-lg: 128px;
 
+    /* Height of the sticky header, measured rather than assumed: 40px
+       of py-5, plus the tallest child (the theme control at 34px),
+       plus the 1px bottom rule ≈ 77px. Consumed by scroll-margin so
+       anchored content clears the bar instead of landing beneath it.
+       Re-measure with getBoundingClientRect on <header> if the nav's
+       padding or control sizes change. */
+    --nav-h: 77px;
+
     /* ---- motion — two tiers, never blended ----
        Entrances are narrative and should be felt. Interactions are
        feedback and should be invisible. easeOutExpo puts 84% of the
@@ -149,6 +157,11 @@
   html {
     -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
+    /* Opt in to animating to and from intrinsic sizes. Inherited, so
+       it is declared once here; on its own it changes no rendering,
+       it only makes `auto` a reachable transition endpoint for the
+       disclosure below. Ignored where unsupported. */
+    interpolate-size: allow-keywords;
     /* The marquee track is deliberately wider than the viewport — it
        has to be, or the loop would have nothing to travel through.
        Without this, that width becomes a horizontal scrollbar on the
@@ -171,6 +184,67 @@
   ::selection {
     background: var(--accent-fill);
     color: #0a0a0a;
+  }
+
+  /* ---- optical typesetting ----
+     Three corrections that are invisible when they work, which is
+     the point.
+
+     1. `text-box-trim` removes half-leading — the empty band a font
+        carries above its cap height and below its baseline. It is
+        why a heading set against a hairline rule always looks like
+        it is floating a few pixels high, and why "just add 24px"
+        never quite lands: the gap you specify is not the gap you
+        see, because part of it is inside the text box. Trimming to
+        cap-height and alphabetic edges means the measured space is
+        the optical space. Applied to display type only, where the
+        leading band is largest and the alignment is most visible.
+
+     2. `text-wrap: balance` on headings evens the ragged edge.
+        Capped by the spec at four lines, which every heading here
+        is well inside.
+
+     3. `text-wrap: pretty` on body copy costs a slower line-breaker
+        in exchange for no orphans — no single word alone on the
+        last line of a paragraph.
+
+     All three degrade to today's rendering where unsupported, so
+     no fallback is needed. */
+  @supports (text-box-trim: trim-both) {
+    h1,
+    h2,
+    h3,
+    .text-display {
+      text-box-trim: trim-both;
+      text-box-edge: cap alphabetic;
+    }
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  /* ---- anchored content clears the sticky header ----
+     A sticky header occupies normal flow, so at the top of the
+     document it sits above #main rather than over it — the skip
+     link, the site's only anchor today, already lands correctly and
+     this rule changes nothing for it.
+
+     It is here for the anchor that does not exist yet. Anywhere
+     below the first screen, a sticky bar genuinely does float over
+     scrolled-to content, and the default landing position hides the
+     first 77px of it. Declaring the offset once on :target means the
+     next in-page link is correct when it is added rather than after
+     someone notices. */
+  :target,
+  #main {
+    scroll-margin-top: calc(var(--nav-h) + 16px);
+  }
+
+  p {
+    text-wrap: pretty;
   }
 
   :focus-visible {
@@ -218,30 +292,109 @@
   }
 
   /* ---- the reveal primitive ----
-     One class, one observer, one-shot. Consistency of entrance IS
-     the polish: when everything arrives the same way, the arrival
-     stops reading as an effect and starts reading as a property of
-     the material. */
+     One class, one entrance. Consistency of entrance IS the polish:
+     when everything arrives the same way, the arrival stops reading
+     as an effect and starts reading as a property of the material.
+
+     There are two implementations here, and choosing between them
+     is most of the design of this block.
+
+     Where scroll-driven animations exist — ~85% of visitors, all
+     three engines — the entrance is pure CSS. No observer, no
+     dependency on hydration, and the work happens off the main
+     thread. Where they do not, an IntersectionObserver adds `.in`
+     and a transition runs instead.
+
+     What both branches share is the part that matters: the base
+     value of `.reveal` is `opacity: 1`. Content is visible unless
+     something actively animates it in. The earlier version
+     inverted that — hidden in the base, shown only once JS said
+     so — which converted every failure of that JS into a blank
+     page, and did precisely that on client-side navigation. An
+     inactive timeline, a bundle that never arrives, an observer
+     that was never rebuilt: all of them now degrade to *visible
+     and unanimated*, which is the only tolerable direction to fail
+     in. */
   .reveal {
     opacity: 1;
   }
-  .js .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition:
-      opacity var(--dur-enter) var(--ease-enter),
-      transform var(--dur-enter) var(--ease-enter);
-  }
-  .js .reveal.in {
-    opacity: 1;
-    transform: none;
+
+  @keyframes reveal-in {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
   }
 
-  .rd-1 { transition-delay: 100ms; }
-  .rd-2 { transition-delay: 200ms; }
-  .rd-3 { transition-delay: 300ms; }
-  .rd-4 { transition-delay: 400ms; }
-  .rd-5 { transition-delay: 500ms; }
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation-name: reveal-in;
+      animation-fill-mode: both;
+      animation-timing-function: linear;
+      animation-timeline: view();
+      /* Finishes over the first 40% of the element's travel through
+         the viewport, so it has settled long before it reaches a
+         comfortable reading position — never mid-fade while being
+         read. Scroll progress drives it, so duration is moot. */
+      animation-range: entry 0% entry 40%;
+    }
+
+    /* Under a view() timeline, stagger is a range offset rather than
+       a delay: each step enters slightly later in its own travel.
+       Reusing the rd-* classes means one set of names drives both
+       branches by whichever mechanism that branch actually has. */
+    .rd-1 { animation-range: entry 3% entry 43%; }
+    .rd-2 { animation-range: entry 6% entry 46%; }
+    .rd-3 { animation-range: entry 9% entry 49%; }
+    .rd-4 { animation-range: entry 12% entry 52%; }
+    .rd-5 { animation-range: entry 15% entry 55%; }
+
+    /* Anything already on screen at load has finished its entry
+       range before the first frame, so it simply appears. Correct
+       below the fold; wrong for the first screen, which should
+       arrive as a cascade. `.reveal--load` therefore steps off the
+       scroll timeline and plays once against the document
+       timeline. Longhands, not the shorthand, because `animation`
+       resets animation-timeline and the reset order is the bug
+       waiting to happen. */
+    .reveal--load {
+      animation-timeline: auto;
+      animation-range: normal;
+      animation-duration: var(--dur-enter);
+      animation-timing-function: var(--ease-enter);
+    }
+    .reveal--load.rd-1 { animation-delay: 100ms; }
+    .reveal--load.rd-2 { animation-delay: 200ms; }
+    .reveal--load.rd-3 { animation-delay: 300ms; }
+    .reveal--load.rd-4 { animation-delay: 400ms; }
+    .reveal--load.rd-5 { animation-delay: 500ms; }
+  }
+
+  /* The observer path. Scoped to browsers without scroll-driven
+     animations so the two can never both apply to one element. */
+  @supports not (animation-timeline: view()) {
+    .js .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition:
+        opacity var(--dur-enter) var(--ease-enter),
+        transform var(--dur-enter) var(--ease-enter);
+    }
+    .js .reveal.in {
+      opacity: 1;
+      transform: none;
+    }
+
+    .rd-1 { transition-delay: 100ms; }
+    .rd-2 { transition-delay: 200ms; }
+    .rd-3 { transition-delay: 300ms; }
+    .rd-4 { transition-delay: 400ms; }
+    .rd-5 { transition-delay: 500ms; }
+  }
 
   /* ---- one hover gesture, site-wide ----
      Lift supplies physicality, edge supplies the signal. Gated
@@ -470,6 +623,46 @@
   .lin details[open] summary { background: var(--surface); }
   .lin summary:hover { color: var(--accent-text); }
 
+  /* The disclosure opens rather than snaps.
+     `::details-content` gives the previously unreachable wrapper
+     around a details element's children a box of its own, which is
+     what makes this animatable at all. Two properties have to move
+     together: block-size for the reveal, and content-visibility for
+     the fact that a closed details is `content-visibility: hidden`
+     and would otherwise pop to visible on frame one.
+     `transition-behavior: allow-discrete` is what lets a discrete
+     property participate at all.
+     The height target is `auto`, which needs `interpolate-size` —
+     Chromium-only for now, so it sits in its own @supports and
+     everyone else keeps the instant open they have today.
+
+     That query tests only `interpolate-size` and not the pseudo-
+     element, for two reasons. A browser that does not know
+     `::details-content` discards these rules by itself, so the test
+     would be redundant; and `and selector(::details-content)` fails
+     to parse in Turbopack's CSS pipeline, taking the whole build
+     down with it. The feature test that earns its place is the one
+     where partial support would actually misbehave. */
+  @supports (interpolate-size: allow-keywords) {
+    .lin details::details-content {
+      block-size: 0;
+      overflow: hidden;
+      content-visibility: hidden;
+      transition:
+        block-size var(--dur-act) var(--ease-act),
+        content-visibility var(--dur-act) var(--ease-act) allow-discrete;
+    }
+    /* `content-visibility` has to be restored here, not just
+       block-size. Declaring `hidden` on the base overrides the
+       toggle the browser does itself, and hidden content generates
+       no box — so without this line the panel stays 0px high in the
+       open state and the disclosure simply does not open. */
+    .lin details[open]::details-content {
+      block-size: auto;
+      content-visibility: visible;
+    }
+  }
+
   /* ---- comparison specimen — radio-driven, keyboard-native ----
      Three states below 1024px: observed, side by side, rebuilt.
      Above it both panes are always visible and the control is
@@ -544,11 +737,179 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+  /* Covers both reveal branches. The blanket rule above collapses
+     durations, but a scroll-driven animation ignores duration
+     entirely — its progress comes from scroll position — so the
+     timeline has to be switched off by name or the fade would
+     survive the preference it is meant to respect. */
+  .reveal,
   .js .reveal {
+    animation: none !important;
     opacity: 1 !important;
     transform: none !important;
   }
   .marquee__track {
     animation: none !important;
+  }
+}
+
+/* ============================================================
+   ENVIRONMENT LAYER
+
+   Four environments the site can find itself in that are not "a
+   sighted user on a normal screen". None of these are hypothetical
+   — each one currently renders something wrong.
+   ============================================================ */
+
+/* ---- print ----
+   Load-bearing rather than decorative, for one specific reason:
+   the reveal entrance is a CSS animation on the document timeline,
+   and a print context may never advance that timeline. Fill mode
+   would then hold the from-state and the page would print with the
+   body copy missing. Forcing reveals visible here is what makes
+   printing safe.
+
+   Beyond that: paper has no dark mode, no hover, and no ability to
+   follow a link, so the palette is inverted back to ink-on-white
+   and every href is written out where it can be read. */
+@media print {
+  .reveal,
+  .js .reveal {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  :root,
+  [data-theme='dark'],
+  [data-theme='light'] {
+    --paper: #fff;
+    --surface: #fff;
+    --surface-2: #fff;
+    --ink: #000;
+    --ink-2: #1a1a1a;
+    --muted: #333;
+    --muted-2: #444;
+    --rule: #ccc;
+    --rule-strong: #999;
+    --accent-text: #000;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  /* Chrome and the decorative grid carry no information on paper.
+     The theme control is inside <header>, so it goes with it. */
+  header,
+  footer,
+  .hud-grid,
+  .marquee {
+    display: none !important;
+  }
+
+  /* A link the reader cannot click needs its destination in the
+     text. Internal hrefs are relative, so they are qualified. */
+  a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.8em;
+    word-break: break-all;
+  }
+  a[href^='/']::after {
+    content: ' (saake.dev' attr(href) ')';
+    font-size: 0.8em;
+  }
+  a[href^='mailto']::after {
+    content: '';
+  }
+
+  /* Never break a heading from the text it introduces, and never
+     split an artefact across a sheet. */
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+  .plate,
+  .cmp,
+  .pipe {
+    break-inside: avoid;
+  }
+
+  /* A closed disclosure would print as a title with no content. */
+  details {
+    display: block;
+  }
+  details::details-content {
+    block-size: auto !important;
+    content-visibility: visible !important;
+    overflow: visible !important;
+  }
+}
+
+/* ---- forced colours ----
+   Windows high-contrast mode replaces the palette wholesale. The
+   casualties are anything whose meaning lives in a background or a
+   border colour rather than in text: the accent fills, the mortar
+   grid's hairline seams, and the artefact regions. System keywords
+   are used instead of the tokens, because in this mode the tokens
+   are being overridden anyway and only the system set is honoured. */
+@media (forced-colors: active) {
+  .mortar,
+  .mortar > *,
+  .plate,
+  .lin details {
+    border-color: CanvasText;
+  }
+
+  ::selection {
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  :focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
+
+  /* The decision bar is the one place where meaning lives purely in
+     a fill: each segment's height encodes a compounding constraint,
+     and the accent fill is what separates it from the track. A
+     forced palette flattens both to the same colour, so the segment
+     keeps its own colours and gains an outline. `forced-color-adjust`
+     is deliberate here — the fill is information, not decoration,
+     which is the documented reason to opt out. */
+  .dseg {
+    forced-color-adjust: none;
+    outline: 1px solid CanvasText;
+  }
+}
+
+/* ---- reduced transparency ----
+   The nav's backdrop blur is a translucency effect, and this
+   preference exists for people who find translucent surfaces hard
+   to read against. Drop it to an opaque bar with a rule. */
+@media (prefers-reduced-transparency: reduce) {
+  .nav-blur {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: var(--paper);
+  }
+}
+
+/* ---- increased contrast ----
+   Raise the two dimmest ramps and firm up the rules. The floor is
+   already 4.5:1 everywhere; this takes the muted registers toward
+   the body colour for people who have asked for more. */
+/* Both selectors are listed because `[data-theme='light']` outranks a
+   bare `:root`, so overriding only the latter would raise contrast in
+   dark mode and silently skip light. */
+@media (prefers-contrast: more) {
+  :root,
+  [data-theme='light'] {
+    --muted: var(--ink-2);
+    --muted-2: var(--ink-2);
+    --rule: var(--rule-strong);
   }
 }

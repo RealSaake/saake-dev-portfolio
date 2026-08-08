@@ -33,6 +33,16 @@ export function RevealObserver() {
 
   useEffect(() => {
     /**
+     * Where scroll-driven animations exist, the entrance is done in
+     * CSS and this component has no work to do — the stylesheet scopes
+     * the observer's rules behind `@supports not (animation-timeline:
+     * view())`, so adding `.in` here would match nothing anyway.
+     * Bailing before constructing anything keeps ~85% of visitors from
+     * paying for an observer, a timer and a listener they never use.
+     */
+    if (typeof CSS !== 'undefined' && CSS.supports?.('animation-timeline: view()')) return
+
+    /**
      * Collected once per route, which is only sound because this app has no
      * streaming boundary: no `loading.tsx`, no `<Suspense>`, no `dynamic()`.
      * Every route's `.reveal` nodes are therefore in the DOM by the time this

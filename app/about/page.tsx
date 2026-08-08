@@ -45,18 +45,18 @@ export default function About() {
           className="hud-grid pointer-events-none absolute inset-0 opacity-60"
         />
         <Container className="relative">
-          <Reveal>
+          <Reveal load>
             <Eyebrow>about // {site.handle}</Eyebrow>
           </Reveal>
 
-          <Reveal delay={1}>
+          <Reveal load delay={1}>
             <h1 className="mt-10 max-w-measure text-h1">
               I am {site.name}. I build things on the web and I am fairly direct about which parts of
               them work.
             </h1>
           </Reveal>
 
-          <Reveal delay={2}>
+          <Reveal load delay={2}>
             <Prose long className="mt-10">
               <p>
                 I came to design through building rather than the other way round. That shows: I am

@@ -64,11 +64,11 @@ export default function Home() {
           className="hud-grid pointer-events-none absolute inset-0 opacity-60"
         />
         <Container className="relative">
-          <Reveal>
+          <Reveal load>
             <Eyebrow>portfolio // interface design + front-end</Eyebrow>
           </Reveal>
 
-          <Reveal delay={1}>
+          <Reveal load delay={1}>
             <h1 className="mt-10 max-w-measure-long text-display font-black">
               I design and build interfaces,
               <br className="hidden md:block" /> and I write down{' '}
@@ -76,7 +76,7 @@ export default function Home() {
             </h1>
           </Reveal>
 
-          <Reveal delay={2}>
+          <Reveal load delay={2}>
             <Prose className="mt-10">
               <p>
                 Most of what makes an interface good is decided before anything is drawn — what the
@@ -87,7 +87,7 @@ export default function Home() {
             </Prose>
           </Reveal>
 
-          <Reveal delay={3}>
+          <Reveal load delay={3}>
             <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-4">
               <InternalLink href="/work">Read the work</InternalLink>
               <a

@@ -41,15 +41,15 @@ export default function Contact() {
           className="hud-grid pointer-events-none absolute inset-0 opacity-60"
         />
         <Container className="relative">
-          <Reveal>
+          <Reveal load>
             <Eyebrow>contact // one channel</Eyebrow>
           </Reveal>
 
-          <Reveal delay={1}>
+          <Reveal load delay={1}>
             <h1 className="mt-10 max-w-measure text-h1">One address, and I read it.</h1>
           </Reveal>
 
-          <Reveal delay={2}>
+          <Reveal load delay={2}>
             <div className="mt-12">
               <a
                 href={`mailto:${site.email}`}
@@ -60,7 +60,7 @@ export default function Contact() {
             </div>
           </Reveal>
 
-          <Reveal delay={3}>
+          <Reveal load delay={3}>
             <Prose className="mt-12">
               <p>
                 I am not going to quote you a response time. I will say that a message describing an

@@ -64,7 +64,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
           className="hud-grid pointer-events-none absolute inset-0 opacity-60"
         />
         <Container className="relative">
-          <Reveal>
+          <Reveal load>
             <nav aria-label="Breadcrumb" className="mb-10">
               <Link
                 href="/work"
@@ -75,22 +75,22 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
             </nav>
           </Reveal>
 
-          <Reveal>
+          <Reveal load>
             <Eyebrow>
               {study.kind} // {study.year}
             </Eyebrow>
           </Reveal>
 
-          <Reveal delay={1}>
+          <Reveal load delay={1}>
             <h1 className="mt-10 max-w-measure-long text-display">{study.title}</h1>
           </Reveal>
 
-          <Reveal delay={2}>
+          <Reveal load delay={2}>
             <p className="mt-8 max-w-measure text-lead text-muted">{study.tagline}</p>
           </Reveal>
 
           {study.links && study.links.length > 0 && (
-            <Reveal delay={3}>
+            <Reveal load delay={3}>
               <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3">
                 {study.links.map((l) => (
                   <ExternalLink key={l.href} href={l.href}>

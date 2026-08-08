@@ -31,15 +31,15 @@ export default function WorkIndex() {
           className="hud-grid pointer-events-none absolute inset-0 opacity-60"
         />
         <Container className="relative">
-          <Reveal>
+          <Reveal load>
             <Eyebrow>archive // {caseStudies.length} entries</Eyebrow>
           </Reveal>
 
-          <Reveal delay={1}>
+          <Reveal load delay={1}>
             <h1 className="mt-10 max-w-measure text-h1">Five projects, written up properly</h1>
           </Reveal>
 
-          <Reveal delay={2}>
+          <Reveal load delay={2}>
             <Prose className="mt-8">
               <p>
                 Each of these states the problem before it states the solution, and each ends with an
