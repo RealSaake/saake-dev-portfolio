@@ -27,6 +27,7 @@ import {
   marqueeItems,
   process,
   site,
+  spelledCount,
   stack,
 } from '@/content'
 
@@ -80,7 +81,8 @@ export default function Home() {
               <p>
                 Most of what makes an interface good is decided before anything is drawn — what the
                 thing is for, what it refuses to do, and which of the two hard cases it is built
-                around. Those decisions are the work. This site is five of them, written out.
+                around. Those decisions are the work. This site is{' '}
+                {spelledCount(caseStudies.length)} of them, written out.
               </p>
             </Prose>
           </Reveal>

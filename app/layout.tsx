@@ -3,7 +3,7 @@ import localFont from 'next/font/local'
 import { Grain } from '@/components/primitives'
 import { RevealObserver } from '@/components/reveal-observer'
 import { Nav, Footer } from '@/components/shell'
-import { caseStudies, site } from '@/content'
+import { caseStudyCount, site } from '@/content'
 import './globals.css'
 
 /* ── Faces ────────────────────────────────────────────────────
@@ -57,11 +57,8 @@ export const metadata: Metadata = {
     default: 'Aryan — designer and engineer',
     template: '%s — saake.dev',
   },
-  /* The count is derived, not typed. It was written out as a word once
-   * and went stale the moment a case study was added — which, on a site
-   * whose argument is that its claims are checkable, is the worst
-   * available defect. */
-  description: `I design and build interfaces, and I write down why. ${caseStudies.length} case studies, each with a stated problem and an honest outcome.`,
+  // The count is derived — see spelledCount in content/index.ts.
+  description: `I design and build interfaces, and I write down why. ${caseStudyCount} case studies, each with a stated problem and an honest outcome.`,
   authors: [{ name: site.name, url: site.url }],
   creator: site.name,
   openGraph: {

@@ -150,6 +150,24 @@ export const caseStudies: CaseStudy[] = [
 export const flagship = caseStudies.find((s) => s.flagship)!
 export const featured = caseStudies.filter((s) => s.featured)
 
+/* How many case studies there are, spelled, for use in prose.
+ *
+ * Derived rather than typed. The metadata description and the share
+ * card both stated this count as a word, both went stale the moment a
+ * case study was added, and neither had any way of noticing — which on
+ * a site whose whole argument is that its claims are checkable is the
+ * worst defect available. Falls back to the numeral above nine, at
+ * which point the sentence needs rewriting anyway. */
+const WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
+
+export function spelledCount(n: number, capitalised = false): string {
+  const word = WORDS[n]
+  if (!word) return String(n)
+  return capitalised ? word[0].toUpperCase() + word.slice(1) : word
+}
+
+export const caseStudyCount = spelledCount(caseStudies.length, true)
+
 export function getCaseStudy(slug: string) {
   return caseStudies.find((s) => s.slug === slug)
 }

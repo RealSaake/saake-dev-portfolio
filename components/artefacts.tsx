@@ -892,7 +892,7 @@ export function Specimen() {
  * page can ask whether an artefact exists before it commits to
  * rendering a section heading for one.
  *
- * Three of the five case studies have a figure. The firmware
+ * Not every case study has a figure. The firmware
  * design and the unfinished experiment do not, and they get
  * nothing rather than an empty frame — a placeholder in an
  * evidence slot is a claim about work that is not there, which

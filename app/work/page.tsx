@@ -13,12 +13,12 @@ import {
   Section,
 } from '@/components/primitives'
 import { CASE_ARTEFACTS, IndexPlate } from '@/components/artefacts'
-import { caseStudies, elsewhere, site } from '@/content'
+import { caseStudies, caseStudyCount, elsewhere, site } from '@/content'
 
 export const metadata: Metadata = {
   title: 'Work',
   description:
-    'Five case studies, each with a stated problem, what I did about it, and an outcome that includes what did not work.',
+    `${caseStudyCount} case studies, each with a stated problem, what I did about it, and an outcome that includes what did not work.`,
   alternates: { canonical: '/work' },
 }
 
