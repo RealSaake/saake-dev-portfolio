@@ -13,7 +13,7 @@ import {
   Section,
 } from '@/components/primitives'
 import { CASE_ARTEFACTS, IndexPlate } from '@/components/artefacts'
-import { caseStudies, caseStudyCount, elsewhere, site } from '@/content'
+import { caseStudies, caseStudyCount, elsewhere, site, spelledCount } from '@/content'
 
 export const metadata: Metadata = {
   title: 'Work',
@@ -36,7 +36,7 @@ export default function WorkIndex() {
           </Reveal>
 
           <Reveal load delay={1}>
-            <h1 className="mt-10 max-w-measure text-h1">Five projects, written up properly</h1>
+            <h1 className="mt-10 max-w-measure text-h1">{caseStudyCount} projects, written up properly</h1>
           </Reveal>
 
           <Reveal load delay={2}>
@@ -44,8 +44,8 @@ export default function WorkIndex() {
               <p>
                 Each of these states the problem before it states the solution, and each ends with an
                 outcome that includes the part that did not work. A portfolio that only contains
-                successes is either very short or not true. One of the five is unfinished and is
-                listed as unfinished.
+                successes is either very short or not true. One of the {spelledCount(caseStudies.length)} is
+                unfinished and is listed as unfinished.
               </p>
             </Prose>
           </Reveal>

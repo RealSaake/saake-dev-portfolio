@@ -749,7 +749,7 @@ export function Specimen() {
         <div className="cmp__panes">
           {/* ---- observed ---- */}
           <div className="cmp__pane--before p-4">
-            <div className="mb-4 flex items-baseline justify-between gap-4">
+            <div className="mb-4 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
               <Label>Observed system</Label>
               <span className="label text-evidence">as deployed</span>
             </div>
@@ -784,7 +784,7 @@ export function Specimen() {
 
           {/* ---- rebuilt ---- */}
           <div className="cmp__pane--after p-4">
-            <div className="mb-4 flex items-baseline justify-between gap-4">
+            <div className="mb-4 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
               <Label>Rebuilt system</Label>
               <span className="label text-accent-text">proposed</span>
             </div>
@@ -848,9 +848,15 @@ export function Specimen() {
         </div>
       </div>
 
-      {/* ---- token ledger ---- */}
+      {/* ---- token ledger ----
+           `table-fixed` rather than auto: with auto layout the widest
+           cell sets the column, and at 320px the three columns add up
+           to more than the viewport, which stretches the plate and
+           gives the whole document a horizontal scrollbar. Fixed
+           layout divides the available width instead, so the table
+           wraps rather than pushes. */}
       <div className="border-t border-rule">
-        <table className="w-full text-left">
+        <table className="w-full table-fixed text-left">
           <caption className="label p-4 text-left">What changed, as tokens</caption>
           <thead>
             <tr className="border-y border-rule">

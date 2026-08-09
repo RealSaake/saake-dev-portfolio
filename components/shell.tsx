@@ -24,7 +24,7 @@ export function Nav() {
   return (
     <header className="nav-blur sticky top-0 z-50 border-b border-rule bg-paper/90">
       <Container>
-        <div className="flex items-center justify-between gap-4 py-5">
+        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3 py-5">
           {/* `.dev` is decorative at the narrowest widths — dropping it
            * below `xs` is what lets the row fit a 360px viewport
            * without shrinking the tap targets. The accessible name
@@ -44,8 +44,16 @@ export function Nav() {
            * behind a button is client state, and this fits without one
            * — but only if the label tracking is allowed to tighten at
            * the narrowest widths. `tracking-normal` below `sm` is what
-           * keeps the row inside a 390px viewport. */}
-          <nav aria-label="Primary" className="flex items-center gap-3 sm:gap-8">
+           * keeps the row inside a 390px viewport.
+           *
+           * Both this list and the row above it wrap rather than
+           * overflow. At every real viewport the bar is one line; the
+           * wrap only engages past ~300% text zoom, where the
+           * alternative is not a narrower bar but links clipped off
+           * the edge — `html` hides horizontal overflow, so anything
+           * that escapes the row is unreachable rather than
+           * scrollable. */}
+          <nav aria-label="Primary" className="flex flex-wrap items-center gap-x-3 gap-y-2 sm:gap-x-8">
             {NAV.map((item) => (
               <Link
                 key={item.href}
