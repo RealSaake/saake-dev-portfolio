@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import { Container, Reveal } from '@/components/primitives'
-import { site } from '@/content'
 
 export const metadata: Metadata = { 
   title: 'About', 
-  description: 'About Saake, Systems Architect & Automation Builder.', 
+  description: 'About Saake, a creative developer based in India.', 
   alternates: { canonical: '/about' } 
 }
 
@@ -16,32 +16,27 @@ export default function About() {
         <Container>
           <div className="about-grid">
             <Reveal load>
-              <div className="portrait-frame bg-[#0a0a0a] flex items-center justify-center p-8">
-                <div className="font-mono text-xs text-accent-text opacity-80 leading-relaxed text-left">
-                  {`// SYS.INIT
-> WHOAMI
-Aryan (Saake)
-> ROLE
-Systems Architect
-Automation Builder
-> STACK
-Next.js / Python / Node
-Oracle Cloud / AI Native
-> STATUS
-Deploying infrastructure.`}
-                </div>
-                <span className="portrait-tag label">Saake / Systems Director</span>
+              <div className="portrait-frame">
+                <Image 
+                  src="/media/saake-portrait.jpg" 
+                  alt="Portrait of Saake" 
+                  fill 
+                  priority 
+                  sizes="(max-width: 800px) 100vw, 44vw" 
+                  className="portrait-image" 
+                />
+                <span className="portrait-tag label">Saake / Creative developer</span>
               </div>
             </Reveal>
             <Reveal load delay={1}>
               <div>
                 <p className="hero-kicker"><span /> About</p>
-                <h1>I build systems that give businesses an <em>unfair advantage.</em></h1>
+                <h1>I like the point where logic becomes <em>feeling.</em></h1>
                 <p className="about-lead">
-                  I&apos;m Saake, an automation architect and systems director. I build high-ticket websites and backend AI infrastructure that runs exactly the way it should: silently and reliably.
+                  I&apos;m Saake, a creative developer in India. I design and build expressive web experiences—especially the ones that need motion, atmosphere and a little technical stubbornness.
                 </p>
                 <p>
-                  I don&apos;t just write code—I architect workflows, design conversion funnels, logic-gate critical business systems, and orchestrate localized AI agents to solve complex problems faster and better than traditional teams. 
+                  I work across product thinking, interface design and front-end engineering. That means fewer handoffs, faster experiments and ideas that survive contact with the browser.
                 </p>
                 <Link href="/contact" className="signal-button mt-6">Work with me ↗</Link>
               </div>
@@ -55,9 +50,9 @@ Deploying infrastructure.`}
           <p className="project-index">What I bring</p>
           <div className="principle-grid">
             {[
-              ['High-Performance Websites', 'Custom, blazingly fast sites built on Next.js designed for conversion, not just looks.'],
-              ['AI-Native Infrastructure', 'From automated lead generation to internal agent swarms, I build the engines that scale your output.'],
-              ['Systems Architecture', 'I shape the concept, structure the logic, and deploy the automated workforce that brings it to production.']
+              ['Taste + systems', 'A visual point of view backed by reusable, accessible foundations.'],
+              ['Ideas + execution', 'I can shape the concept, prototype it and carry it into production.'],
+              ['Honest curiosity', 'I learn quickly, ask direct questions and care about the details people feel.']
             ].map(([title, body], i) => (
               <Reveal key={title} delay={(i + 1) as 1 | 2 | 3}>
                 <div>
