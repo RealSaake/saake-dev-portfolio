@@ -28,24 +28,29 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 }
 
 export default async function ProjectPage({ params }: { params: Promise<Params> }) {
-  const project = getProject((await params).slug)
+  const { slug } = await params
+  const project = getProject(slug)
+
   if (!project) notFound()
-  const next = projects[(projects.indexOf(project) + 1) % projects.length]
+
+  const currentIndex = projects.findIndex((p) => p.slug === slug)
+  const next = projects[(currentIndex + 1) % projects.length]
 
   return (
-    <article className={`project-page project-page--${project.slug}`}>
+    <article className="project-detail">
       <section className="project-hero">
         <Container>
-          <Reveal load>
-            <Link href="/work" className="hero-kicker-link">
+          <div className="project-hero-head">
+            <Link className="project-back" href="/work">
               ← All work
             </Link>
             <p className="project-index">
-              {project.kicker} / {project.year}
+              Case study {(currentIndex + 1).toString().padStart(2, '0')} of{' '}
+              {projects.length.toString().padStart(2, '0')}
             </p>
-            <h1>{project.title}</h1>
-            <p className="project-hero-summary">{project.summary}</p>
-          </Reveal>
+          </div>
+          <h1>{project.title}</h1>
+          <p className="project-summary">{project.summary}</p>
         </Container>
       </section>
 
@@ -79,7 +84,28 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
         </Container>
       </section>
 
-      <section className="project-story">
+      {/* Metrics Banner */}
+      {project.metrics && project.metrics.length > 0 && (
+        <section className="project-metrics-banner border-y border-border bg-subtle py-8">
+          <Container>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {project.metrics.map((m, idx) => (
+                <div key={idx} className="metric-card p-4 border border-border bg-surface">
+                  <p className="text-2xl md:text-3xl font-bold text-accent mb-1 tracking-tight font-mono">
+                    {m.value}
+                  </p>
+                  <p className="text-xs uppercase tracking-wider text-muted font-medium">
+                    {m.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </Container>
+        </section>
+      )}
+
+      {/* Deep Blocker-Style Case Study Narrative */}
+      <section className="project-story py-16">
         <Container>
           <div>
             <p className="project-index">The origin &amp; vision</p>
@@ -97,6 +123,58 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
                 {project.description}
               </p>
             )}
+
+            {/* Problem Breakdown */}
+            {project.problem && project.problem.length > 0 && (
+              <div className="case-study-pillar my-10 p-6 border-l-2 border-accent bg-subtle">
+                <h3 className="text-xs uppercase tracking-widest font-mono text-muted mb-4">
+                  01 // The Core Problem
+                </h3>
+                <ul className="space-y-3">
+                  {project.problem.map((item, i) => (
+                    <li key={i} className="text-sm md:text-base leading-relaxed text-ink/80 flex items-start">
+                      <span className="text-accent mr-3 font-mono">▸</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Architecture Breakdown */}
+            {project.architecture && project.architecture.length > 0 && (
+              <div className="case-study-pillar my-10 p-6 border-l-2 border-accent bg-subtle">
+                <h3 className="text-xs uppercase tracking-widest font-mono text-muted mb-4">
+                  02 // Systems &amp; Architecture
+                </h3>
+                <ul className="space-y-3">
+                  {project.architecture.map((item, i) => (
+                    <li key={i} className="text-sm md:text-base leading-relaxed text-ink/80 flex items-start">
+                      <span className="text-accent mr-3 font-mono">▸</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Outcome Breakdown */}
+            {project.outcome && project.outcome.length > 0 && (
+              <div className="case-study-pillar my-10 p-6 border-l-2 border-accent bg-subtle">
+                <h3 className="text-xs uppercase tracking-widest font-mono text-muted mb-4">
+                  03 // Shipped Outcome &amp; Value
+                </h3>
+                <ul className="space-y-3">
+                  {project.outcome.map((item, i) => (
+                    <li key={i} className="text-sm md:text-base leading-relaxed text-ink/80 flex items-start">
+                      <span className="text-accent mr-3 font-mono">▸</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             <p className="project-role">{project.role}</p>
             <ul className="stack-list">
               {project.stack.map((item) => (
