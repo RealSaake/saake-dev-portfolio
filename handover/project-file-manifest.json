@@ -1,0 +1,282 @@
+{
+  "generated_at_utc": "2026-08-14T00:00:00Z",
+  "repo": "C:\\Users\\anubh\\Downloads\\Antigravity Projects\\claude\\site",
+  "excluded_directories": [
+    ".git",
+    "node_modules",
+    ".next"
+  ],
+  "file_count": 54,
+  "files": [
+    {
+      "path": ".claude/launch.json",
+      "bytes": 176,
+      "kind": "source/config"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 555,
+      "kind": "source/config"
+    },
+    {
+      "path": ".npmrc",
+      "bytes": 128,
+      "kind": "source/config"
+    },
+    {
+      "path": "AGENTS.md",
+      "bytes": 1604,
+      "kind": "source/config"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2621,
+      "kind": "source/config"
+    },
+    {
+      "path": "app/about/page.tsx",
+      "bytes": 1933,
+      "kind": "source/config"
+    },
+    {
+      "path": "app/apple-icon.tsx",
+      "bytes": 556,
+      "kind": "source/config"
+    },
+    {
+      "path": "app/contact/page.tsx",
+      "bytes": 1143,
+      "kind": "source/config"
+    },
+    {
+      "path": "app/globals.css",
+      "bytes": 45760,
+      "kind": "source/config"
+    },
+    {
+      "path": "app/icon.tsx",
+      "bytes": 745,
+      "kind": "source/config"
+    },
+    {
+      "path": "app/layout.tsx",
+      "bytes": 5932,
+      "kind": "source/config"
+    },
+    {
+      "path": "app/not-found.tsx",
+      "bytes": 1229,
+      "kind": "source/config"
+    },
+    {
+      "path": "app/opengraph-image.tsx",
+      "bytes": 718,
+      "kind": "source/config"
+    },
+    {
+      "path": "app/page.tsx",
+      "bytes": 3719,
+      "kind": "source/config"
+    },
+    {
+      "path": "app/robots.ts",
+      "bytes": 294,
+      "kind": "source/config"
+    },
+    {
+      "path": "app/sitemap.ts",
+      "bytes": 799,
+      "kind": "source/config"
+    },
+    {
+      "path": "app/work/[slug]/opengraph-image.tsx",
+      "bytes": 916,
+      "kind": "source/config"
+    },
+    {
+      "path": "app/work/[slug]/page.tsx",
+      "bytes": 2650,
+      "kind": "source/config"
+    },
+    {
+      "path": "app/work/page.tsx",
+      "bytes": 988,
+      "kind": "source/config"
+    },
+    {
+      "path": "assets/og/README.md",
+      "bytes": 1376,
+      "kind": "asset"
+    },
+    {
+      "path": "assets/og/SpaceGrotesk-Regular.ttf",
+      "bytes": 114428,
+      "kind": "asset"
+    },
+    {
+      "path": "assets/og/SpaceMono-Regular.ttf",
+      "bytes": 99356,
+      "kind": "asset"
+    },
+    {
+      "path": "assets/og/Syne-ExtraBold.ttf",
+      "bytes": 70132,
+      "kind": "asset"
+    },
+    {
+      "path": "components/artefacts.tsx",
+      "bytes": 36160,
+      "kind": "source/config"
+    },
+    {
+      "path": "components/hero-scene-loader.tsx",
+      "bytes": 184,
+      "kind": "source/config"
+    },
+    {
+      "path": "components/hero-scene.tsx",
+      "bytes": 2021,
+      "kind": "source/config"
+    },
+    {
+      "path": "components/lovequest-showcase.tsx",
+      "bytes": 5572,
+      "kind": "source/config"
+    },
+    {
+      "path": "components/og-card.tsx",
+      "bytes": 4350,
+      "kind": "source/config"
+    },
+    {
+      "path": "components/primitives.tsx",
+      "bytes": 11909,
+      "kind": "source/config"
+    },
+    {
+      "path": "components/reveal-observer.tsx",
+      "bytes": 4761,
+      "kind": "source/config"
+    },
+    {
+      "path": "components/shell.tsx",
+      "bytes": 2205,
+      "kind": "source/config"
+    },
+    {
+      "path": "components/theme-toggle.tsx",
+      "bytes": 1244,
+      "kind": "source/config"
+    },
+    {
+      "path": "components/waveline-visualizer.tsx",
+      "bytes": 5555,
+      "kind": "source/config"
+    },
+    {
+      "path": "content/index.ts",
+      "bytes": 7075,
+      "kind": "source/config"
+    },
+    {
+      "path": "handover/SAAKEDEV_HANDOVER.md",
+      "bytes": 18129,
+      "kind": "source/config"
+    },
+    {
+      "path": "handover/project-file-manifest.json",
+      "bytes": 5222,
+      "kind": "source/config"
+    },
+    {
+      "path": "handover/transcript-manifest.json",
+      "bytes": 115228,
+      "kind": "source/config"
+    },
+    {
+      "path": "next-env.d.ts",
+      "bytes": 257,
+      "kind": "source/config"
+    },
+    {
+      "path": "next.config.js",
+      "bytes": 1079,
+      "kind": "source/config"
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 101099,
+      "kind": "source/config"
+    },
+    {
+      "path": "package.json",
+      "bytes": 822,
+      "kind": "source/config"
+    },
+    {
+      "path": "postcss.config.js",
+      "bytes": 86,
+      "kind": "source/config"
+    },
+    {
+      "path": "public/fonts/SpaceGrotesk-Variable.woff2",
+      "bytes": 22288,
+      "kind": "asset"
+    },
+    {
+      "path": "public/fonts/SpaceMono-400.woff2",
+      "bytes": 16520,
+      "kind": "asset"
+    },
+    {
+      "path": "public/fonts/SpaceMono-700.woff2",
+      "bytes": 16724,
+      "kind": "asset"
+    },
+    {
+      "path": "public/fonts/Syne-Variable.woff2",
+      "bytes": 34608,
+      "kind": "asset"
+    },
+    {
+      "path": "public/media/saake-portrait.jpg",
+      "bytes": 238778,
+      "kind": "asset"
+    },
+    {
+      "path": "scripts/contrast.mjs",
+      "bytes": 3640,
+      "kind": "source/config"
+    },
+    {
+      "path": "scripts/verify-live.mjs",
+      "bytes": 8803,
+      "kind": "source/config"
+    },
+    {
+      "path": "scripts/verify.mjs",
+      "bytes": 15575,
+      "kind": "source/config"
+    },
+    {
+      "path": "tailwind.config.ts",
+      "bytes": 3958,
+      "kind": "source/config"
+    },
+    {
+      "path": "tsconfig.json",
+      "bytes": 719,
+      "kind": "source/config"
+    },
+    {
+      "path": "tsconfig.tsbuildinfo",
+      "bytes": 84454,
+      "kind": "source/config"
+    },
+    {
+      "path": "vercel.json",
+      "bytes": 28,
+      "kind": "source/config"
+    }
+  ]
+}

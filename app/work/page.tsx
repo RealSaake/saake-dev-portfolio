@@ -1,144 +1,73 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import {
-  Container,
-  Eyebrow,
-  ExternalLink,
-  InternalLink,
-  Label,
-  Prose,
-  Reveal,
-  revealDelay,
-  Rule,
-  Section,
-} from '@/components/primitives'
-import { CASE_ARTEFACTS, IndexPlate } from '@/components/artefacts'
-import { caseStudies, caseStudyCount, elsewhere, site, spelledCount } from '@/content'
+import { Container, Reveal } from '@/components/primitives'
+import { projects } from '@/content'
 
 export const metadata: Metadata = {
   title: 'Work',
-  description:
-    `${caseStudyCount} case studies, each with a stated problem, what I did about it, and an outcome that includes what did not work.`,
+  description: 'Selected projects, autonomous systems, and interactive web architectures by Saake.',
   alternates: { canonical: '/work' },
 }
 
-export default function WorkIndex() {
+export default function Work() {
   return (
-    <>
-      <Section pad="top" className="relative overflow-hidden">
-        <div
-          aria-hidden="true"
-          className="hud-grid pointer-events-none absolute inset-0 opacity-60"
-        />
-        <Container className="relative">
-          <Reveal load>
-            <Eyebrow>archive // {caseStudies.length} entries</Eyebrow>
-          </Reveal>
-
-          <Reveal load delay={1}>
-            <h1 className="mt-10 max-w-measure text-h1">{caseStudyCount} projects, written up properly</h1>
-          </Reveal>
-
-          <Reveal load delay={2}>
-            <Prose className="mt-8">
-              <p>
-                Each of these states the problem before it states the solution, and each ends with an
-                outcome that includes the part that did not work. A portfolio that only contains
-                successes is either very short or not true. One of the {spelledCount(caseStudies.length)} is
-                unfinished and is listed as unfinished.
-              </p>
-            </Prose>
-          </Reveal>
-        </Container>
-      </Section>
-
-      <Section pad="tight">
-        <Container>
-          <ul className="border-t border-rule">
-            {caseStudies.map((study, i) => (
-              <li key={study.slug}>
-                <Reveal delay={revealDelay(i)}>
-                  <Link
-                    href={`/work/${study.slug}`}
-                    className="lift group block border-b border-rule py-12 transition-colors duration-act hover:border-accent-edge"
-                  >
-                    <div className="grid gap-8 md:grid-cols-12 md:items-center">
-                      <div className="md:col-span-2">
-                        <Label>{study.year}</Label>
-                        <Label className="mt-2">{study.kind}</Label>
-                      </div>
-
-                      <div className="md:col-span-6">
-                        <h2 className="text-h2 transition-colors duration-act group-hover:text-accent-text">
-                          {study.title}
-                        </h2>
-                        <p className="mt-4 max-w-measure text-body text-muted">{study.tagline}</p>
-                        {study.note && (
-                          <p className="mt-4 text-s text-muted-2">{study.note}</p>
-                        )}
-                      </div>
-
-                      <div className="md:col-span-3 md:col-start-10">
-                        <IndexPlate
-                          year={study.year}
-                          kind={study.kind}
-                          deployed={Boolean(study.links?.some((l) => l.label === 'Live'))}
-                          source={Boolean(study.links?.some((l) => l.label === 'Source'))}
-                          hasArtefact={study.slug in CASE_ARTEFACTS}
-                        />
-                      </div>
-                    </div>
-                  </Link>
-                </Reveal>
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </Section>
-
-      <Section className="border-t border-rule bg-surface">
-        <Container>
-          <div className="grid gap-12 md:grid-cols-12">
-            <div className="md:col-span-7">
-              <Reveal>
-                <p className="max-w-measure text-h2">
-                  The source for all of it is public, including the parts that are wrong.
-                </p>
-              </Reveal>
-              <Reveal delay={1}>
-                <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
-                  <a
-                    href={`mailto:${site.email}`}
-                    className="text-lead text-accent-text underline decoration-rule-strong underline-offset-8 transition-colors duration-act hover:decoration-accent-edge"
-                  >
-                    {site.email}
-                  </a>
-                  <InternalLink href="/about">About</InternalLink>
-                </div>
-              </Reveal>
-            </div>
-
-            <div className="md:col-span-4 md:col-start-9">
-              <Reveal delay={2}>
-                <Label className="mb-4">Check for yourself</Label>
-                <ul className="flex flex-col gap-4">
-                  {elsewhere.map((l) => (
-                    <li key={l.href} className="border-t border-rule pt-4">
-                      <ExternalLink href={l.href} className="text-s">
-                        {l.label}
-                      </ExternalLink>
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
-            </div>
-          </div>
-        </Container>
-      </Section>
-
+    <section className="index-page">
       <Container>
-        <Rule />
+        <Reveal load>
+          <p className="hero-kicker-link">
+            Selected work &amp; engineering blueprints
+          </p>
+          <h1 className="index-title">
+            Autonomous systems &amp;<br />interactive <em>architectures.</em>
+          </h1>
+          <p className="contact-lead max-w-2xl mt-4">
+            A portfolio of verified systems: peer-to-peer learning networks, private relationship companions, distributed AI proxy infrastructure, automated content research pipelines, and structured second-brain matrices.
+          </p>
+        </Reveal>
+
+        <div className="work-index mt-12 grid gap-8 md:grid-cols-2">
+          {projects.map((project, index) => (
+            <Reveal key={project.slug} delay={Math.min(index + 1, 3) as 1 | 2 | 3}>
+              <Link
+                href={`/work/${project.slug}`}
+                className={`work-index-card work-index-card--${project.slug} block border border-rule bg-surface p-6 sm:p-8 transition-all hover:border-rule-strong h-full flex flex-col justify-between`}
+              >
+                <div>
+                  <div className="flex items-center justify-between font-mono text-xs text-muted mb-4 border-b border-rule pb-3">
+                    <span className="text-accent-text font-bold">0{index + 1} / {project.year}</span>
+                    <span>{project.kicker}</span>
+                  </div>
+                  <h2 className="text-2xl font-display font-bold text-ink tracking-tight mb-3">
+                    {project.title}
+                  </h2>
+                  <p className="text-sm font-sans text-muted leading-relaxed mb-6">
+                    {project.summary}
+                  </p>
+                </div>
+
+                <div>
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {project.stack.map((tech) => (
+                      <span
+                        key={tech}
+                        className="font-mono text-[11px] px-2 py-1 bg-paper border border-rule text-muted"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="pt-4 border-t border-rule flex items-center justify-between">
+                    <span className="text-xs font-mono text-muted">{project.role.split('·')[0].trim()}</span>
+                    <span className="text-link font-mono text-xs uppercase tracking-wider font-semibold">
+                      Explore Case Study →
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
       </Container>
-    </>
+    </section>
   )
 }

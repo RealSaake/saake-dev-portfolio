@@ -1,0 +1,21 @@
+{
+  "generatedAt": "2026-08-16T18:45:51.485Z",
+  "root": "C:\\Users\\anubh\\Downloads\\Antigravity Projects\\claude\\site",
+  "researchModel": "gpt-5.6-terra",
+  "managerModel": "gpt-5.6-sol",
+  "provider": "custom:hhtechapi.com",
+  "tracks": [
+    {
+      "name": "vault-curator",
+      "prompt": "Audit the generated Brain control plane and its Obsidian source boundaries. Find the highest-value indexing, privacy, stale-data, or discoverability improvements. Do not edit files. Return verified evidence, risks, and three concrete recommendations."
+    },
+    {
+      "name": "design-guardian",
+      "prompt": "Audit the new Brain UI against the existing saake.dev design faith and repository verification standards. Inspect the current code and build output. Do not edit files. Return verified visual/system inconsistencies, responsive risks, and three concrete recommendations."
+    },
+    {
+      "name": "reliability-auditor",
+      "prompt": "Audit the manual brain sync and upgrade workflow for Windows paths, RaiDrive safety, reproducibility, model pinning, and verification gaps. Do not edit files. Return verified evidence, failure modes, and three concrete recommendations."
+    }
+  ]
+}

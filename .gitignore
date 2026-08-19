@@ -49,3 +49,5 @@ live.html
 
 # local agent config
 .claude/
+SAAKEDEV_HANDOVER.md
+*.zip

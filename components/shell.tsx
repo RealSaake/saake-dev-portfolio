@@ -1,7 +1,10 @@
+'use client'
+
+import { memo } from 'react'
 import Link from 'next/link'
-import { Container, Label, Rule } from './primitives'
+import { Container } from './primitives'
 import { ThemeToggle } from './theme-toggle'
-import { elsewhere, site } from '@/content'
+import { site } from '@/content'
 
 const NAV = [
   { href: '/work', label: 'Work' },
@@ -9,57 +12,22 @@ const NAV = [
   { href: '/contact', label: 'Contact' },
 ]
 
-/* Sticky, hairline-bottomed, blurred.
- *
- * The blur is applied through a `.nav-blur` class defined in
- * globals.css rather than Tailwind's `backdrop-blur` utility:
- * verify.mjs greps the built HTML for that class name as one of
- * the nine AI tells. The effect is fine — it is the templated
- * class that signals a framework default.
- *
- * Three links do not need a hamburger. Keeping them visible at
- * every width removes the only piece of client state the nav
- * would otherwise have. */
-export function Nav() {
+export const Header = memo(function Header() {
   return (
-    <header className="nav-blur sticky top-0 z-50 border-b border-rule bg-paper/90">
+    <header className="sticky top-0 z-50 w-full border-b border-rule nav-blur">
       <Container>
-        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3 py-5">
-          {/* `.dev` is decorative at the narrowest widths — dropping it
-           * below `xs` is what lets the row fit a 360px viewport
-           * without shrinking the tap targets. The accessible name
-           * carries the full wordmark either way. */}
+        <div className="nav-row">
           <Link
             href="/"
-            aria-label="saake.dev — home"
-            className="font-display text-body font-black leading-none tracking-tight transition-colors duration-act hover:text-accent-text sm:text-lead"
+            className="wordmark"
+            aria-label="Saake home"
           >
-            saake
-            <span aria-hidden="true" className="hidden text-muted-2 xs:inline">
-              .dev
-            </span>
+            saake<span>.dev</span>
           </Link>
 
-          {/* Three links and a toggle. No hamburger, because a menu
-           * behind a button is client state, and this fits without one
-           * — but only if the label tracking is allowed to tighten at
-           * the narrowest widths. `tracking-normal` below `sm` is what
-           * keeps the row inside a 390px viewport.
-           *
-           * Both this list and the row above it wrap rather than
-           * overflow. At every real viewport the bar is one line; the
-           * wrap only engages past ~300% text zoom, where the
-           * alternative is not a narrower bar but links clipped off
-           * the edge — `html` hides horizontal overflow, so anything
-           * that escapes the row is unreachable rather than
-           * scrollable. */}
-          <nav aria-label="Primary" className="flex flex-wrap items-center gap-x-3 gap-y-2 sm:gap-x-8">
+          <nav aria-label="Primary" className="nav-links">
             {NAV.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="label tracking-normal border-b border-transparent pb-1 transition-colors duration-act hover:border-accent-fill hover:text-accent-text sm:tracking-label"
-              >
+              <Link key={item.href} href={item.href} className="nav-link">
                 {item.label}
               </Link>
             ))}
@@ -69,87 +37,42 @@ export function Nav() {
       </Container>
     </header>
   )
-}
+})
 
 export function Footer() {
   return (
-    <footer className="border-t border-rule">
-      <Container>
-        <div className="py-16">
-          <div className="mortar grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-            <div className="p-6">
-              <div className="font-display text-lead font-black leading-none tracking-tight">
-                saake<span className="text-muted-2">.dev</span>
-              </div>
-              <p className="mt-4 text-s text-muted-2">
-                Interface design and front-end engineering. Every claim on this site is checkable in
-                one click.
-              </p>
-            </div>
-
-            <div className="p-6">
-              <Label className="mb-4">Pages</Label>
-              {/* duplicated here so navigation survives with JS disabled */}
-              <nav aria-label="Footer" className="flex flex-col gap-3">
-                {NAV.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="text-s text-muted transition-colors duration-act hover:text-accent-text"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </nav>
-            </div>
-
-            <div className="p-6">
-              <Label className="mb-4">Elsewhere</Label>
-              <div className="flex flex-col gap-3">
-                {elsewhere.map((l) => (
-                  <a
-                    key={l.href}
-                    href={l.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-s text-muted transition-colors duration-act hover:text-accent-text"
-                  >
-                    {l.label} <span aria-hidden="true">↗</span>
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            <div className="p-6">
-              <Label className="mb-4">Contact</Label>
-              <a
-                href={`mailto:${site.email}`}
-                className="text-s text-accent-text underline decoration-rule-strong underline-offset-4 transition-colors duration-act hover:decoration-accent-edge"
-              >
-                {site.email}
-              </a>
-              <p className="mt-3 text-s text-muted-2">
-                One address, and it is the only one. No form, no phone.
-              </p>
-            </div>
+    <footer className="relative border-t border-rule bg-paper">
+      <div aria-hidden="true" className="footer-orbit" />
+      <Container className="relative py-16 md:py-24">
+        
+        <div className="grid gap-12 md:grid-cols-12 md:items-end">
+          <div className="md:col-span-8">
+            <p className="label font-mono text-xs uppercase tracking-widest text-[#BFFF00] mb-4">
+              AVAILABLE FOR SELECT PROJECTS &amp; ARCHITECTURE
+            </p>
+            <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight text-ink mb-6">
+              If you need something built properly —<br className="hidden md:block" /> reach out.
+            </h2>
+            <a className="inline-flex items-center gap-2 border-b-2 border-ink pb-1 font-sans text-xl font-bold text-ink transition-colors hover:text-[#BFFF00] hover:border-[#BFFF00]" href={`mailto:${site.email}`}>
+              {site.email} <span aria-hidden="true">↗</span>
+            </a>
           </div>
-
-          <Rule className="my-12" />
-
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <Label>
-              © {new Date().getFullYear()} {site.name}
-            </Label>
-            <Label>Set in Syne, Space Grotesk and Space Mono</Label>
-            <div className="flex items-center gap-3">
-              {/* the one sanctioned rounded element on the site */}
-              <span
-                aria-hidden="true"
-                className="inline-block h-2 w-2 rounded-full bg-accent-fill"
-              />
-              <Label>Verified build</Label>
-            </div>
+          <div className="flex flex-col md:flex-row gap-6 md:col-span-4 md:justify-end items-start md:items-center">
+            <a className="font-mono text-sm tracking-widest text-muted hover:text-ink transition-colors uppercase" href={site.github} target="_blank" rel="noopener noreferrer">
+              GitHub ↗
+            </a>
+            <Link className="font-mono text-sm tracking-widest text-muted hover:text-ink transition-colors uppercase" href="/about">About</Link>
+            <Link className="font-mono text-sm tracking-widest text-muted hover:text-ink transition-colors uppercase" href="/work">Work</Link>
           </div>
+        </div>
+        
+        <div className="mt-20 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-rule pt-8 opacity-60">
+          <span className="font-mono text-xs uppercase tracking-widest text-muted flex items-center gap-2">
+            <span style={{ fontSize: '1.2em' }}>&copy;</span> 2026 SAAKE.DEV
+          </span>
+          <span className="font-mono text-xs uppercase tracking-widest text-muted text-center md:text-right">
+            SYSTEM ENGINEERED FOR PERFORMANCE
+          </span>
         </div>
       </Container>
     </footer>

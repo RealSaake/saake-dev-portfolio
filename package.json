@@ -5,23 +5,25 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "contrast": "node scripts/contrast.mjs",
     "verify": "node scripts/verify.mjs",
     "verify:live": "node scripts/verify-live.mjs",
-    "contrast": "node scripts/contrast.mjs",
     "check": "next build && node scripts/verify.mjs"
   },
   "dependencies": {
+    "@react-three/fiber": "^9.7.0",
+    "@types/three": "^0.185.4",
     "next": "16.2.12",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "three": "^0.185.1"
   },
   "devDependencies": {
     "@types/node": "20.14.10",
-    "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.4",
+    "@types/react": "npm:types-react@19.2.8",
+    "@types/react-dom": "npm:types-react-dom@19.2.8",
     "autoprefixer": "10.4.19",
-    "postcss": "^8.5.25",
+    "postcss": "8.4.39",
     "tailwindcss": "3.4.6",
     "typescript": "5.5.3"
   }

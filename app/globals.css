@@ -1,5 +1,5 @@
-/* ============================================================
-   saake.dev — token layer
+﻿/* ============================================================
+   saake.dev Ã¢â‚¬â€ token layer
 
    Dark is the default. Light is a real second mode, not an
    inversion. Values are the measured PandaX/Karakal house
@@ -8,7 +8,7 @@
 
    Every contrast figure in the comments was computed, not
    estimated. scripts/verify.mjs recomputes them from this file
-   at build time — if a number here is wrong, the build fails.
+   at build time Ã¢â‚¬â€ if a number here is wrong, the build fails.
    ============================================================ */
 
 @tailwind base;
@@ -16,19 +16,19 @@
 @tailwind utilities;
 
 @layer base {
-  /* ---- DARK — the default ---- */
+  /* ---- DARK Ã¢â‚¬â€ the default ---- */
   :root {
     --paper: #0a0a0a;
     --surface: #101010;
     --surface-2: #0d0d0d;
-    --rule: #1f1f1f; /* 1.20 vs paper — below the visible-edge threshold on purpose */
+    --rule: #1f1f1f; /* 1.20 vs paper Ã¢â‚¬â€ below the visible-edge threshold on purpose */
     --rule-strong: #262626; /* 1.31 */
     --muted-2: #8a8a82; /* 5.69 */
     --muted: #9a9a92; /* 6.99 */
     --ink-2: #d5d5cd; /* 13.41 */
     --ink: #f5f5f0; /* 18.10 */
 
-    /* ---- accent — lime, seven steps ----
+    /* ---- accent Ã¢â‚¬â€ lime, seven steps ----
        Three steps is what both source sites shipped, and both ran
        out and patched off-token (one hardcoded a hover value, the
        other smuggled two stops into a gradient). Seven covers
@@ -52,14 +52,14 @@
        it is dark in both themes. One token, no per-theme guessing. */
     --on-accent: #0a0a0a; /* 15.12 on --l-4 */
 
-    /* ---- signal — fault, failure, the thing that broke ----
+    /* ---- signal Ã¢â‚¬â€ fault, failure, the thing that broke ----
        A second semantic colour, and the only one. It is not a
        palette expansion: red means a specific state and appears
        nowhere that state does not exist. */
     --signal: #ff5a49; /* 5.89 on paper, 5.66 on surface */
     --signal-wash: #2a1512;
 
-    /* ---- evidence — QUARANTINED ----
+    /* ---- evidence Ã¢â‚¬â€ QUARANTINED ----
        Purple is not a brand colour on this site. It appears only
        inside a labelled artefact depicting a system being
        criticised, and never outside one. */
@@ -69,14 +69,14 @@
 
     --grain: 0.35;
 
-    /* ---- type — base 16, ratio 1.25 ---- */
+    /* ---- type Ã¢â‚¬â€ base 16, ratio 1.25 ---- */
     --t-label: 0.8rem;
     --t-body-s: 1rem;
     --t-body: 1.125rem;
     --t-lead: 1.375rem;
     /* h3 fluidises for one reason: it labels cards in a grid, and a
        card is the narrowest column on the site. At a fixed 1.75rem a
-       single unbreakable word — "Accessibility" — measures 272px
+       single unbreakable word Ã¢â‚¬â€ "Accessibility" Ã¢â‚¬â€ measures 272px
        inside a 248px card at 320px, stretching the track and giving
        the whole document a horizontal scrollbar. The floor is set
        below that word's width at the narrowest viewport; from 400px
@@ -86,7 +86,7 @@
     --t-h1: clamp(2.25rem, 1.6rem + 2.6vw, 3.75rem);
     --t-display: clamp(2.75rem, 1.75rem + 4vw, 5.5rem);
 
-    /* ---- tracking — four values, all tokenized ----
+    /* ---- tracking Ã¢â‚¬â€ four values, all tokenized ----
        Both source sites converged independently on .2em for the
        smallest uppercase text, and both hardcoded it. That is how
        one of them ended up with thirteen tracking values. */
@@ -107,13 +107,13 @@
 
     /* Height of the sticky header, measured rather than assumed: 40px
        of py-5, plus the tallest child (the theme control at 34px),
-       plus the 1px bottom rule ≈ 77px. Consumed by scroll-margin so
+       plus the 1px bottom rule Ã¢â€°Ë† 77px. Consumed by scroll-margin so
        anchored content clears the bar instead of landing beneath it.
        Re-measure with getBoundingClientRect on <header> if the nav's
        padding or control sizes change. */
     --nav-h: 77px;
 
-    /* ---- motion — two tiers, never blended ----
+    /* ---- motion Ã¢â‚¬â€ two tiers, never blended ----
        Entrances are narrative and should be felt. Interactions are
        feedback and should be invisible. easeOutExpo puts 84% of the
        travel in the first 30% of the time, which is what makes an
@@ -138,7 +138,7 @@
     --ink-2: #33332e; /* 11.72 */
     --ink: #111110; /* 17.44 */
 
-    /* Fill stays #c6f135 — the brand is constant. Text darkens to
+    /* Fill stays #c6f135 Ã¢â‚¬â€ the brand is constant. Text darkens to
        clear 4.5:1, which lime at 1.21:1 could never do on paper. */
     --accent-fill: var(--l-4);
     --accent-text: var(--l-7); /* 5.95 */
@@ -169,7 +169,7 @@
        it only makes `auto` a reachable transition endpoint for the
        disclosure below. Ignored where unsupported. */
     interpolate-size: allow-keywords;
-    /* The marquee track is deliberately wider than the viewport — it
+    /* The marquee track is deliberately wider than the viewport Ã¢â‚¬â€ it
        has to be, or the loop would have nothing to travel through.
        Without this, that width becomes a horizontal scrollbar on the
        whole document at narrow widths. Clipping at the root keeps the
@@ -197,7 +197,7 @@
      Three corrections that are invisible when they work, which is
      the point.
 
-     1. `text-box-trim` removes half-leading — the empty band a font
+     1. `text-box-trim` removes half-leading Ã¢â‚¬â€ the empty band a font
         carries above its cap height and below its baseline. It is
         why a heading set against a hairline rule always looks like
         it is floating a few pixels high, and why "just add 24px"
@@ -212,7 +212,7 @@
         is well inside.
 
      3. `text-wrap: pretty` on body copy costs a slower line-breaker
-        in exchange for no orphans — no single word alone on the
+        in exchange for no orphans Ã¢â‚¬â€ no single word alone on the
         last line of a paragraph.
 
      All three degrade to today's rendering where unsupported, so
@@ -235,7 +235,7 @@
 
   /* ---- anchored content clears the sticky header ----
      A sticky header occupies normal flow, so at the top of the
-     document it sits above #main rather than over it — the skip
+     document it sits above #main rather than over it Ã¢â‚¬â€ the skip
      link, the site's only anchor today, already lands correctly and
      this rule changes nothing for it.
 
@@ -257,7 +257,7 @@
   /* An email address, a URL and a file path are single unbreakable
      words to a line-breaker. `html` clips horizontal overflow rather
      than scrolling it, so one that outgrows its column is not merely
-     ugly — it is unreadable. `anywhere`, not `break-word`, because
+     ugly Ã¢â‚¬â€ it is unreadable. `anywhere`, not `break-word`, because
      these strings have no break opportunity to prefer. */
   a[href^='mailto'],
   a[href^='http'],
@@ -275,7 +275,7 @@
   h3,
   h4 {
     font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
-    font-weight: 800;
+    font-weight: 650;
     color: var(--ink);
   }
 }
@@ -283,7 +283,7 @@
 @layer components {
   /* ---- the label register ----
      One mono face, used only here, never for body. This creates a
-     second voice — machine/annotation — sitting beside the editorial
+     second voice Ã¢â‚¬â€ machine/annotation Ã¢â‚¬â€ sitting beside the editorial
      one. It is why a sparse page still reads as dense: the labels
      carry structure that would otherwise need boxes. */
   .label {
@@ -310,7 +310,7 @@
   /* ---- mortar grid ----
      Container painted in the rule colour, cells in the surface
      colour, 1px gap. The gap bleeds through as perfect hairline
-     seams — no per-cell border management, no double borders. */
+     seams Ã¢â‚¬â€ no per-cell border management, no double borders. */
   .mortar {
     display: grid;
     gap: 1px;
@@ -329,8 +329,8 @@
      There are two implementations here, and choosing between them
      is most of the design of this block.
 
-     Where scroll-driven animations exist — ~85% of visitors, all
-     three engines — the entrance is pure CSS. No observer, no
+     Where scroll-driven animations exist Ã¢â‚¬â€ ~85% of visitors, all
+     three engines Ã¢â‚¬â€ the entrance is pure CSS. No observer, no
      dependency on hydration, and the work happens off the main
      thread. Where they do not, an IntersectionObserver adds `.in`
      and a transition runs instead.
@@ -338,8 +338,8 @@
      What both branches share is the part that matters: the base
      value of `.reveal` is `opacity: 1`. Content is visible unless
      something actively animates it in. The earlier version
-     inverted that — hidden in the base, shown only once JS said
-     so — which converted every failure of that JS into a blank
+     inverted that Ã¢â‚¬â€ hidden in the base, shown only once JS said
+     so Ã¢â‚¬â€ which converted every failure of that JS into a blank
      page, and did precisely that on client-side navigation. An
      inactive timeline, a bundle that never arrives, an observer
      that was never rebuilt: all of them now degrade to *visible
@@ -368,7 +368,7 @@
       animation-timeline: view();
       /* Finishes over the first 40% of the element's travel through
          the viewport, so it has settled long before it reaches a
-         comfortable reading position — never mid-fade while being
+         comfortable reading position Ã¢â‚¬â€ never mid-fade while being
          read. Scroll progress drives it, so duration is moot. */
       animation-range: entry 0% entry 40%;
     }
@@ -441,7 +441,7 @@
     }
   }
 
-  /* ---- corner brackets — the card motif ---- */
+  /* ---- corner brackets Ã¢â‚¬â€ the card motif ---- */
   .bracket {
     position: relative;
   }
@@ -474,7 +474,7 @@
     }
   }
 
-  /* ---- HUD graph paper — a background layer, never a compound bg ---- */
+  /* ---- HUD graph paper Ã¢â‚¬â€ a background layer, never a compound bg ---- */
   .hud-grid {
     background-image:
       repeating-linear-gradient(0deg, rgba(140, 150, 165, 0.05) 0 1px, transparent 1px 40px),
@@ -482,7 +482,7 @@
     background-size: 40px 40px;
   }
 
-  /* ---- marquee — the breadth band ---- */
+  /* ---- marquee Ã¢â‚¬â€ the breadth band ---- */
   .marquee {
     display: flex;
     overflow: hidden;
@@ -546,7 +546,7 @@
   .plate__head { border-bottom: 1px solid var(--rule); }
   .plate__foot { border-top: 1px solid var(--rule); }
 
-  /* ---- three-layer proof — requirement → rule → rendered ----
+  /* ---- three-layer proof Ã¢â‚¬â€ requirement Ã¢â€ â€™ rule Ã¢â€ â€™ rendered ----
      One row per decision category. The row IDs stay visible at
      every width, because the ID is what ties the three layers
      together once they stop sitting side by side. */
@@ -578,7 +578,7 @@
   /* Grid children default to `min-width: auto`, which means a track
      can never shrink below the widest unbreakable thing inside it.
      At 400% text zoom that floor exceeds the viewport and the whole
-     document gains a horizontal scrollbar — a WCAG 1.4.10 failure,
+     document gains a horizontal scrollbar Ã¢â‚¬â€ a WCAG 1.4.10 failure,
      not a cosmetic one. Every artefact grid therefore names `min-width: 0`
      on its children so the declared fractions actually govern. */
   .proof__row > *,
@@ -614,7 +614,7 @@
     background: var(--accent-fill);
   }
 
-  /* ---- pipeline — repository → matrix → roadmap ----
+  /* ---- pipeline Ã¢â‚¬â€ repository Ã¢â€ â€™ matrix Ã¢â€ â€™ roadmap ----
      Connectors are borders on real grid cells, so they survive a
      resize with no observer and no measured pixel anywhere. */
   .pipe {
@@ -643,7 +643,7 @@
     .pipe__link { flex-direction: row; }
   }
 
-  /* ---- lineage — a real disclosure, no script ---- */
+  /* ---- lineage Ã¢â‚¬â€ a real disclosure, no script ---- */
   .lin { border-top: 1px solid var(--rule); }
   .lin details { border-bottom: 1px solid var(--rule); }
   .lin summary {
@@ -661,7 +661,7 @@
     color: var(--accent-text);
     font-family: var(--font-mono), monospace;
   }
-  .lin details[open] summary::after { content: '−'; }
+  .lin details[open] summary::after { content: 'Ã¢Ë†â€™'; }
   .lin details[open] summary { background: var(--surface); }
   .lin summary:hover { color: var(--accent-text); }
 
@@ -674,7 +674,7 @@
      and would otherwise pop to visible on frame one.
      `transition-behavior: allow-discrete` is what lets a discrete
      property participate at all.
-     The height target is `auto`, which needs `interpolate-size` —
+     The height target is `auto`, which needs `interpolate-size` Ã¢â‚¬â€
      Chromium-only for now, so it sits in its own @supports and
      everyone else keeps the instant open they have today.
 
@@ -697,7 +697,7 @@
     /* `content-visibility` has to be restored here, not just
        block-size. Declaring `hidden` on the base overrides the
        toggle the browser does itself, and hidden content generates
-       no box — so without this line the panel stays 0px high in the
+       no box Ã¢â‚¬â€ so without this line the panel stays 0px high in the
        open state and the disclosure simply does not open. */
     .lin details[open]::details-content {
       block-size: auto;
@@ -705,7 +705,7 @@
     }
   }
 
-  /* ---- comparison specimen — radio-driven, keyboard-native ----
+  /* ---- comparison specimen Ã¢â‚¬â€ radio-driven, keyboard-native ----
      Three states below 1024px: observed, side by side, rebuilt.
      Above it both panes are always visible and the control is
      redundant, so it hides itself rather than lying about what
@@ -718,7 +718,7 @@
     .cmp__panes { grid-template-columns: 1fr 2px 1fr; }
     .cmp__ctl { display: none; }
   }
-  /* the fixed datum — a hard line, never a draggable handle */
+  /* the fixed datum Ã¢â‚¬â€ a hard line, never a draggable handle */
   .cmp__datum { background: var(--ink); }
   @media (max-width: 1023px) {
     .cmp__datum { height: 2px; }
@@ -781,7 +781,7 @@
   }
   /* Covers both reveal branches. The blanket rule above collapses
      durations, but a scroll-driven animation ignores duration
-     entirely — its progress comes from scroll position — so the
+     entirely Ã¢â‚¬â€ its progress comes from scroll position Ã¢â‚¬â€ so the
      timeline has to be switched off by name or the fade would
      survive the preference it is meant to respect. */
   .reveal,
@@ -800,7 +800,7 @@
 
    Four environments the site can find itself in that are not "a
    sighted user on a normal screen". None of these are hypothetical
-   — each one currently renders something wrong.
+   Ã¢â‚¬â€ each one currently renders something wrong.
    ============================================================ */
 
 /* ---- print ----
@@ -920,7 +920,7 @@
      and the accent fill is what separates it from the track. A
      forced palette flattens both to the same colour, so the segment
      keeps its own colours and gains an outline. `forced-color-adjust`
-     is deliberate here — the fill is information, not decoration,
+     is deliberate here Ã¢â‚¬â€ the fill is information, not decoration,
      which is the documented reason to opt out. */
   .dseg {
     forced-color-adjust: none;
@@ -955,3 +955,238 @@
     --rule: var(--rule-strong);
   }
 }
+
+
+
+/* 2026 Studio Environment */
+.site-environment { position: relative; }
+.nav-row { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.wordmark { font-family: var(--font-display), sans-serif; font-size: clamp(1.25rem, 2vw, 1.55rem); font-weight: 700; line-height: 1; letter-spacing: -0.04em; }
+.wordmark span { color: var(--muted-2); }
+.nav-links { display: flex; align-items: center; gap: clamp(16px, 2.4vw, 32px); }
+.nav-link, .theme-switch { display: inline-flex; align-items: center; gap: 6px; border: 0; background: transparent; color: var(--muted); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; }
+.nav-link:hover, .theme-switch:hover { color: var(--ink); }
+.theme-switch__icon { color: var(--accent-text); font-size: 0.9rem; }
+
+/* Hero Section with Architectural Grid & 3D Atmospheric Canvas */
+.hero { position: relative; overflow: hidden; background: var(--paper); padding: clamp(36px, 4.5vw, 64px) 0 clamp(24px, 3vw, 44px); }
+.hero-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: radial-gradient(ellipse at 50% 40%, black 20%, transparent 80%), linear-gradient(to bottom, black 40%, transparent 95%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 40%, black 20%, transparent 80%), linear-gradient(to bottom, black 40%, transparent 95%);
+  mask-composite: intersect;
+  -webkit-mask-composite: source-in;
+}
+[data-theme='light'] .hero-grid-overlay { background-image: linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px); }
+
+.hero-scene { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; overflow: visible; filter: drop-shadow(0 0 45px rgba(198, 241, 53, 0.12)); }
+.hero-inner { position: relative; z-index: 2; width: 100%; display: flex; align-items: center; justify-content: space-between; }
+.hero-copy { position: relative; z-index: 2; width: 100%; max-width: 860px; padding: clamp(24px, 3vw, 44px) 0 clamp(32px, 4vw, 56px); background: transparent; }
+
+.hero-kicker-link { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted-2); margin-bottom: 24px; font-weight: 600; text-decoration: none; transition: color 0.15s ease; }
+.hero-kicker-link:hover { color: var(--ink); text-decoration: none; }
+
+.hero-title { margin: 0; font-family: var(--font-display), sans-serif; font-size: clamp(2.8rem, 5.4vw, 5.4rem); font-weight: 750; line-height: 1.04; letter-spacing: -0.04em; color: var(--ink); background: transparent; }
+.hero-title em { color: var(--accent-text); font-style: normal; font-weight: 750; }
+.hero-intro { max-width: 600px; margin-top: 24px; color: var(--muted); font-size: clamp(1.05rem, 1.35vw, 1.2rem); line-height: 1.6; font-weight: 400; background: transparent; }
+
+.hero-actions { margin-top: 36px; display: flex; align-items: center; gap: 18px; }
+.signal-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; border: 1px solid var(--accent-fill); background: var(--accent-fill); color: var(--on-accent); padding: 0 28px; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700; transition: transform 0.15s ease, background-color 0.15s ease; text-decoration: none; }
+.signal-button:hover { transform: translateY(-2px); }
+.signal-button .btn-arrow { display: inline-block; transition: transform 0.15s ease; }
+.signal-button:hover .btn-arrow { transform: translateY(2px); }
+
+.text-link { display: inline-block; color: var(--ink); border-bottom: 1px solid var(--accent-edge); padding-bottom: 3px; font-size: 0.85rem; }
+
+/* Coordinates Display */
+.hero-coordinates { position: absolute; right: 0; bottom: 24px; text-align: right; font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted-2); line-height: 1.4; letter-spacing: 0.05em; pointer-events: none; z-index: 4; }
+
+.section-marker { display: grid; grid-template-columns: 60px 1fr auto; gap: 20px; padding: 0 0 20px; border-bottom: 1px solid var(--rule); color: var(--muted-2); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; }
+.project-section { padding: 88px 0; border-bottom: 1px solid var(--rule); }
+.project-lead { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 48px; align-items: end; padding: 48px 0 36px; }
+.project-index, .project-role { color: var(--muted-2); font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.project-lead h2 { font-family: var(--font-display), sans-serif; font-size: clamp(2.4rem, 4.6vw, 4.2rem); font-weight: 600; line-height: 1.05; letter-spacing: -0.035em; }
+.project-lead h2 + p { max-width: 600px; margin-top: 16px; color: var(--muted); font-size: 1.12rem; line-height: 1.55; }
+.visualizer-shell { border: 1px solid var(--rule-strong); background: #070907; }
+.visualizer-head, .visualizer-controls { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 18px; }
+.visualizer-head { border-bottom: 1px solid #242824; }
+.visualizer-controls { border-top: 1px solid #242824; }
+.visualizer-canvas { display: block; width: 100%; height: clamp(300px, 42vw, 540px); }
+.mode-button { min-height: 44px; padding: 0 16px; border: 1px solid #384038; color: #c8cec8; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.project-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 32px; padding-top: 32px; }
+.project-foot p { max-width: 640px; color: var(--muted); font-size: 1.05rem; line-height: 1.55; }
+.closing-strip { padding: 80px 0; text-align: center; background: var(--accent-fill); color: var(--on-accent); }
+.closing-strip p { font-size: clamp(1.8rem, 3.6vw, 3.4rem); font-family: var(--font-display); font-weight: 700; line-height: 1.15; letter-spacing: -0.03em; }
+.closing-strip a { display: inline-block; margin-top: 20px; font-weight: 600; border-bottom: 1px solid currentColor; }
+
+.lovequest-section { position: relative; }
+.lovequest-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; padding: 64px 0; }
+.lovequest-art { position: relative; aspect-ratio: 16/10; border: 1px solid var(--rule-strong); background: radial-gradient(circle at 50% 40%, rgba(255,111,145,0.18), transparent 70%), var(--surface); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 32px; overflow: hidden; }
+.lovequest-heart { font-size: 4rem; color: #ff6f91; margin-bottom: 16px; }
+.quest-card { background: var(--paper); border: 1px solid var(--rule); padding: 10px 16px; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; color: var(--muted-2); margin-top: 8px; width: 85%; max-width: 320px; text-align: center; }
+.quest-card strong { color: var(--ink); display: block; font-family: var(--font-sans); font-size: 0.88rem; margin-top: 4px; }
+.quest-card--three { border-color: #ff6f91; color: #ff6f91; font-weight: 700; }
+.lovequest-title { font-family: var(--font-display), sans-serif; font-size: clamp(2.8rem, 5vw, 4.8rem); font-weight: 700; line-height: 1; letter-spacing: -0.035em; margin: 16px 0; }
+.lovequest-summary { font-size: 1.12rem; color: var(--muted); line-height: 1.55; margin-bottom: 24px; max-width: 480px; }
+.lovequest-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.lovequest-tags span { border: 1px solid var(--rule); background: var(--surface); padding: 4px 10px; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+.about-hero { padding: clamp(64px, 8vw, 112px) 0; }
+.about-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 6vw; align-items: center; }
+.portrait-frame { position: relative; aspect-ratio: 4/5; overflow: hidden; border: 1px solid var(--rule-strong); background: var(--surface); }
+.portrait-image { object-fit: cover; object-position: 50% 22%; filter: grayscale(1) contrast(1.08) sepia(0.1); }
+.portrait-frame::after { content: ''; position: absolute; inset: 0; background: linear-gradient(145deg, rgba(198, 241, 53, 0.15), transparent 45%); mix-blend-mode: color; }
+.portrait-tag { position: absolute; z-index: 2; left: 16px; bottom: 16px; background: var(--paper); padding: 6px 10px; }
+.about-grid h1 { margin: 20px 0 24px; font-family: var(--font-display), sans-serif; font-size: clamp(2.2rem, 3.8vw, 3.6rem); font-weight: 600; line-height: 1.1; letter-spacing: -0.03em; }
+.about-grid p { margin-bottom: 20px; color: var(--muted); font-size: 1.05rem; line-height: 1.6; }
+.about-grid .about-lead { font-size: clamp(1.15rem, 1.8vw, 1.45rem); color: var(--ink-2); line-height: 1.5; }
+.principles { padding: 80px 0; border-top: 1px solid var(--rule); }
+.principle-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 32px; background: var(--rule); }
+.principle-grid > div > div { min-height: 260px; padding: 28px; background: var(--surface); }
+.principle-grid span { color: var(--accent-text); font-family: var(--font-mono); }
+.principle-grid h2 { margin: 48px 0 14px; font-family: var(--font-display), sans-serif; font-size: 1.5rem; font-weight: 600; }
+.principle-grid p { color: var(--muted); font-size: 0.95rem; line-height: 1.55; }
+.contact-page { padding: clamp(64px, 8vw, 112px) 0; min-height: 75svh; }
+.contact-page h1 { max-width: 820px; margin-top: 24px; font-family: var(--font-display), sans-serif; font-size: clamp(2.4rem, 4.6vw, 4.4rem); font-weight: 600; line-height: 1.08; letter-spacing: -0.035em; }
+.contact-page h1 em { color: var(--accent-text); font-style: normal; }
+.contact-lead { max-width: 640px; margin-top: 32px; color: var(--muted); font-size: 1.18rem; line-height: 1.55; }
+.contact-email { display: inline-block; color: var(--accent-text); font-size: clamp(1.3rem, 2.8vw, 2.4rem); border-bottom: 1px solid var(--accent-edge); }
+.contact-details { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--rule); }
+.contact-details p { margin-top: 10px; color: var(--muted); }
+.index-page { padding: clamp(64px, 8vw, 112px) 0; }
+.index-title { max-width: 820px; margin-top: 24px; font-family: var(--font-display), sans-serif; font-size: clamp(2.4rem, 4.6vw, 4.4rem); font-weight: 600; line-height: 1.08; letter-spacing: -0.035em; }
+.index-title em { color: var(--accent-text); font-style: normal; }
+.work-index { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; margin-top: 48px; background: var(--rule); }
+.work-index-card { display: block; padding: 48px 36px; background: var(--surface); transition: background 0.2s ease; }
+.work-index-card:hover { background: var(--paper); }
+.work-index-card h2 { font-family: var(--font-display), sans-serif; font-size: clamp(1.8rem, 2.6vw, 2.4rem); font-weight: 600; margin: 24px 0 12px; transition: color 0.2s ease; }
+.work-index-card--lovequest:hover h2 { color: #ff6f91; }
+.work-index-card--skillbridge:hover h2 { color: #a98cea; }
+.work-index-card--jarvis-infrastructure:hover h2 { color: var(--accent-text); }
+.work-index-card--youtube-engine:hover h2 { color: var(--signal); }
+.work-index-card--second-brain:hover h2 { color: var(--accent-text); }
+.work-index-card--waveline:hover h2 { color: var(--accent-text); }
+
+/* Project Grid & Card System */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 1px;
+  background: var(--rule);
+  margin-top: 24px;
+  border: 1px solid var(--rule);
+}
+.project-grid > * {
+  background: var(--paper);
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px 32px;
+  background: var(--surface);
+  transition: border-color var(--dur-act) var(--ease-act), background-color var(--dur-act) var(--ease-act);
+  text-decoration: none;
+  height: 100%;
+}
+.project-card:hover {
+  background: var(--surface-2);
+}
+.project-card:hover h2 {
+  color: var(--accent-text);
+}
+.project-card--skillbridge:hover h2 { color: #a98cea; }
+.project-card--lovequest:hover h2 { color: #ff6f91; }
+.project-card--jarvis-infrastructure:hover h2 { color: var(--accent-text); }
+.project-card--youtube-engine:hover h2 { color: var(--signal); }
+.project-card--second-brain:hover h2 { color: var(--accent-text); }
+
+.project-card__content {
+  flex-grow: 1;
+}
+
+.project-card__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+}
+.project-card h2 {
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(2rem, 3.2vw, 2.6rem);
+  font-weight: 650;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  margin-bottom: 16px;
+  transition: color var(--dur-act) var(--ease-act);
+  text-align: left;
+}
+.project-card p {
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+.project-card__footer {
+  margin-top: auto;
+}
+
+.project-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-bottom: 24px;
+}
+.project-card__tags span {
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.work-index-card p { color: var(--muted); font-size: 1rem; line-height: 1.55; margin-bottom: 32px; }
+.project-hero { padding: 64px 0 48px; }
+.project-hero h1 { margin-top: 16px; font-family: var(--font-display), sans-serif; font-size: clamp(2.8rem, 6vw, 5.6rem); font-weight: 650; line-height: 1.02; letter-spacing: -0.035em; }
+.project-hero-summary { max-width: 680px; margin-top: 24px; color: var(--muted); font-size: clamp(1.1rem, 1.6vw, 1.35rem); line-height: 1.5; }
+.project-showcase { padding: 48px 0; border-bottom: 1px solid var(--rule); }
+.project-story { padding: 80px 0; }
+.project-story > div { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 64px; }
+.project-story h2 { font-family: var(--font-display), sans-serif; font-size: clamp(2rem, 3.2vw, 3rem); font-weight: 600; line-height: 1.1; margin-top: 16px; }
+.project-story p { color: var(--muted); font-size: 1.08rem; line-height: 1.65; margin-bottom: 24px; }
+.stack-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 32px 0; }
+.stack-list li { border: 1px solid var(--rule); background: var(--surface); padding: 4px 10px; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.next-project { padding: 80px 0; border-top: 1px solid var(--rule); }
+.next-project a { display: inline-block; font-family: var(--font-display), sans-serif; font-size: clamp(2.4rem, 4.4vw, 4.2rem); font-weight: 650; margin-top: 16px; }
+
+@media (max-width: 768px) {
+  .hero { min-height: auto; padding: 64px 0 56px; }
+  .hero-scene { opacity: 0.32; }
+  .hero-copy { padding: 0; max-width: 100%; }
+  .hero-kicker-link { margin-bottom: 16px; }
+  .hero-title { font-size: clamp(2.3rem, 9.5vw, 3.2rem); line-height: 1.08; letter-spacing: -0.035em; }
+  .hero-intro { font-size: 1.05rem; line-height: 1.55; margin-top: 18px; }
+  .hero-actions { margin-top: 28px; }
+  .signal-button { width: 100%; min-height: 48px; }
+  .hero-coordinates { position: static; margin-top: 24px; text-align: left; }
+  .project-lead, .project-foot, .lovequest-grid, .about-grid, .principle-grid, .contact-details, .work-index, .project-story > div { grid-template-columns: 1fr; }
+  .project-role { margin-top: 8px; }
+  .section-marker { grid-template-columns: 40px 1fr; }
+  .visualizer-controls { align-items: stretch; }
+  .signal-button, .mode-button { flex: 1; }
+  .project-section { padding: 64px 0; }
+}
+
